@@ -1,17 +1,20 @@
 from django.db import models
 
-# Create your models here.
+# ===================================================================
+# Todos os Modelos Abaixo vão para a série de tabelas de GERAIS!
+# ===================================================================
+
 class Estado(models.Model):
-    est_id = models.AutoField(primary_key=True)
-    est_estado = models.CharField(max_length=50)
+    est_id      = models.AutoField(primary_key=True)
+    est_estado  = models.CharField(max_length=50)
 
     def __str__(self):
         return self.est_estado
 
 class Cidade(models.Model):
-    cid_id = models.AutoField(primary_key=True)
-    cid_cidade = models.CharField(max_length=50)
-    cid_est_id = models.ForeignKey(Estado, on_delete=models.CASCADE, default=1)
+    cid_id      = models.AutoField(primary_key=True)
+    cid_cidade  = models.CharField(max_length=50)
+    cid_est_id  = models.ForeignKey(Estado, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.cid_cidade
@@ -21,8 +24,8 @@ class Cidade(models.Model):
 # ===================================================================
 
 class Profissao(models.Model):
-    pro_id = models.AutoField(primary_key=True)
-    pro_profissao = models.CharField(max_length=100)
+    pro_id          = models.AutoField(primary_key=True)
+    pro_profissao   = models.CharField(max_length=100)
 
     def __str__(self):
         return self.pro_profissao
@@ -32,8 +35,8 @@ class Profissao(models.Model):
         verbose_name_plural = "Profissões"
 
 class Situacao(models.Model):
-    sit_id = models.AutoField(primary_key=True)
-    sit_situacao = models.CharField(max_length=100)
+    sit_id          = models.AutoField(primary_key=True)
+    sit_situacao    = models.CharField(max_length=100)
 
     def __str__(self):
         return self.sit_situacao
@@ -43,7 +46,7 @@ class Situacao(models.Model):
         verbose_name_plural = "Situações"
 
 class Genero(models.Model):
-    gen_id = models.AutoField(primary_key=True)
+    gen_id      = models.AutoField(primary_key=True)
     gen_generos = models.CharField(max_length=20)
 
     def __str__(self):
@@ -102,9 +105,9 @@ class Necessitado(models.Model):
         verbose_name        = "Necessitado"
 
 class Atualizacao(models.Model):
-    att_id = models.AutoField(primary_key=True)
-    att_usu_id = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=1)
-    att_nec_id = models.ForeignKey(Necessitado, on_delete=models.CASCADE, default=1)
+    att_id      = models.AutoField(primary_key=True)
+    att_usu_id  = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=1)
+    att_nec_id  = models.ForeignKey(Necessitado, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return "Atualização %s pelo usuário(a) %s para o necessitado(a) %s" % (self.att_id, self.att_usu_id, self.att_nec_id)
@@ -113,3 +116,20 @@ class Atualizacao(models.Model):
         verbose_name        = "Atualização"
         verbose_name_plural = "Atualizações"
         unique_together = (("att_id", "att_usu_id", "att_nec_id"),)
+
+# ===================================================================
+# Todos os Modelos Abaixo vão para a série de tabelas de ONGS!
+# ===================================================================
+
+class ONG(models.Model):
+    ong_id          = models.AutoField(primary_key=True)
+    ong_nome        = models.CharField(max_length=100)
+    ong_site        = models.CharField(max_length=70)
+    ong_logradouro  = models.CharField(max_length=50)
+    ong_cid_id      = models.ForeignKey(Cidade, on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return self.ong_nome
+
+    class Meta:
+        verbose_name        = "ONG"
