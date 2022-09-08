@@ -48,6 +48,37 @@ class Genero(models.Model):
     class Meta:
         verbose_name        = "Gênero"
 
+class Usuario(models.Model):
+    usu_id      = models.AutoField(primary_key=True)
+    usu_nome    = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.usu_nome
+
+class TEL_DOS_USU(models.Model):
+    tel_telefone    = models.CharField(max_length=15, primary_key=True)
+    tel_usu_id      = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return self.tel_telefone
+
+    class Meta:
+        verbose_name        = "Telefone de Usuário"
+        verbose_name_plural = "Telefone dos Usuários"
+        unique_together = (("tel_telefone", "tel_usu_id"),)
+
+class EMAIL_DOS_USU(models.Model):
+    ema_email    = models.CharField(max_length=40, primary_key=True)
+    ema_usu_id   = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return self.ema_email
+
+    class Meta:
+        verbose_name        = "E-mail de Usuário"
+        verbose_name_plural = "E-mail dos Usuários"
+        unique_together = (("ema_email", "ema_usu_id"),)
+
 class Necessitado(models.Model):
     nec_id          = models.AutoField(primary_key=True)
     nec_nome        = models.CharField(max_length=100)
