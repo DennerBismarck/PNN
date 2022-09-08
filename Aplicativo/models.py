@@ -133,3 +133,27 @@ class ONG(models.Model):
 
     class Meta:
         verbose_name        = "ONG"
+    
+class EMAIL_DAS_ONGS(models.Model):
+    emo_email = models.CharField(max_length=40, primary_key=True)
+    emo_ong_id = models.ForeignKey(ONG, on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return self.emo_email
+
+    class Meta:
+        verbose_name        = "E-mail da ONG"
+        verbose_name_plural = "E-mail das ONGs"
+        unique_together = (("emo_email", "emo_ong_id"),)
+
+class TEL_DAS_ONGS(models.Model):
+    ton_telefone = models.CharField(max_length=15, primary_key=True)
+    ton_ong_id = models.ForeignKey(ONG, on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return self.ton_telefone
+
+    class Meta:
+        verbose_name        = "Telefone da ONG"
+        verbose_name_plural = "Telefone das ONGs"
+        unique_together = (("ton_telefone", "ton_ong_id"),)
