@@ -1,6 +1,11 @@
 from django.contrib import admin
 from Aplicativo     import models
 
+...
+
+
+
+
 # Modelos Gerais
 admin.site.register(models.Estado)
 admin.site.register(models.Cidade)
