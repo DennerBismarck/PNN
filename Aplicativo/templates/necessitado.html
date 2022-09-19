@@ -9,7 +9,7 @@
 <body>
     <form method="POST">
         {% csrf_token %}
-        {{ form_necessitado }}
+        {{ form_necessitado.as_p }}
         <button type="submit">Enviar</button>
     </form>
 </body>
