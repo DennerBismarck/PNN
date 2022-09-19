@@ -1,9 +1,9 @@
-from .models import Necessitado
+from Aplicativo import models
 from django.forms import ModelForm
 
 class NecessitadoForm(ModelForm):
     class Meta:
-        model = Necessitado
+        model = models.Necessitado
         fields = [
             'nec_nome',
             'nec_idade',
@@ -13,4 +13,19 @@ class NecessitadoForm(ModelForm):
             'nec_pro_id',
             'nec_gen_id',
             'nec_cid_id'
+        ]
+
+class CidadeForm(ModelForm):
+    class Meta:
+        model = models.Cidade
+        fields = [
+            'cid_cidade',
+            'cid_est_id',
+        ]
+
+class ProfissaoForm(ModelForm):
+    class Meta:
+        model = models.Profissao
+        fields= [
+            'pro_profissao',
         ]

@@ -5,10 +5,18 @@ from Aplicativo import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name= 'main'),
-    # URLs de CRUD dos Necessitados.
+    # CRUD de NECESSITADOS
     path('necessitado', views.createNecessitado, name="createNecessitado"),
     path('necessitado/<int:id_necessitado>', views.updateNecessitado, name="updateNecessitado"),
     path('necessitado/<int:id_necessitado>/delete', views.deleteNecessitado, name="deleteNecessitado"),
+    # CRUD de CIDADES
+    path('cidade', views.createCidade, name="createCidade"),
+    path('cidade/<int:id_cidade>', views.updateCidade, name="updateCidade"),
+    path('cidade/<int:id_cidade>/delete', views.deleteCidade, name="deleteCidade"),
+    # CRUD de PROFISSÕES
+    path('profissao', views.createProfissao, name="createProfissao"),
+    path('profissao/<int:id_profissao>', views.updateProfissao, name="updateProfissao"),
+    path('profissao/<int:id_profissao>/delete', views.deleteProfissao, name="deleteProfissao"),
 ]
 
 # if settings.DEBUG:
