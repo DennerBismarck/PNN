@@ -29,3 +29,17 @@ class ProfissaoForm(ModelForm):
         fields= [
             'pro_profissao',
         ]
+
+class SituacaoForm(ModelForm):
+    class Meta:
+        model = models.Situacao
+        fields =[
+            'sit_situacao'
+        ]
+
+class GeneroForm(ModelForm):
+    class Meta:
+        model = models.Genero
+        fields =[
+            'gen_generos'
+        ]

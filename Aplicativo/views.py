@@ -8,32 +8,6 @@ def index(request):
     return render(request, "index.html", listagem)
 
 # ===================================================================
-# CRUD de NECESSITADOS
-# ===================================================================
-
-def createNecessitado(request):
-    form = forms.NecessitadoForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_necessitado': form}
-    return render(request, "necessitado.html", listagem)
-
-def updateNecessitado(request, id_necessitado):
-    necessitado = models.Necessitado.objects.get(pk=id_necessitado)
-    form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
-    if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_necessitado': form}
-    return render(request, "necessitado.html", listagem)
-
-def deleteNecessitado(request, id_necessitado):
-    necessitado = models.Necessitado.objects.get(pk=id_necessitado)
-    necessitado.delete()
-    return redirect("main")
-
-# ===================================================================
 # CRUD de CIDADE
 # ===================================================================
 
@@ -83,4 +57,82 @@ def updateProfissao(request, id_profissao):
 def deleteProfissao(request, id_profissao):
     Profissao = models.Profissao.objects.get(pk=id_profissao)
     Profissao.delete()
+    return redirect("main")
+
+# ===================================================================
+# CRUD de Situação
+# ===================================================================
+
+def createSituacao(request):
+    form = forms.SituacaoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_situacao': form}
+    return render(request, "situacao.html", listagem)
+
+def updateSituacao(request, id_situacao):
+    Situacao = models.Situacao.objects.get(pk=id_situacao)
+    form = forms.SituacaoForm(request.POST or None, instance=Situacao)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_situacao': form}
+    return render(request, "situacao.html", listagem)
+
+def deleteSituacao(request, id_situacao):
+    Situacao = models.Situacao.objects.get(pk=id_situacao)
+    Situacao.delete()
+    return redirect("main")
+
+# ===================================================================
+# CRUD de Genero
+# ===================================================================
+
+def createGenero(request):
+    form = forms.GeneroForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_genero': form}
+    return render(request, "genero.html", listagem)
+
+def updateGenero(request, id_genero):
+    Genero = models.Genero.objects.get(pk=id_genero)
+    form = forms.GeneroForm(request.POST or None, instance=Genero)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_genero': form}
+    return render(request, "genero.html", listagem)
+
+def deleteGenero(request, id_genero):
+    Genero = models.Genero.objects.get(pk=id_genero)
+    Genero.delete()
+    return redirect("main")
+
+# ===================================================================
+# CRUD de NECESSITADOS
+# ===================================================================
+
+def createNecessitado(request):
+    form = forms.NecessitadoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_necessitado': form}
+    return render(request, "necessitado.html", listagem)
+
+def updateNecessitado(request, id_necessitado):
+    necessitado = models.Necessitado.objects.get(pk=id_necessitado)
+    form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_necessitado': form}
+    return render(request, "necessitado.html", listagem)
+
+def deleteNecessitado(request, id_necessitado):
+    necessitado = models.Necessitado.objects.get(pk=id_necessitado)
+    necessitado.delete()
     return redirect("main")

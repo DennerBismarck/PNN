@@ -5,10 +5,6 @@ from Aplicativo import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name= 'main'),
-    # CRUD de NECESSITADOS
-    path('necessitado', views.createNecessitado, name="createNecessitado"),
-    path('necessitado/<int:id_necessitado>', views.updateNecessitado, name="updateNecessitado"),
-    path('necessitado/<int:id_necessitado>/delete', views.deleteNecessitado, name="deleteNecessitado"),
     # CRUD de CIDADES
     path('cidade', views.createCidade, name="createCidade"),
     path('cidade/<int:id_cidade>', views.updateCidade, name="updateCidade"),
@@ -17,6 +13,19 @@ urlpatterns = [
     path('profissao', views.createProfissao, name="createProfissao"),
     path('profissao/<int:id_profissao>', views.updateProfissao, name="updateProfissao"),
     path('profissao/<int:id_profissao>/delete', views.deleteProfissao, name="deleteProfissao"),
+    # CRUD de SITUAÇÕES
+    path('situacao', views.createSituacao, name="createSituacao"),
+    path('situacao/<int:id_situacao>', views.updateSituacao, name="updateSituacao"),
+    path('situacao/<int:id_situacao>/delete', views.deleteSituacao, name="deleteSituacao"),
+    # CRUD de GÊNEROS
+    path('genero', views.createGenero, name="createGenero"),
+    path('genero/<int:id_genero>', views.updateGenero, name="updateGenero"),
+    path('genero/<int:id_genero>/delete', views.deleteGenero, name="deleteGenero"),
+    # CRUD de NECESSITADOS
+    path('necessitado', views.createNecessitado, name="createNecessitado"),
+    path('necessitado/<int:id_necessitado>', views.updateNecessitado, name="updateNecessitado"),
+    path('necessitado/<int:id_necessitado>/delete', views.deleteNecessitado, name="deleteNecessitado"),
+    
 ]
 
 # if settings.DEBUG:
