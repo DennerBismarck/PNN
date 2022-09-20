@@ -25,6 +25,10 @@ urlpatterns = [
     path('necessitado', views.createNecessitado, name="createNecessitado"),
     path('necessitado/<int:id_necessitado>', views.updateNecessitado, name="updateNecessitado"),
     path('necessitado/<int:id_necessitado>/delete', views.deleteNecessitado, name="deleteNecessitado"),
+    # CRUD de ATUALIZAÇAÕES
+    path('atualizacao', views.createAtualizacao, name="createAtualizacao"),
+    path('atualizacao/<int:id_atualizacao>', views.updateAtualizacao, name="updateAtualizacao"),
+    path('atualizacao/<int:id_atualizacao>/delete', views.deleteAtualizacao, name="deleteAtualizacao"),
     
 ]
 

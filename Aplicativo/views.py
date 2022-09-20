@@ -136,3 +136,29 @@ def deleteNecessitado(request, id_necessitado):
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     necessitado.delete()
     return redirect("main")
+
+# ===================================================================
+# CRUD de ATUALIZAÇÕES
+# ===================================================================
+
+def createAtualizacao(request):
+    form = forms.AtualizacaoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_atualizacao': form}
+    return render(request, "atualizacao.html", listagem)
+
+def updateAtualizacao(request, id_atualizacao):
+    Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
+    form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_atualizacao': form}
+    return render(request, "atualizacao.html", listagem)
+
+def deleteAtualizacao(request, id_atualizacao):
+    Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
+    Atualizacao.delete()
+    return redirect("main")

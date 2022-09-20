@@ -43,3 +43,11 @@ class GeneroForm(ModelForm):
         fields =[
             'gen_generos'
         ]
+
+class AtualizacaoForm(ModelForm):
+    class Meta:
+        model = models.Atualizacao
+        fields =[
+            'att_usu_id',
+            'att_nec_id',
+        ]
