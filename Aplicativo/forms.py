@@ -1,5 +1,5 @@
 from Aplicativo import models
-from django.forms import ModelForm
+from django.forms import ModelForm, Widget
 
 class NecessitadoForm(ModelForm):
     class Meta:
@@ -12,8 +12,9 @@ class NecessitadoForm(ModelForm):
             'nec_sit_id',
             'nec_pro_id',
             'nec_gen_id',
-            'nec_cid_id'
+            'nec_cid_id',
         ]
+        
 
 class CidadeForm(ModelForm):
     class Meta:
@@ -28,26 +29,4 @@ class ProfissaoForm(ModelForm):
         model = models.Profissao
         fields= [
             'pro_profissao',
-        ]
-
-class SituacaoForm(ModelForm):
-    class Meta:
-        model = models.Situacao
-        fields =[
-            'sit_situacao'
-        ]
-
-class GeneroForm(ModelForm):
-    class Meta:
-        model = models.Genero
-        fields =[
-            'gen_generos'
-        ]
-
-class AtualizacaoForm(ModelForm):
-    class Meta:
-        model = models.Atualizacao
-        fields =[
-            'att_usu_id',
-            'att_nec_id',
         ]

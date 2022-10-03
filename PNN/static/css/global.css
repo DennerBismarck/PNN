@@ -13,7 +13,24 @@
     color: #b3cff2;
 }
 
+form{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-auto-rows: auto;
+}
+p{
+    width: 100px;
+}
+label{color: #b3cff2; }
 
+input{color: #070540;  }
+
+select{color: #070540;  }
+
+button{
+    background-color: #b3cff2; color: #070540; width: 60px; height: 35px; border-radius: 5px; 
+}
 
 body{
     background-color: var(--azulGelo);
