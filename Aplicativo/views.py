@@ -8,11 +8,15 @@ def index(request):
     listagem = {'necessitados_chave': necessitados}
     return render(request, "index.html", listagem)
 
+# ===================================================================
+# SISTEMA DE AUTENTICAÇÃO
+# ===================================================================
+
 def login(request):
-    return render(request, "login.html")
+    return render(request, "authentication/login.html")
 
 def cadastro(request):
-    return render(request, "cadastro.html")
+    return render(request, "authentication/cadastro.html")
 
 # ===================================================================
 # CRUD de NECESSITADOS

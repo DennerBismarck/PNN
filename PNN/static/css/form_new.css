@@ -1,0 +1,70 @@
+.container{
+    width: 35%;
+}
+.campos{
+    display: grid;
+    width: 220px;
+    height: 40px;
+    padding-top: 2px;
+    border-radius: 10px;
+    text-align: center;
+}
+.butao{
+    background-color: #b3cff2;
+    position: relative;
+    width: 90px;
+    height: 30px;
+    display: block;
+    top: 50%;
+    
+    color: #070540;
+    border-radius: 5px;
+}
+input{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.dv{
+        position: relative;
+        background-color:#070540;
+        width: 100%;
+        left: 50%;
+        border-radius: 10px;
+    }
+    @media (max-width: 1280px) and (min-width: 901px)  {
+        form{
+                    grid-template-columns: 1fr;
+                }         
+                .table-responsive{
+                    width: 100%;
+                    left: 0;
+                }
+                .container{
+                    width: 40%;
+                }
+            }  
+            @media (max-width: 900px) {
+                form{
+                    grid-template-columns: 1fr;
+                }         
+                .table-responsive{
+                    width: 100%;
+                    left: 0;
+                }
+                .container{
+                    width: 60%;
+                }
+            }
+            @media  (max-width: 600px) {
+                form{
+                    grid-template-columns: 1fr;
+                }
+                .table-responsive{
+                    width: 100%;
+                    left: 0;
+                }
+                .container{
+                    width: 70%;
+                }
+            } 
+
+            
