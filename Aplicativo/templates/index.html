@@ -24,12 +24,15 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 fixed-top">
             <div class="container-fluid row">
-                <img class="img-fluid col-2" src="{% static 'img/logo_navbar.png' %}"/>
+                {% comment %} <a class="">
+                    A
+                    {% comment %} <img class="navbar-brand" src="{% static 'img/logo_navbar.png' %}"/> {% endcomment %}
+                
                 <button class="navbar-toggler col" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 col-10">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 col-10 my-0">
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="/cidade">Cidades</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="/necessitado">Necessitados</a></li>
