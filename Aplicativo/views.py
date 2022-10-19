@@ -1,11 +1,18 @@
 from django.shortcuts import render, redirect
-from Aplicativo import forms
-from Aplicativo import models
-from .forms import *
+from Aplicativo import forms, models
+import folium, requests, json, urllib
 
 def index(request):
+    m = folium.Map()
+    m = m._repr_html_()
+
+    url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/33/municipios'
+    r = requests.get(url)
+    list = r.json()
+
+    print(r)
     necessitados = models.Necessitado.objects.all()
-    listagem = {'necessitados_chave': necessitados}
+    listagem = {'necessitados_chave': necessitados, 'map': m, 'request': list[1]}
     return render(request, "index.html", listagem)
 
 # ===================================================================
@@ -43,6 +50,33 @@ def deleteNecessitado(request, id_necessitado):
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     necessitado.delete()
     return redirect("main")
+
+# ===================================================================
+# CRUD de ESTADO
+# ===================================================================
+
+def createEstado(request):
+    form = forms.EstadoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_estado': form}
+    return render(request, "estado.html", listagem)
+
+def updateEstado(request, id_estado):
+    Estado = models.Estado.objects.get(pk=id_estado)
+    form = forms.EstadoForm(request.POST or None, instance=Estado)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_estado': form}
+    return render(request, "estado.html", listagem)
+
+def deleteEstado(request, id_estado):
+    Estado = models.Estado.objects.get(pk=id_estado)
+    Estado.delete()
+    return redirect("main")
+
 
 # ===================================================================
 # CRUD de CIDADE

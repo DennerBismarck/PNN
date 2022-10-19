@@ -24,6 +24,13 @@ class CidadeForm(ModelForm):
             'cid_est_id',
         ]
 
+class EstadoForm(ModelForm):
+    class Meta:
+        model = models.Estado
+        fields = [
+            'est_estado',
+        ]
+
 class ProfissaoForm(ModelForm):
     class Meta:
         model = models.Profissao

@@ -9,15 +9,15 @@ from django.contrib.auth.models import AbstractUser
 
 class Estado(models.Model):
     est_id      = models.AutoField(primary_key=True)
-    est_estado  = models.CharField(max_length=50)
+    est_estado  = models.CharField(verbose_name='Estado', max_length=50)
 
     def __str__(self):
         return self.est_estado
 
 class Cidade(models.Model):
     cid_id      = models.AutoField(primary_key=True)
-    cid_cidade  = models.CharField(max_length=50)
-    cid_est_id  = models.ForeignKey(Estado, on_delete=models.CASCADE, default=1)
+    cid_cidade  = models.CharField(verbose_name='Cidade', max_length=50)
+    cid_est_id  = models.ForeignKey(Estado, verbose_name='Estado', on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.cid_cidade
@@ -28,7 +28,7 @@ class Cidade(models.Model):
 
 class Profissao(models.Model):
     pro_id          = models.AutoField(primary_key=True)
-    pro_profissao   = models.CharField(max_length=100)
+    pro_profissao   = models.CharField(verbose_name='Profissão',max_length=100)
 
     def __str__(self):
         return self.pro_profissao
@@ -39,7 +39,7 @@ class Profissao(models.Model):
 
 class Situacao(models.Model):
     sit_id          = models.AutoField(primary_key=True)
-    sit_situacao    = models.CharField(max_length=100)
+    sit_situacao    = models.CharField(verbose_name='Situação',max_length=100)
 
     def __str__(self):
         return self.sit_situacao
@@ -50,7 +50,7 @@ class Situacao(models.Model):
 
 class Genero(models.Model):
     gen_id      = models.AutoField(primary_key=True)
-    gen_generos = models.CharField(max_length=20)
+    gen_generos = models.CharField(verbose_name='Gênero', max_length=20)
 
     def __str__(self):
         return self.gen_generos
@@ -60,15 +60,15 @@ class Genero(models.Model):
 
 class Necessitado(models.Model):
     nec_id          = models.AutoField(primary_key=True)
-    nec_nome        = models.CharField(max_length=100)
-    nec_idade       = models.IntegerField(default=0)
-    nec_logradouro  = models.CharField(max_length=100)
-    nec_cpf         = models.CharField(max_length=14)
+    nec_nome        = models.CharField(verbose_name="Nome",max_length=100)
+    nec_idade       = models.IntegerField(verbose_name="Idade",default=0)
+    nec_logradouro  = models.CharField(verbose_name="Logradouro",max_length=100)
+    nec_cpf         = models.CharField(verbose_name="CPF",max_length=14)
 
-    nec_sit_id      = models.ForeignKey(Situacao, on_delete=models.CASCADE, default=1)
-    nec_pro_id      = models.ForeignKey(Profissao, on_delete=models.CASCADE, default=1)
-    nec_gen_id      = models.ForeignKey(Genero, on_delete=models.CASCADE, default=1)
-    nec_cid_id      = models.ForeignKey(Cidade, on_delete=models.CASCADE, default=1)
+    nec_sit_id      = models.ForeignKey(Situacao, verbose_name="Situação",on_delete=models.CASCADE, default=1)
+    nec_pro_id      = models.ForeignKey(Profissao, verbose_name="Profissão",on_delete=models.CASCADE, default=1)
+    nec_gen_id      = models.ForeignKey(Genero, verbose_name="Gênero",on_delete=models.CASCADE, default=1)
+    nec_cid_id      = models.ForeignKey(Cidade, verbose_name="Cidade",on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.nec_nome
@@ -78,8 +78,8 @@ class Necessitado(models.Model):
 
 class Atualizacao(models.Model):
     att_id      = models.AutoField(primary_key=True)
-    att_usu_id  = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=1)
-    att_nec_id  = models.ForeignKey(Necessitado, on_delete=models.CASCADE, default=1)
+    att_usu_id  = models.ForeignKey(Usuario, verbose_name="Usuário",on_delete=models.CASCADE, default=1)
+    att_nec_id  = models.ForeignKey(Necessitado, verbose_name="Necessitado",on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return "Atualização %s pelo usuário(a) %s para o necessitado(a) %s" % (self.att_id, self.att_usu_id, self.att_nec_id)
@@ -95,10 +95,10 @@ class Atualizacao(models.Model):
 
 class ONG(models.Model):
     ong_id          = models.AutoField(primary_key=True)
-    ong_nome        = models.CharField(max_length=100)
-    ong_site        = models.CharField(max_length=70)
-    ong_logradouro  = models.CharField(max_length=50)
-    ong_cid_id      = models.ForeignKey(Cidade, on_delete=models.CASCADE, default=1)
+    ong_nome        = models.CharField(verbose_name="Nome da ONG",max_length=100)
+    ong_site        = models.CharField(verbose_name="Site da ONG",max_length=70)
+    ong_logradouro  = models.CharField(verbose_name="Logradouro da ONG",max_length=50)
+    ong_cid_id      = models.ForeignKey(Cidade, verbose_name="Cidade da ONG",on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.ong_nome
@@ -108,7 +108,7 @@ class ONG(models.Model):
     
 class EMAIL_DAS_ONGS(models.Model):
     emo_email = models.CharField(max_length=40, primary_key=True)
-    emo_ong_id = models.ForeignKey(ONG, on_delete=models.CASCADE, default=1)
+    emo_ong_id = models.ForeignKey(ONG, verbose_name="ONG",on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.emo_email
@@ -120,7 +120,7 @@ class EMAIL_DAS_ONGS(models.Model):
 
 class TEL_DAS_ONGS(models.Model):
     ton_telefone = models.CharField(max_length=15, primary_key=True)
-    ton_ong_id = models.ForeignKey(ONG, on_delete=models.CASCADE, default=1)
+    ton_ong_id = models.ForeignKey(ONG, verbose_name="ONG",on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.ton_telefone
