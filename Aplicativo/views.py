@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from Aplicativo import forms, models
 import folium, requests, json, urllib
+import pandas as pd
     
 # API PARA CIDADES E ESTADOS
 def requestAPI():
@@ -13,7 +14,6 @@ def requestDBEstado():
     rlist = requestAPI()
     for municipio in rlist:
         estado = municipio['municipio']['regiao-imediata']['regiao-intermediaria']['UF']['nome']
-        
         EstadoList = models.Estado(est_estado=estado)
         estadoVerify = models.Estado.objects.filter(est_estado=estado)
         if (set(estadoVerify) == set(models.Estado.objects.none())):
@@ -30,19 +30,15 @@ def requestDBCidade():
             CidadeList.save()
 
 def index(request):
-    m = folium.Map()
-    m = m._repr_html_()
-
     # Verificando se os ESTADOS e CIDADES já foram ADICIONADOS ao DB
     if (set(models.Estado.objects.filter(est_id=1)) == set(models.Estado.objects.none())):
         requestDBEstado()
         if (set(models.Cidade.objects.filter(cid_id=1)) == set(models.Cidade.objects.none())):
             requestDBCidade()
-            
+
     necessitados = models.Necessitado.objects.all()
     listagem = {
         'necessitados_chave': necessitados, 
-        'map': m,
     }
     return render(request, "index.html", listagem)
 
@@ -84,31 +80,30 @@ def deleteNecessitado(request, id_necessitado):
     return redirect("main")
 
 # ===================================================================
-# CRUD de ESTADO
+# CRUD de Situação
 # ===================================================================
 
-def createEstado(request):
-    form = forms.EstadoForm(request.POST or None)
+def createSituacao(request):
+    form = forms.SituacaoForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_estado': form}
-    return render(request, "estado.html", listagem)
+    listagem = {'form_Situacao': form}
+    return render(request, "Situacao.html", listagem)
 
-def updateEstado(request, id_estado):
-    Estado = models.Estado.objects.get(pk=id_estado)
-    form = forms.EstadoForm(request.POST or None, instance=Estado)
+def updateSituacao(request, id_Situacao):
+    Situacao = models.Situacao.objects.get(pk=id_Situacao)
+    form = forms.SituacaoForm(request.POST or None, instance=Situacao)
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_estado': form}
-    return render(request, "estado.html", listagem)
+    listagem = {'form_Situacao': form}
+    return render(request, "Situacao.html", listagem)
 
-def deleteEstado(request, id_estado):
-    Estado = models.Estado.objects.get(pk=id_estado)
-    Estado.delete()
+def deleteSituacao(request, id_Situacao):
+    Situacao = models.Situacao.objects.get(pk=id_Situacao)
+    Situacao.delete()
     return redirect("main")
-
 
 # ===================================================================
 # CRUD de CIDADE
@@ -145,7 +140,7 @@ def createProfissao(request):
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_Profissao': form}
+    listagem = {'form_profissao': form}
     return render(request, "profissao.html", listagem)
 
 def updateProfissao(request, id_profissao):
@@ -154,10 +149,36 @@ def updateProfissao(request, id_profissao):
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_Profissao': form}
+    listagem = {'form_profissao': form}
     return render(request, "profissao.html", listagem)
 
 def deleteProfissao(request, id_profissao):
     Profissao = models.Profissao.objects.get(pk=id_profissao)
     Profissao.delete()
+    return redirect("main")
+
+# ===================================================================
+# CRUD de ONG
+# ===================================================================
+
+def createONG(request):
+    form = forms.ONGForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_ONG': form}
+    return render(request, "ONG.html", listagem)
+
+def updateONG(request, id_ONG):
+    ONG = models.ONG.objects.get(pk=id_ONG)
+    form = forms.ONGForm(request.POST or None, instance=ONG)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_ONG': form}
+    return render(request, "ONG.html", listagem)
+
+def deleteONG(request, id_ONG):
+    ONG = models.ONG.objects.get(pk=id_ONG)
+    ONG.delete()
     return redirect("main")

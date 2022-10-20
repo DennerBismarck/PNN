@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -11,44 +10,33 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        {% block title %}
+        <title>NeSys</title>
+        {% endblock title %}
+
         {% block style %}
         <link rel="icon" type="image/x-icon" href="{% static 'img/logo_title.png' %}" />
         <link rel="stylesheet" href="{% static 'css/global.css' %}">
         <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
         {% endblock style%}
-
-        <title>NeSys</title>
         
     </head>
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 fixed-top">
             <div class="container-fluid row">
-                {% comment %} <a class="">
-                    A
-                    {% comment %} <img class="navbar-brand" src="{% static 'img/logo_navbar.png' %}"/> {% endcomment %}
-                
                 <button class="navbar-toggler col" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 col-10 my-0">
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/cidade">Cidades</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/necessitado">Necessitados</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/profissao">Profissão</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/genero">Gênero</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/idade">Idade</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/ongs">ONGs</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/situacao">Situação</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/estado">Estado</a></li> 
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/notificacao">Notificação</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="/mapeamento">Mapeamento</a></li>         
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'main' %}">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createCidade' %}">Cidades</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createNecessitado' %}">Necessitados</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createProfissao' %}">Profissão</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createONG' %}">ONGs</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createSituacao' %}">Situação</a></li>    
                     </ul>
-
-                    <div class="offcanvas-header">
-                  
-                    </div>
               </div>
             </div>
         </nav>
@@ -61,6 +49,7 @@
             </div>
         </header>
         <!-- Content section-->
+        {% block content %}
         <section class="py-5" style="background-color: #b3cff2; height: 700px;">
             <div class="container my-5">
                 <div class="row justify-cotent-center">
@@ -113,15 +102,8 @@
                     </div>
                 </div>
             </div>
-        </section><br>
-        <!-- Content section-->
-        <section class="py-5" style="background-color: #070540;">
-            <div class="container my-5" >
-                <div class="row justify-content-center">
-                </div>
-            </div>
         </section>
-        <br style = background-color:#b3cff2>
+        {% endblock %}
         <!-- Footer-->
         <footer class="py-5 footer" style=background-color:#070540; >
             <div class="container"><h6 class="m-0 text-center text-white">Esse site tem como objetivo aproximar doadores e ajudantes dos necessitados, saiba de mais detalhes clicando nos links </h6>

@@ -17,14 +17,18 @@ urlpatterns = [
     path('cidade', views.createCidade, name="createCidade"),
     path('cidade/<int:id_cidade>', views.updateCidade, name="updateCidade"),
     path('cidade/<int:id_cidade>/delete', views.deleteCidade, name="deleteCidade"),
-    # CRUD de ESTADOS
-    path('estado', views.createEstado, name="createEstado"),
-    path('estado/<int:id_estado>', views.updateEstado, name="updateEstado"),
-    path('estado/<int:id_estado>/delete', views.deleteEstado, name="deleteEstado"),
     # CRUD de PROFISSÕES
     path('profissao', views.createProfissao, name="createProfissao"),
     path('profissao/<int:id_profissao>', views.updateProfissao, name="updateProfissao"),
     path('profissao/<int:id_profissao>/delete', views.deleteProfissao, name="deleteProfissao"),
+    # CRUD de ONGs
+    path('ONG', views.createONG, name="createONG"),
+    path('ONG/<int:id_ONG>', views.updateONG, name="updateONG"),
+    path('ONG/<int:id_ONG>/delete', views.deleteONG, name="deleteONG"),
+    # CRUD de ONGs
+    path('Situacao', views.createSituacao, name="createSituacao"),
+    path('Situacao/<int:id_Situacao>', views.updateSituacao, name="updateSituacao"),
+    path('Situacao/<int:id_Situacao>/delete', views.deleteSituacao, name="deleteSituacao"),
 ]
 
 # if settings.DEBUG:

@@ -14,7 +14,23 @@ class NecessitadoForm(ModelForm):
             'nec_gen_id',
             'nec_cid_id',
         ]
-        
+
+class ONGForm(ModelForm):
+    class Meta:
+        model = models.ONG
+        fields = [
+            'ong_nome',
+            'ong_site',
+            'ong_logradouro',
+            'ong_cid_id',
+        ]
+
+class SituacaoForm(ModelForm):
+    class Meta:
+        model = models.Situacao
+        fields = [
+            'sit_situacao',
+        ]
 
 class CidadeForm(ModelForm):
     class Meta:
