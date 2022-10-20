@@ -1,18 +1,49 @@
 from django.shortcuts import render, redirect
 from Aplicativo import forms, models
 import folium, requests, json, urllib
+    
+# API PARA CIDADES E ESTADOS
+def requestAPI():
+    url = 'https://servicodados.ibge.gov.br/api/v1/localidades/distritos'
+    r = requests.get(url)
+    rlist = r.json()
+    return rlist
+
+def requestDBEstado():
+    rlist = requestAPI()
+    for municipio in rlist:
+        estado = municipio['municipio']['regiao-imediata']['regiao-intermediaria']['UF']['nome']
+        
+        EstadoList = models.Estado(est_estado=estado)
+        estadoVerify = models.Estado.objects.filter(est_estado=estado)
+        if (set(estadoVerify) == set(models.Estado.objects.none())):
+            EstadoList.save()
+
+def requestDBCidade():
+    rlist = requestAPI()
+    for municipio in rlist:
+        estado = municipio['municipio']['regiao-imediata']['regiao-intermediaria']['UF']['nome']
+        cidade = municipio['municipio']['nome']
+        CidadeList = models.Cidade(cid_cidade=cidade, cid_est_id=models.Estado.objects.get(est_estado=estado))
+        cidadeVerify = models.Cidade.objects.filter(cid_cidade=cidade)
+        if (set(cidadeVerify) == set(models.Cidade.objects.none())):
+            CidadeList.save()
 
 def index(request):
     m = folium.Map()
     m = m._repr_html_()
 
-    url = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados/33/municipios'
-    r = requests.get(url)
-    list = r.json()
-
-    print(r)
+    # Verificando se os ESTADOS e CIDADES já foram ADICIONADOS ao DB
+    if (set(models.Estado.objects.filter(est_id=1)) == set(models.Estado.objects.none())):
+        requestDBEstado()
+        if (set(models.Cidade.objects.filter(cid_id=1)) == set(models.Cidade.objects.none())):
+            requestDBCidade()
+            
     necessitados = models.Necessitado.objects.all()
-    listagem = {'necessitados_chave': necessitados, 'map': m, 'request': list[1]}
+    listagem = {
+        'necessitados_chave': necessitados, 
+        'map': m,
+    }
     return render(request, "index.html", listagem)
 
 # ===================================================================
@@ -34,10 +65,11 @@ def createNecessitado(request):
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_necessitado': form}
+    listagem = {'form_necessitado': form, 'request': list}
     return render(request, "necessitado.html", listagem)
 
 def updateNecessitado(request, id_necessitado):
+
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
     if form.is_valid():
