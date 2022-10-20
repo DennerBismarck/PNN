@@ -4,6 +4,7 @@
 {% block content %}
 <form method="POST">
     {% csrf_token %}
+    {{ form_profissao.pro_profissao.value }}
     {{ form_profissao.as_p }}
     <button type="submit">Enviar</button>
 </form>

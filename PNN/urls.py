@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from Aplicativo import views
 
 urlpatterns = [
@@ -8,7 +8,8 @@ urlpatterns = [
     path('cadastro/', views.cadastro),
     #-----------  -----------#
     path('admin/', admin.site.urls),
-    path('', views.index, name= 'main'),
+    # path('', views.index, name= 'main'),
+    path('', include('Timeline.urls')),
     # CRUD de NECESSITADOS
     path('necessitado', views.createNecessitado, name="createNecessitado"),
     path('necessitado/<int:id_necessitado>', views.updateNecessitado, name="updateNecessitado"),

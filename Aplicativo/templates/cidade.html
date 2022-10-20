@@ -5,6 +5,7 @@
 <form method="POST">
     {% csrf_token %}
     {{ form_cidade.as_p }}
+    {{ form_teste }}
     <button type="submit">Enviar</button>
 </form>
 {% endblock %}

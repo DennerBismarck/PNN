@@ -3,7 +3,28 @@ from Aplicativo import forms, models
 import folium, requests, json, urllib
 import pandas as pd
     
-# API PARA CIDADES E ESTADOS
+# ==================================================================
+# INDEX
+# ==================================================================
+
+def index(request):
+    # Verificando se os ESTADOS e CIDADES já foram ADICIONADOS ao DB
+    if (set(models.Estado.objects.filter(est_id=1)) == set(models.Estado.objects.none())):
+        requestDBEstado()
+        if (set(models.Cidade.objects.filter(cid_id=1)) == set(models.Cidade.objects.none())):
+            requestDBCidade()
+
+    necessitados = models.Necessitado.objects.all()
+    listagem = {
+        'necessitados_chave': necessitados, 
+        'request': models.Necessitado.objects.values(),
+    }
+    return render(request, "index.html", listagem)
+
+# ==================================================================
+# API e REQUESTS para DATABASE de CIDADE e ESTADO
+# ==================================================================
+
 def requestAPI():
     url = 'https://servicodados.ibge.gov.br/api/v1/localidades/distritos'
     r = requests.get(url)
@@ -29,19 +50,6 @@ def requestDBCidade():
         if (set(cidadeVerify) == set(models.Cidade.objects.none())):
             CidadeList.save()
 
-def index(request):
-    # Verificando se os ESTADOS e CIDADES já foram ADICIONADOS ao DB
-    if (set(models.Estado.objects.filter(est_id=1)) == set(models.Estado.objects.none())):
-        requestDBEstado()
-        if (set(models.Cidade.objects.filter(cid_id=1)) == set(models.Cidade.objects.none())):
-            requestDBCidade()
-
-    necessitados = models.Necessitado.objects.all()
-    listagem = {
-        'necessitados_chave': necessitados, 
-    }
-    return render(request, "index.html", listagem)
-
 # ===================================================================
 # SISTEMA DE AUTENTICAÇÃO
 # ===================================================================
@@ -65,13 +73,12 @@ def createNecessitado(request):
     return render(request, "necessitado.html", listagem)
 
 def updateNecessitado(request, id_necessitado):
-
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_necessitado': form}
+    listagem = {'form_necessitado': form, 'necessitado': necessitado}
     return render(request, "necessitado.html", listagem)
 
 def deleteNecessitado(request, id_necessitado):

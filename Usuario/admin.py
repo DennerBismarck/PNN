@@ -13,6 +13,6 @@ class UsuarioAdmin(UserAdmin):
     list_filter = ()
     fieldsets = ()
 
-# admin.site.register(models.Usuario, UsuarioAdmin)
-# admin.site.register(models.TEL_DOS_USU)
-# admin.site.register(models.EMAIL_DOS_USU)
+admin.site.register(models.Usuario)
+admin.site.register(models.TEL_DOS_USU)
+admin.site.register(models.EMAIL_DOS_USU)
