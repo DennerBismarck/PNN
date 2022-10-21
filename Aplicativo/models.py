@@ -78,8 +78,8 @@ class Necessitado(models.Model):
 
 class Atualizacao(models.Model):
     att_id      = models.AutoField(primary_key=True)
-    att_usu_id  = models.ForeignKey(Usuario, verbose_name="Usuário",on_delete=models.CASCADE, default=1)
-    att_nec_id  = models.ForeignKey(Necessitado, verbose_name="Necessitado",on_delete=models.CASCADE, default=1)
+    att_usu_id  = models.ForeignKey(Usuario, verbose_name="Usuário", related_name='usuario', on_delete=models.CASCADE, default=1)
+    att_nec_id  = models.ForeignKey(Necessitado, verbose_name="Necessitado", related_name='necessitado', on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return "Atualização %s pelo usuário(a) %s para o necessitado(a) %s" % (self.att_id, self.att_usu_id, self.att_nec_id)
@@ -87,7 +87,7 @@ class Atualizacao(models.Model):
     class Meta:
         verbose_name        = "Atualização"
         verbose_name_plural = "Atualizações"
-        unique_together = (("att_id", "att_usu_id", "att_nec_id"),)
+        unique_together = ['att_id', 'att_usu_id', 'att_nec_id']
 
 # ===================================================================
 # Todos os Modelos Abaixo vão para a série de tabelas de ONGS!

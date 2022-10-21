@@ -8,8 +8,8 @@ urlpatterns = [
     path('cadastro/', views.cadastro),
     #-----------  -----------#
     path('admin/', admin.site.urls),
-    # path('', views.index, name= 'main'),
-    path('', include('Timeline.urls')),
+    path('', views.index, name= 'main'),
+    path('api', include('Timeline.urls')),
     # CRUD de NECESSITADOS
     path('necessitado', views.createNecessitado, name="createNecessitado"),
     path('necessitado/<int:id_necessitado>', views.updateNecessitado, name="updateNecessitado"),

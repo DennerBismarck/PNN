@@ -14,10 +14,14 @@ def index(request):
         if (set(models.Cidade.objects.filter(cid_id=1)) == set(models.Cidade.objects.none())):
             requestDBCidade()
 
+    url = 'http://127.0.0.1:8000/api'
+    r = requests.get(url)
+    rlista = r.json()
+
     necessitados = models.Necessitado.objects.all()
     listagem = {
         'necessitados_chave': necessitados, 
-        'request': models.Necessitado.objects.values(),
+        'request': rlista,
     }
     return render(request, "index.html", listagem)
 
