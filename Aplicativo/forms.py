@@ -13,6 +13,7 @@ class NecessitadoForm(ModelForm):
             'nec_pro_id',
             'nec_gen_id',
             'nec_cid_id',
+            'year_in_school',
         ]
 
 class ONGForm(ModelForm):

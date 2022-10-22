@@ -70,6 +70,26 @@ class Necessitado(models.Model):
     nec_gen_id      = models.ForeignKey(Genero, verbose_name="Gênero",on_delete=models.CASCADE, default=1)
     nec_cid_id      = models.ForeignKey(Cidade, verbose_name="Cidade",on_delete=models.CASCADE, default=1)
 
+    MEDIA_CHOICES = [
+    ('Audio', (
+            ('vinyl', 'Vinyl'),
+            ('cd', 'CD'),
+        )
+    ),
+    ('Video', (
+            ('vhs', 'VHS Tape'),
+            ('dvd', 'DVD'),
+        )
+    ),
+    ('unknown', 'Unknown'),
+]
+    year_in_school = models.CharField(
+        max_length=1000,
+        choices=MEDIA_CHOICES,
+        default=1,
+    )
+
+
     def __str__(self):
         return self.nec_nome
 
@@ -80,9 +100,10 @@ class Atualizacao(models.Model):
     att_id      = models.AutoField(primary_key=True)
     att_usu_id  = models.ForeignKey(Usuario, verbose_name="Usuário", related_name='usuario', on_delete=models.CASCADE, default=1)
     att_nec_id  = models.ForeignKey(Necessitado, verbose_name="Necessitado", related_name='necessitado', on_delete=models.CASCADE, default=1)
+    date        = models.DateTimeField(verbose_name="Data da Atualização", auto_now_add=True)
 
     def __str__(self):
-        return "Atualização %s pelo usuário(a) %s para o necessitado(a) %s" % (self.att_id, self.att_usu_id, self.att_nec_id)
+        return "%s: Usuário %s atualizou %s" % (self.att_id, self.att_usu_id, self.att_nec_id)
 
     class Meta:
         verbose_name        = "Atualização"
