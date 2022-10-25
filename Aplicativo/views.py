@@ -14,14 +14,9 @@ def index(request):
         if (set(models.Cidade.objects.filter(cid_id=1)) == set(models.Cidade.objects.none())):
             requestDBCidade()
 
-    url = 'http://127.0.0.1:8000/api'
-    r = requests.get(url)
-    rlista = r.json()
-
     necessitados = models.Necessitado.objects.all()
     listagem = {
         'necessitados_chave': necessitados, 
-        'request': rlista,
     }
     return render(request, "index.html", listagem)
 
@@ -88,6 +83,32 @@ def updateNecessitado(request, id_necessitado):
 def deleteNecessitado(request, id_necessitado):
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     necessitado.delete()
+    return redirect("main")
+
+# ===================================================================
+# CRUD de Atualização
+# ===================================================================
+
+def createAtualizacao(request):
+    form = forms.AtualizacaoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_atualizacao': form, 'request': list}
+    return render(request, "atualizacao.html", listagem)
+
+def updateAtualizacao(request, id_atualizacao):
+    Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
+    form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_atualizacao': form, 'Atualizacao': Atualizacao}
+    return render(request, "atualizacao.html", listagem)
+
+def deleteAtualizacao(request, id_atualizacao):
+    Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
+    Atualizacao.delete()
     return redirect("main")
 
 # ===================================================================
