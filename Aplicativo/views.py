@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from Aplicativo import forms, models
+from Usuario.models import Usuario, TEL_DOS_USU, EMAIL_DOS_USU
 import folium, requests, json, urllib
 import pandas as pd
     
@@ -115,25 +116,51 @@ def deleteAtualizacao(request, id_atualizacao):
 # TIMELINE
 # ===================================================================
 
+def user_is_authenticated(request):
+    username = None
+    if request.user.is_authenticated:
+        username = request.user.usu_nome
+    return username
+
 def createTimeline(request, id_necessitado):
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
-    Atualizacao = models.Atualizacao(att_nec_id=necessitado,att_usu_id=1)
-    Atualizacao.save()
+    form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
+    if form.is_valid():
+        user = Usuario.objects.filter(usu_nome=user_is_authenticated(request)).first()
+        atualizacao = models.Atualizacao(
+            att_nec_id          = necessitado,
+            att_usu_id          = user, 
+            att_nec_nome        = form['nec_nome'].value(),
+            att_nec_idade       = form['nec_idade'].value(),
+            att_nec_logradouro  = form['nec_logradouro'].value(),
+            att_nec_cpf         = form['nec_cpf'].value(),
+            att_nec_sit_id      = models.Situacao.objects.get(sit_id=form['nec_sit_id'].value()),
+            att_nec_pro_id      = models.Profissao.objects.get(pro_id=form['nec_pro_id'].value()),
+            att_nec_gen_id      = models.Genero.objects.get(gen_id=form['nec_gen_id'].value()),
+            att_nec_cid_id      = models.Cidade.objects.get(cid_id=form['nec_cid_id'].value()),
+        )
+        atualizacao.save()
+        return redirect("main")
+    listagem = {'form_necessitado': form, 'necessitado': necessitado}
+    return render(request, "necessitado.html", listagem)
+
+def updateTimeline(request, id_necessitado, id_atualizacao):
+    listNumber = int(id_atualizacao)-1
+    Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
+    Atualizacao = models.Atualizacao.objects.filter(att_nec_id=Necessitado)[listNumber]
+    form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_atualizacao': form, 'Atualizacao': Atualizacao, 'teste': listNumber}
+    return render(request, "atualizacao.html", listagem)
+
+def deleteTimeline(request, id_necessitado, id_atualizacao):
+    listNumber = int(id_atualizacao)-1
+    Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
+    Atualizacao = models.Atualizacao.objects.filter(att_nec_id=Necessitado)[listNumber]
+    Atualizacao.delete()
     return redirect("main")
-
-# def updateTimeline(request, id_atualizacao):
-#     Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
-#     form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
-#     if form.is_valid():
-#         form.save()
-#         return redirect("main")
-#     listagem = {'form_atualizacao': form, 'Atualizacao': Atualizacao}
-#     return render(request, "atualizacao.html", listagem)
-
-# def deletTimeline(request, id_atualizacao):
-#     Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
-#     Atualizacao.delete()
-#     return redirect("main")
 
 
 

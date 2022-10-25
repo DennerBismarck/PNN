@@ -11,12 +11,12 @@ urlpatterns = [
     path('', views.index, name='main'),
     # CRUD de NECESSITADOS
     path('necessitado', views.createNecessitado, name="createNecessitado"),
-    path('necessitado/<int:id_necessitado>', views.createTimeline, name="updateNecessitado"),
+    path('necessitado/<int:id_necessitado>', views.updateNecessitado, name="updateNecessitado"),
     path('necessitado/<int:id_necessitado>/delete', views.deleteNecessitado, name="deleteNecessitado"),
     # CRUD de ATUALIZAÇÕES
-    path('atualizacao', views.createAtualizacao, name="createAtualizacao"),
-    path('atualizacao/<int:id_atualizacao>', views.updateAtualizacao, name="updateAtualizacao"),
-    path('atualizacao/<int:id_atualizacao>/delete', views.deleteAtualizacao, name="deleteAtualizacao"),
+    path('necessitado', views.createTimeline, name="createAtualizacao"),
+    path('necessitado/<int:id_necessitado>/<int:id_atualizacao>', views.updateTimeline, name="updateAtualizacao"),
+    path('necessitado/<int:id_necessitado>/<int:id_atualizacao>/delete', views.deleteTimeline, name="deleteAtualizacao"),
     # CRUD de CIDADES
     path('cidade', views.createCidade, name="createCidade"),
     path('cidade/<int:id_cidade>', views.updateCidade, name="updateCidade"),
