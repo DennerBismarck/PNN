@@ -11,7 +11,7 @@ urlpatterns = [
     path('', views.index, name='main'),
     # CRUD de NECESSITADOS
     path('necessitado', views.createNecessitado, name="createNecessitado"),
-    path('necessitado/<int:id_necessitado>', views.updateNecessitado, name="updateNecessitado"),
+    path('necessitado/<int:id_necessitado>', views.createTimeline, name="updateNecessitado"),
     path('necessitado/<int:id_necessitado>/delete', views.deleteNecessitado, name="deleteNecessitado"),
     # CRUD de ATUALIZAÇÕES
     path('atualizacao', views.createAtualizacao, name="createAtualizacao"),
@@ -29,7 +29,7 @@ urlpatterns = [
     path('ONG', views.createONG, name="createONG"),
     path('ONG/<int:id_ONG>', views.updateONG, name="updateONG"),
     path('ONG/<int:id_ONG>/delete', views.deleteONG, name="deleteONG"),
-    # CRUD de ONGs
+    # CRUD de Situação
     path('Situacao', views.createSituacao, name="createSituacao"),
     path('Situacao/<int:id_Situacao>', views.updateSituacao, name="updateSituacao"),
     path('Situacao/<int:id_Situacao>/delete', views.deleteSituacao, name="deleteSituacao"),

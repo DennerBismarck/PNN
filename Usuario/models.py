@@ -9,28 +9,28 @@ class MyUsuarioManager(BaseUserManager):
             usu_nome = usu_nome
         )
         Usuario.set_password(password)
-        Usuario.save(using=self._db)
+        Usuario.save()
         return Usuario
     
     def create_superuser(self, usu_nome, password):
-        Usuario = self.model(
+        Usuario = self.create_user(
             usu_nome = usu_nome,
             password = password,
         )
         Usuario.is_admin = True
         Usuario.is_staff = True
         Usuario.is_superuser = True
-        Usuario.save(using=self._db)
+        Usuario.save()
         return Usuario
 
 class Usuario(AbstractBaseUser):
-    usu_id       = models.AutoField(primary_key=True)
-    usu_nome     = models.CharField(max_length=50, unique=True, verbose_name="Usuário")
+    usu_id      = models.AutoField(primary_key=True)
+    usu_nome    = models.CharField(max_length=50, unique=True, verbose_name="Usuário")
 
-    is_admin     = models.BooleanField(default=False)
-    is_active    = models.BooleanField(default=True)
-    is_staff     = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+    is_admin        = models.BooleanField(default=False)
+    is_active       = models.BooleanField(default=True)
+    is_staff        = models.BooleanField(default=False)
+    is_superuser    = models.BooleanField(default=False)
 
     objects = MyUsuarioManager()
 

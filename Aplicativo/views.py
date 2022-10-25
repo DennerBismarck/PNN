@@ -112,6 +112,32 @@ def deleteAtualizacao(request, id_atualizacao):
     return redirect("main")
 
 # ===================================================================
+# TIMELINE
+# ===================================================================
+
+def createTimeline(request, id_necessitado):
+    necessitado = models.Necessitado.objects.get(pk=id_necessitado)
+    Atualizacao = models.Atualizacao(att_nec_id=necessitado,att_usu_id=1)
+    Atualizacao.save()
+    return redirect("main")
+
+# def updateTimeline(request, id_atualizacao):
+#     Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
+#     form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
+#     if form.is_valid():
+#         form.save()
+#         return redirect("main")
+#     listagem = {'form_atualizacao': form, 'Atualizacao': Atualizacao}
+#     return render(request, "atualizacao.html", listagem)
+
+# def deletTimeline(request, id_atualizacao):
+#     Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
+#     Atualizacao.delete()
+#     return redirect("main")
+
+
+
+# ===================================================================
 # CRUD de Situação
 # ===================================================================
 
