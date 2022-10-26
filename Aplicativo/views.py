@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from Aplicativo import forms, models
 from Usuario.models import Usuario, TEL_DOS_USU, EMAIL_DOS_USU
+from django.contrib.auth.decorators import login_required
 import folium, requests, json, urllib
 import pandas as pd
     
@@ -8,6 +9,7 @@ import pandas as pd
 # INDEX
 # ==================================================================
 
+@login_required(login_url="/login")
 def index(request):
     # Verificando se os ESTADOS e CIDADES já foram ADICIONADOS ao DB
     if (set(models.Estado.objects.filter(est_id=1)) == set(models.Estado.objects.none())):
@@ -49,16 +51,6 @@ def requestDBCidade():
         cidadeVerify = models.Cidade.objects.filter(cid_cidade=cidade)
         if (set(cidadeVerify) == set(models.Cidade.objects.none())):
             CidadeList.save()
-
-# ===================================================================
-# SISTEMA DE AUTENTICAÇÃO
-# ===================================================================
-
-def login(request):
-    return render(request, "authentication/login.html")
-
-def cadastro(request):
-    return render(request, "authentication/cadastro.html")
 
 # ===================================================================
 # CRUD de NECESSITADOS

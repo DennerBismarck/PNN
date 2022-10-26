@@ -1,11 +1,12 @@
 from django.contrib import admin
 from django.urls import path
 from Aplicativo import views
+from Usuario import views as userView
 
 urlpatterns = [
     # Tela Login e Cadastro
-    path('login/', views.login),
-    path('cadastro/', views.cadastro),
+    path('login/', userView.login, name="login"),
+    path('cadastro/', userView.cadastro, name="cadastro"),
     #-----------  -----------#
     path('admin/', admin.site.urls),
     path('', views.index, name='main'),

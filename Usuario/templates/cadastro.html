@@ -112,19 +112,12 @@
         <!-- Content section-->
         <section class="py-5" style="background-color: #b3cff2;">
             <div class="container my-5 " style="background-color:#070540; border-radius: 5px;">   
-                <form method="POST" class= "table-responsive thead-dark dv" >
+                <form action="{% url 'cadastro' %}" method="POST" class= "table-responsive thead-dark dv" >
                     {% csrf_token %}
-                    <div>
-                        <br><h1>Cadastro</h1><br>
-                        <input class = "campos" type="text" placeholder="nome"><br>
-                        <input class = "campos" type="email" placeholder="e-mail"><br>
-                        <input class = "campos" type="tel" placeholder="telefone"><br>
-                        <input class = "campos" type="password" placeholder="Senha"><br>
-                        <input class = "campos" type="password" placeholder="Confirmar Senha"><br>
-                        <button class = "butao" type="submit"><a style="color:#070540" href="/login">Enviar</a></button>
-                        <input type="checkbox" onclick="myFunction()">Mostrar Senha
-                        <p style="color: #b3cff2;"><a href="/login">Tenho Conta</a></p>
-                    </div>
+                    <input type="text" id="username" name="username" placeholder="Nome do Usuário">
+                    <input type="text" id="password" name="password" placeholder="Sua Senha">
+                    <button type="submit">Enviar</button>
+                    {{ error }}
                 </form> 
             </div>
         </section>

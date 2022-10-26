@@ -103,16 +103,12 @@ input{
         <!-- Content section-->
         <section class="py-5" style="background-color: #b3cff2;">
             <div class="container my-5 " style="background-color:#070540; border-radius: 5px;">  
-                <form method="POST" class= "table-responsive thead-dark dv">
+                <form action="{% url 'login' %}" method="POST" class="table-responsive thead-dark dv" >
                     {% csrf_token %}
-                    <div>    
-                        <br><h1>Login</h1><br>
-                        <input class="campos" type="text" value="nome"><br>
-                        <input class="campos" type="password" value="Senha"><br>
-                        <button class="butao" type="submit"><a style="color:#070540" href="/">Enviar</a></button><br>
-                        <input type="checkbox" onclick="myFunction()">Mostrar Senha
-                        <p style="color: #b3cff2;"><a href="/cadastro">Se Cadastrar</a></p>
-                    </div>        
+                    <input type="text" name="username" placeholder="Nome do Usuário">
+                    <input type="text" name="password" placeholder="Sua Senha">
+                    <button type="submit">Enviar</button>
+                    {{ error }}
                 </form> 
         </section><br>
         <!-- Content section-->
