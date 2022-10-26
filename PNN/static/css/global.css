@@ -10,7 +10,7 @@
     padding: 0;
     text-decoration: none;
     border: black, 1px;
-    color: #b3cff2;
+    color: blue;
 }
 
 form{
@@ -22,11 +22,11 @@ form{
 p{
     width: 100px;
 }
-label{color: #b3cff2; }
+label{color: var(--azulEscuro); }
 
-input{color: #070540;  }
+input{color: var(--azulEscuro);  }
 
-select{color: #070540;  }
+select{color: var(--azulEscuro);  }
 
 button{
     background-color: #b3cff2; color: #070540; width: 60px; height: 35px; border-radius: 5px; 
@@ -38,7 +38,7 @@ body{
 
 tr{
     background-color: #070540;
-    color: white;
+    color: var(--azulEscuro);
     border: 1px;
     border-color: #b3cff2;
 }

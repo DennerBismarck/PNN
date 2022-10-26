@@ -17,6 +17,17 @@ def index(request):
     if (set(modelsL.Cidade.objects.filter(cid_id=1)) == set(modelsL.Cidade.objects.none())):
         requestDBCidade()
 
+    # Criar primeiros GÊNEROS
+    if not (models.Genero.objects.filter(gen_generos="Masculino").first()):
+        model = models.Genero(gen_generos="Masculino")
+        model.save()
+    if not (models.Genero.objects.filter(gen_generos="Feminino").first()):
+        model = models.Genero(gen_generos="Feminino")
+        model.save()
+    if not (models.Genero.objects.filter(gen_generos="Outro").first()):
+        model = models.Genero(gen_generos="Outro")
+        model.save()
+
     necessitados = models.Necessitado.objects.all()
     listagem = {
         'necessitados_chave': necessitados, 
@@ -27,6 +38,7 @@ def index(request):
 # CRUD de NECESSITADOS
 # ===================================================================
 
+@login_required(login_url="/login")
 def createNecessitado(request):
     form = forms.NecessitadoForm(request.POST or None)
     if form.is_valid():
@@ -35,6 +47,7 @@ def createNecessitado(request):
     listagem = {'form_necessitado': form, 'request': list}
     return render(request, "necessitado.html", listagem)
 
+@login_required(login_url="/login")
 def updateNecessitado(request, id_necessitado):
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
@@ -45,6 +58,7 @@ def updateNecessitado(request, id_necessitado):
     listagem = {'form_necessitado': form, 'necessitado': necessitado, 'atualizacoes': atualizacoes}
     return render(request, "necessitado.html", listagem)
 
+@login_required(login_url="/login")
 def deleteNecessitado(request, id_necessitado):
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     necessitado.delete()
@@ -54,6 +68,7 @@ def deleteNecessitado(request, id_necessitado):
 # CRUD de Atualização
 # ===================================================================
 
+@login_required(login_url="/login")
 def createAtualizacao(request):
     form = forms.AtualizacaoForm(request.POST or None)
     if form.is_valid():
@@ -62,6 +77,7 @@ def createAtualizacao(request):
     listagem = {'form_atualizacao': form, 'request': list}
     return render(request, "atualizacao.html", listagem)
 
+@login_required(login_url="/login")
 def updateAtualizacao(request, id_atualizacao):
     Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
     form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
@@ -73,21 +89,82 @@ def updateAtualizacao(request, id_atualizacao):
     listagem = {'form_atualizacao': form, 'Atualizacao': Atualizacao}
     return render(request, "atualizacao.html", listagem)
 
+@login_required(login_url="/login")
 def deleteAtualizacao(request, id_atualizacao):
     Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
     Atualizacao.delete()
     return redirect("main")
 
 # ===================================================================
+# CRUD de Situação
+# ===================================================================
+
+@login_required(login_url="/login")
+def createSituacao(request):
+    form = forms.SituacaoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_Situacao': form}
+    return render(request, "Situacao.html", listagem)
+
+@login_required(login_url="/login")
+def updateSituacao(request, id_Situacao):
+    Situacao = models.Situacao.objects.get(pk=id_Situacao)
+    form = forms.SituacaoForm(request.POST or None, instance=Situacao)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_Situacao': form}
+    return render(request, "Situacao.html", listagem)
+
+@login_required(login_url="/login")
+def deleteSituacao(request, id_Situacao):
+    Situacao = models.Situacao.objects.get(pk=id_Situacao)
+    Situacao.delete()
+    return redirect("main")
+
+# ===================================================================
+# CRUD de Profissão
+# ===================================================================
+
+@login_required(login_url="/login")
+def createProfissao(request):
+    form = forms.ProfissaoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_profissao': form}
+    return render(request, "profissao.html", listagem)
+
+@login_required(login_url="/login")
+def updateProfissao(request, id_profissao):
+    Profissao = models.Profissao.objects.get(pk=id_profissao)
+    form = forms.ProfissaoForm(request.POST or None, instance=Profissao)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_profissao': form}
+    return render(request, "profissao.html", listagem)
+
+@login_required(login_url="/login")
+def deleteProfissao(request, id_profissao):
+    Profissao = models.Profissao.objects.get(pk=id_profissao)
+    Profissao.delete()
+    return redirect("main")
+
+# ===================================================================
 # TIMELINE
 # ===================================================================
 
+@login_required(login_url="/login")
 def user_is_authenticated(request):
     username = None
     if request.user.is_authenticated:
         username = request.user.usu_nome
     return username
 
+@login_required(login_url="/login")
 def createTimeline(request, id_necessitado):
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
@@ -111,6 +188,7 @@ def createTimeline(request, id_necessitado):
     listagem = {'form_necessitado': form, 'necessitado': necessitado, 'atualizacoes': atualizacoes}
     return render(request, "necessitado.html", listagem)
 
+@login_required(login_url="/login")
 def updateTimeline(request, id_necessitado, id_atualizacao):
     listNumber = int(id_atualizacao)-1
     Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
@@ -122,61 +200,10 @@ def updateTimeline(request, id_necessitado, id_atualizacao):
     listagem = {'form_atualizacao': form, 'Atualizacao': Atualizacao, 'teste': listNumber}
     return render(request, "atualizacao.html", listagem)
 
+@login_required(login_url="/login")
 def deleteTimeline(request, id_necessitado, id_atualizacao):
     listNumber = int(id_atualizacao)-1
     Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     Atualizacao = models.Atualizacao.objects.filter(att_nec_id=Necessitado)[listNumber]
     Atualizacao.delete()
-    return redirect("main")
-
-# ===================================================================
-# CRUD de Situação
-# ===================================================================
-
-def createSituacao(request):
-    form = forms.SituacaoForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_Situacao': form}
-    return render(request, "Situacao.html", listagem)
-
-def updateSituacao(request, id_Situacao):
-    Situacao = models.Situacao.objects.get(pk=id_Situacao)
-    form = forms.SituacaoForm(request.POST or None, instance=Situacao)
-    if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_Situacao': form}
-    return render(request, "Situacao.html", listagem)
-
-def deleteSituacao(request, id_Situacao):
-    Situacao = models.Situacao.objects.get(pk=id_Situacao)
-    Situacao.delete()
-    return redirect("main")
-
-# ===================================================================
-# CRUD de Profissão
-# ===================================================================
-
-def createProfissao(request):
-    form = forms.ProfissaoForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_profissao': form}
-    return render(request, "profissao.html", listagem)
-
-def updateProfissao(request, id_profissao):
-    Profissao = models.Profissao.objects.get(pk=id_profissao)
-    form = forms.ProfissaoForm(request.POST or None, instance=Profissao)
-    if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_profissao': form}
-    return render(request, "profissao.html", listagem)
-
-def deleteProfissao(request, id_profissao):
-    Profissao = models.Profissao.objects.get(pk=id_profissao)
-    Profissao.delete()
     return redirect("main")

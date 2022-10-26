@@ -2,10 +2,16 @@
 {% block title %}<title>Criação de Cidade</title>{% endblock %}
 
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    {{ form_cidade.as_p }}
+<form method="POST">{% csrf_token %}
+    <div class="mb-3">
+        {{ form_cidade.cid_cidade.label }}
+        {{ form_cidade.cid_cidade }}
+      </div>
+      <div class="mb-3">
+        {{ form_cidade.cid_est_id.label }}
+        {{ form_cidade.cid_est_id }}
+      </div>
+      <button type="submit" class="btn btn-primary">Enviar</button>
     {{ form_teste }}
-    <button type="submit">Enviar</button>
-</form>
+</form>  
 {% endblock %}

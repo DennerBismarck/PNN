@@ -15,6 +15,14 @@ class NecessitadoForm(ModelForm):
             'nec_cid_id',
         ]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nec_sit_id'].widget.attrs.update({'class': 'select_id_control'})
+        self.fields['nec_pro_id'].widget.attrs.update({'class': 'select_id_control'})
+        self.fields['nec_gen_id'].widget.attrs.update({'class': 'select_id_control'})
+        self.fields['nec_cid_id'].widget.attrs.update({'class': 'select_id_control'})
+
+
 class AtualizacaoForm(ModelForm):
     class Meta:
         model = models.Atualizacao
@@ -30,6 +38,15 @@ class AtualizacaoForm(ModelForm):
             'att_nec_gen_id',
             'att_nec_cid_id',
         ]
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['att_nec_id'].widget.attrs.update({'class': 'select_id_control'})
+        self.fields['att_usu_id'].widget.attrs.update({'class': 'select_id_control'})
+        self.fields['att_nec_sit_id'].widget.attrs.update({'class': 'select_id_control'})
+        self.fields['att_nec_pro_id'].widget.attrs.update({'class': 'select_id_control'})
+        self.fields['att_nec_gen_id'].widget.attrs.update({'class': 'select_id_control'})
+        self.fields['att_nec_cid_id'].widget.attrs.update({'class': 'select_id_control'})
 
 class SituacaoForm(ModelForm):
     class Meta:
