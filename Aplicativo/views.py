@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
-from Aplicativo import forms, models
-from Usuario.models import Usuario, TEL_DOS_USU, EMAIL_DOS_USU
+from django.shortcuts               import render, redirect
+from Aplicativo                     import forms, models
+from Usuario.models                 import Usuario
+from Localidade.views               import requestDBEstado, requestDBCidade
+from Localidade                     import models as modelsL
 from django.contrib.auth.decorators import login_required
-import folium, requests, json, urllib
-import pandas as pd
     
 # ==================================================================
 # INDEX
@@ -12,45 +12,16 @@ import pandas as pd
 @login_required(login_url="/login")
 def index(request):
     # Verificando se os ESTADOS e CIDADES já foram ADICIONADOS ao DB
-    if (set(models.Estado.objects.filter(est_id=1)) == set(models.Estado.objects.none())):
+    if (set(modelsL.Estado.objects.filter(est_id=1)) == set(modelsL.Estado.objects.none())):
         requestDBEstado()
-        if (set(models.Cidade.objects.filter(cid_id=1)) == set(models.Cidade.objects.none())):
-            requestDBCidade()
+    if (set(modelsL.Cidade.objects.filter(cid_id=1)) == set(modelsL.Cidade.objects.none())):
+        requestDBCidade()
 
     necessitados = models.Necessitado.objects.all()
     listagem = {
         'necessitados_chave': necessitados, 
     }
     return render(request, "index.html", listagem)
-
-# ==================================================================
-# API e REQUESTS para DATABASE de CIDADE e ESTADO
-# ==================================================================
-
-def requestAPI():
-    url = 'https://servicodados.ibge.gov.br/api/v1/localidades/distritos'
-    r = requests.get(url)
-    rlist = r.json()
-    return rlist
-
-def requestDBEstado():
-    rlist = requestAPI()
-    for municipio in rlist:
-        estado = municipio['municipio']['regiao-imediata']['regiao-intermediaria']['UF']['nome']
-        EstadoList = models.Estado(est_estado=estado)
-        estadoVerify = models.Estado.objects.filter(est_estado=estado)
-        if (set(estadoVerify) == set(models.Estado.objects.none())):
-            EstadoList.save()
-
-def requestDBCidade():
-    rlist = requestAPI()
-    for municipio in rlist:
-        estado = municipio['municipio']['regiao-imediata']['regiao-intermediaria']['UF']['nome']
-        cidade = municipio['municipio']['nome']
-        CidadeList = models.Cidade(cid_cidade=cidade, cid_est_id=models.Estado.objects.get(est_estado=estado))
-        cidadeVerify = models.Cidade.objects.filter(cid_cidade=cidade)
-        if (set(cidadeVerify) == set(models.Cidade.objects.none())):
-            CidadeList.save()
 
 # ===================================================================
 # CRUD de NECESSITADOS
@@ -133,7 +104,7 @@ def createTimeline(request, id_necessitado):
             att_nec_sit_id      = models.Situacao.objects.get(sit_id=form['nec_sit_id'].value()),
             att_nec_pro_id      = models.Profissao.objects.get(pro_id=form['nec_pro_id'].value()),
             att_nec_gen_id      = models.Genero.objects.get(gen_id=form['nec_gen_id'].value()),
-            att_nec_cid_id      = models.Cidade.objects.get(cid_id=form['nec_cid_id'].value()),
+            att_nec_cid_id      = modelsL.Cidade.objects.get(cid_id=form['nec_cid_id'].value()),
         )
         atualizacao.save()
         return redirect("main")
@@ -157,8 +128,6 @@ def deleteTimeline(request, id_necessitado, id_atualizacao):
     Atualizacao = models.Atualizacao.objects.filter(att_nec_id=Necessitado)[listNumber]
     Atualizacao.delete()
     return redirect("main")
-
-
 
 # ===================================================================
 # CRUD de Situação
@@ -187,32 +156,6 @@ def deleteSituacao(request, id_Situacao):
     return redirect("main")
 
 # ===================================================================
-# CRUD de CIDADE
-# ===================================================================
-
-def createCidade(request):
-    form = forms.CidadeForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_cidade': form}
-    return render(request, "cidade.html", listagem)
-
-def updateCidade(request, id_cidade):
-    cidade = models.Cidade.objects.get(pk=id_cidade)
-    form = forms.CidadeForm(request.POST or None, instance=cidade)
-    if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_cidade': form}
-    return render(request, "cidade.html", listagem)
-
-def deleteCidade(request, id_cidade):
-    Cidade = models.Cidade.objects.get(pk=id_cidade)
-    Cidade.delete()
-    return redirect("main")
-
-# ===================================================================
 # CRUD de Profissão
 # ===================================================================
 
@@ -236,30 +179,4 @@ def updateProfissao(request, id_profissao):
 def deleteProfissao(request, id_profissao):
     Profissao = models.Profissao.objects.get(pk=id_profissao)
     Profissao.delete()
-    return redirect("main")
-
-# ===================================================================
-# CRUD de ONG
-# ===================================================================
-
-def createONG(request):
-    form = forms.ONGForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_ONG': form}
-    return render(request, "ONG.html", listagem)
-
-def updateONG(request, id_ONG):
-    ONG = models.ONG.objects.get(pk=id_ONG)
-    form = forms.ONGForm(request.POST or None, instance=ONG)
-    if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_ONG': form}
-    return render(request, "ONG.html", listagem)
-
-def deleteONG(request, id_ONG):
-    ONG = models.ONG.objects.get(pk=id_ONG)
-    ONG.delete()
     return redirect("main")

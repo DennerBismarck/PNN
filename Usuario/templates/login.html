@@ -106,7 +106,7 @@ input{
                 <form action="{% url 'login' %}" method="POST" class="table-responsive thead-dark dv" >
                     {% csrf_token %}
                     <input type="text" name="username" placeholder="Nome do Usuário">
-                    <input type="text" name="password" placeholder="Sua Senha">
+                    <input type="password" name="password" placeholder="Sua Senha">
                     <button type="submit">Enviar</button>
                     {{ erro }}
                 </form> 

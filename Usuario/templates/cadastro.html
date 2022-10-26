@@ -114,8 +114,10 @@
             <div class="container my-5 " style="background-color:#070540; border-radius: 5px;">   
                 <form action="{% url 'cadastro' %}" method="POST" class= "table-responsive thead-dark dv" >
                     {% csrf_token %}
-                    <input type="text" id="username" name="username" placeholder="Nome do Usuário">
-                    <input type="text" id="password" name="password" placeholder="Sua Senha">
+                    <input type="text"      id="username"   name="username"     placeholder="Nome do Usuário">
+                    <input type="password"  id="password"   name="password"     placeholder="Sua Senha">
+                    <input type="email"     id="email"      name="email"        placeholder="Digite o seu E-mail">
+                    <input type="tel"       id="telefone"   name="telefone"     placeholder="Digite o seu Telefone" pattern="[0-9]{2}9[0-9]{8}">
                     <button type="submit">Enviar</button>
                     {{ erro }}
                 </form> 

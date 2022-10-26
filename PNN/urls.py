@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path
-from Aplicativo import views
+from Aplicativo import views as viewsAplicativo
+from Localidade import views as viewsLocalidade
+from ONG        import views as viewsONG
 from Usuario import views as userView
 
 urlpatterns = [
@@ -9,31 +11,31 @@ urlpatterns = [
     path('cadastro/', userView.cadastro, name="cadastro"),
     #-----------  -----------#
     path('admin/', admin.site.urls),
-    path('', views.index, name='main'),
+    path('', viewsAplicativo.index, name='main'),
     # CRUD de NECESSITADOS
-    path('necessitado', views.createNecessitado, name="createNecessitado"),
-    path('necessitado/<int:id_necessitado>', views.createTimeline, name="updateNecessitado"),
-    path('necessitado/<int:id_necessitado>/delete', views.deleteNecessitado, name="deleteNecessitado"),
+    path('necessitado', viewsAplicativo.createNecessitado, name="createNecessitado"),
+    path('necessitado/<int:id_necessitado>', viewsAplicativo.createTimeline, name="updateNecessitado"),
+    path('necessitado/<int:id_necessitado>/delete', viewsAplicativo.deleteNecessitado, name="deleteNecessitado"),
     # CRUD de ATUALIZAÇÕES
-    path('necessitado', views.createTimeline, name="createAtualizacao"),
-    path('necessitado/<int:id_necessitado>/<int:id_atualizacao>', views.updateTimeline, name="updateAtualizacao"),
-    path('necessitado/<int:id_necessitado>/<int:id_atualizacao>/delete', views.deleteTimeline, name="deleteAtualizacao"),
-    # CRUD de CIDADES
-    path('cidade', views.createCidade, name="createCidade"),
-    path('cidade/<int:id_cidade>', views.updateCidade, name="updateCidade"),
-    path('cidade/<int:id_cidade>/delete', views.deleteCidade, name="deleteCidade"),
+    path('necessitado', viewsAplicativo.createTimeline, name="createAtualizacao"),
+    path('necessitado/<int:id_necessitado>/<int:id_atualizacao>', viewsAplicativo.updateTimeline, name="updateAtualizacao"),
+    path('necessitado/<int:id_necessitado>/<int:id_atualizacao>/delete', viewsAplicativo.deleteTimeline, name="deleteAtualizacao"),
     # CRUD de PROFISSÕES
-    path('profissao', views.createProfissao, name="createProfissao"),
-    path('profissao/<int:id_profissao>', views.updateProfissao, name="updateProfissao"),
-    path('profissao/<int:id_profissao>/delete', views.deleteProfissao, name="deleteProfissao"),
-    # CRUD de ONGs
-    path('ONG', views.createONG, name="createONG"),
-    path('ONG/<int:id_ONG>', views.updateONG, name="updateONG"),
-    path('ONG/<int:id_ONG>/delete', views.deleteONG, name="deleteONG"),
+    path('profissao', viewsAplicativo.createProfissao, name="createProfissao"),
+    path('profissao/<int:id_profissao>', viewsAplicativo.updateProfissao, name="updateProfissao"),
+    path('profissao/<int:id_profissao>/delete', viewsAplicativo.deleteProfissao, name="deleteProfissao"),
     # CRUD de Situação
-    path('Situacao', views.createSituacao, name="createSituacao"),
-    path('Situacao/<int:id_Situacao>', views.updateSituacao, name="updateSituacao"),
-    path('Situacao/<int:id_Situacao>/delete', views.deleteSituacao, name="deleteSituacao"),
+    path('Situacao', viewsAplicativo.createSituacao, name="createSituacao"),
+    path('Situacao/<int:id_Situacao>', viewsAplicativo.updateSituacao, name="updateSituacao"),
+    path('Situacao/<int:id_Situacao>/delete', viewsAplicativo.deleteSituacao, name="deleteSituacao"),
+    # CRUD de ONGs
+    path('ONG', viewsONG.createONG, name="createONG"),
+    path('ONG/<int:id_ONG>', viewsONG.updateONG, name="updateONG"),
+    path('ONG/<int:id_ONG>/delete', viewsONG.deleteONG, name="deleteONG"),
+    # CRUD de CIDADES
+    path('cidade', viewsLocalidade.createCidade, name="createCidade"),
+    path('cidade/<int:id_cidade>', viewsLocalidade.updateCidade, name="updateCidade"),
+    path('cidade/<int:id_cidade>/delete', viewsLocalidade.deleteCidade, name="deleteCidade"),
 ]
 
 # if settings.DEBUG:
