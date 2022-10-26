@@ -1,6 +1,12 @@
 from django.shortcuts import render, redirect
 from Usuario import models
-from django.contrib.auth import authenticate, login as loginSite
+from django.contrib.auth import authenticate, login as loginSite, logout as desconectar
+
+def user_is_authenticated(request):
+    user = None
+    if request.user.is_authenticated:
+        user = request.user
+    return user
 
 def login(request):
     if request.method == "GET":
@@ -17,6 +23,10 @@ def login(request):
         else:
             erro = {'erro': 'Usuário ou Senha INVÁLIDA'}
             return render(request, "login.html", erro)
+
+def logout(request):
+    desconectar(request)
+    return render(request, "login.html")
 
 def cadastro(request):
     if request.method == "GET":

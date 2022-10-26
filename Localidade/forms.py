@@ -1,5 +1,5 @@
 from Localidade     import models
-from django.forms   import ModelForm, Widget
+from django.forms   import ModelForm
 
 class CidadeForm(ModelForm):
     class Meta:

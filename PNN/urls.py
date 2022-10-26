@@ -9,6 +9,7 @@ urlpatterns = [
     # Tela Login e Cadastro
     path('login/', userView.login, name="login"),
     path('cadastro/', userView.cadastro, name="cadastro"),
+    path('logout/', userView.logout, name="logout"),
     #-----------  -----------#
     path('admin/', admin.site.urls),
     path('', viewsAplicativo.index, name='main'),

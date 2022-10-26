@@ -157,7 +157,6 @@ def deleteProfissao(request, id_profissao):
 # TIMELINE
 # ===================================================================
 
-@login_required(login_url="/login")
 def user_is_authenticated(request):
     username = None
     if request.user.is_authenticated:
