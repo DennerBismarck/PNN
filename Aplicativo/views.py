@@ -67,10 +67,11 @@ def createNecessitado(request):
 def updateNecessitado(request, id_necessitado):
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
+    atualizacoes = models.Atualizacao.objects.filter(att_nec_id=necessitado)
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_necessitado': form, 'necessitado': necessitado}
+    listagem = {'form_necessitado': form, 'necessitado': necessitado, 'atualizacoes': atualizacoes}
     return render(request, "necessitado.html", listagem)
 
 def deleteNecessitado(request, id_necessitado):
@@ -93,6 +94,8 @@ def createAtualizacao(request):
 def updateAtualizacao(request, id_atualizacao):
     Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
     form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
+
+
     if form.is_valid():
         form.save()
         return redirect("main")
@@ -117,6 +120,7 @@ def user_is_authenticated(request):
 def createTimeline(request, id_necessitado):
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
+    atualizacoes = models.Atualizacao.objects.filter(att_nec_id=necessitado)
     if form.is_valid():
         user = Usuario.objects.filter(usu_nome=user_is_authenticated(request)).first()
         atualizacao = models.Atualizacao(
@@ -133,7 +137,7 @@ def createTimeline(request, id_necessitado):
         )
         atualizacao.save()
         return redirect("main")
-    listagem = {'form_necessitado': form, 'necessitado': necessitado}
+    listagem = {'form_necessitado': form, 'necessitado': necessitado, 'atualizacoes': atualizacoes}
     return render(request, "necessitado.html", listagem)
 
 def updateTimeline(request, id_necessitado, id_atualizacao):

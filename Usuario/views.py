@@ -16,7 +16,8 @@ def login(request):
             loginSite(request, user)
             return redirect('main')
         else:
-            return HttpResponse('invalido')
+            erro = {'erro': 'Usuário ou Senha INVÁLIDA'}
+            return render(request, "login.html", erro)
 
 def cadastro(request):
     if request.method == "GET":
@@ -28,7 +29,8 @@ def cadastro(request):
         user = models.Usuario.objects.filter(usu_nome=username).first()
 
         if user:
-            return HttpResponse("não criado")
+            erro = {'erro': 'Usuário ou Senha INVÁLIDA'}
+            return render(request, "cadastro.html", erro)
         
         user = models.Usuario.objects.create_user(usu_nome=username, password=password)
         user.save()

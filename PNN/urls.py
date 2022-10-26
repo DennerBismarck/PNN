@@ -12,7 +12,7 @@ urlpatterns = [
     path('', views.index, name='main'),
     # CRUD de NECESSITADOS
     path('necessitado', views.createNecessitado, name="createNecessitado"),
-    path('necessitado/<int:id_necessitado>', views.updateNecessitado, name="updateNecessitado"),
+    path('necessitado/<int:id_necessitado>', views.createTimeline, name="updateNecessitado"),
     path('necessitado/<int:id_necessitado>/delete', views.deleteNecessitado, name="deleteNecessitado"),
     # CRUD de ATUALIZAÇÕES
     path('necessitado', views.createTimeline, name="createAtualizacao"),

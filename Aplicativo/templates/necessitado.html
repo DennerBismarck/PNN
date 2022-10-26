@@ -7,4 +7,58 @@
     {{ form_necessitado.as_p }}
     <button type="submit">Enviar</button>
 </form>
+<table class="table" border="1px">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="row">Data de Modificação</th>
+            <th scope="row">Necessitado</th>
+            <th scope="row">Usuario</th>
+            <th scope="row">Nome</th>
+            <th scope="row">Idade</th>
+            <th scope="row">Logradouro</th>
+            <th scope="row">Cpf</th>
+            <th scope="row">Situação</th>
+            <th scope="row">Profissão</th>
+            <th scope="row">Gênero</th>
+            <th scope="row">Cidade</th> 
+        </tr>
+    </thead>
+    <tbody>     
+        {% for atualizacao in atualizacoes %}
+        <td>
+            {{atualizacao.att_date}}
+        </td>
+        <td>
+            {{atualizacao.att_nec_id}}
+        </td>
+        <td>
+            {{atualizacao.att_usu_id}}
+        </td>
+        <td>
+            {{atualizacao.att_nec_nome}}
+        </td>
+        <td>
+            {{atualizacao.att_nec_idade}}
+        </td>
+        <td>
+            {{atualizacao.att_nec_logradouro}}
+        </td>
+        <td>
+            {{atualizacao.att_nec_cpf}}
+        </td>
+        <td>
+            {{atualizacao.att_nec_sit_id}} 
+        </td>
+        <td>
+            {{atualizacao.att_nec_pro_id}} 
+        </td>
+        <td>
+            {{atualizacao.att_nec_gen_id}}
+        </td>
+        <td>
+            {{atualizacao.att_nec_cid_id}}
+        </td>
+    </tbody>
+    {% endfor %}
+</table>
 {% endblock %}
