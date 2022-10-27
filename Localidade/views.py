@@ -1,5 +1,6 @@
-from django.shortcuts   import render, redirect
-from Localidade         import models, forms
+from django.shortcuts               import render, redirect
+from Localidade                     import models, forms
+from django.contrib.auth.decorators import login_required
 import requests
 
 # ==================================================================
@@ -35,6 +36,7 @@ def requestDBCidade():
 # CRUD de CIDADE
 # ===================================================================
 
+@login_required(login_url="/login")
 def createCidade(request):
     form = forms.CidadeForm(request.POST or None)
     if form.is_valid():
@@ -43,6 +45,7 @@ def createCidade(request):
     listagem = {'form_cidade': form}
     return render(request, "cidade.html", listagem)
 
+@login_required(login_url="/login")
 def updateCidade(request, id_cidade):
     cidade = models.Cidade.objects.get(pk=id_cidade)
     form = forms.CidadeForm(request.POST or None, instance=cidade)
@@ -52,6 +55,7 @@ def updateCidade(request, id_cidade):
     listagem = {'form_cidade': form}
     return render(request, "cidade.html", listagem)
 
+@login_required(login_url="/login")
 def deleteCidade(request, id_cidade):
     Cidade = models.Cidade.objects.get(pk=id_cidade)
     Cidade.delete()

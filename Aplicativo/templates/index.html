@@ -37,19 +37,26 @@
                 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 my-0">
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'main' %}">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createCidade' %}">Cidades</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createNecessitado' %}">Necessitados</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createProfissao' %}">Profissão</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createONG' %}">ONGs</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createSituacao' %}">Situação</a></li>
-                        
                         {% if user %}
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'logout' %}">Deslogar</a></li>    
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mais Opções
+                              </a>
+                              <ul class="dropdown-menu dropdown-menu-dark">
+                                <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createCidade' %}">   Cadastrar Cidade</a></li>
+                                <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createSituacao' %}"> Cadastrar Situação</a></li>
+                                <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createProfissao' %}">Cadastrar Profissão</a></li>
+                              </ul>
+                            </li>
+                        </ul>    
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'logout' %}">Deslogar</a></li>  
                         {% else %}
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'login' %}">Logar</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'cadastro' %}">Cadastrar</a></li>        
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'login' %}">Entrar</a></li>
                         {% endif %}
-                        
+                                          
                     </ul>
               </div>
             </div>
