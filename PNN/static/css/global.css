@@ -10,7 +10,6 @@
     padding: 0;
     text-decoration: none;
     border: black, 1px;
-    color: blue;
 }
 
 form{
@@ -22,11 +21,13 @@ form{
 p{
     width: 100px;
 }
-label{color: var(--azulEscuro); }
+label{color: var(--azulMediano);}
 
-input{color: var(--azulEscuro);  }
+input{color: var(--azulMarinho);  }
 
-select{color: var(--azulEscuro);  }
+select{color: var(--azulMarinho);  }
+
+li {color: var(--azulMarinho);  }
 
 button{
     background-color: #b3cff2; color: #070540; width: 60px; height: 35px; border-radius: 5px; 
@@ -38,7 +39,7 @@ body{
 
 tr{
     background-color: #070540;
-    color: var(--azulEscuro);
+    color: var(--azulMarinho);
     border: 1px;
     border-color: #b3cff2;
 }
