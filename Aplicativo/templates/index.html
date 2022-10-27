@@ -26,19 +26,30 @@
     <body>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 fixed-top">
-            <div class="container-fluid row">
-                <button class="navbar-toggler col" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'main' %}">
+                    NeSys
+                    {% comment %} <img class="col-2" src="{% static 'img/logo_navbar.png'%}"> {% endcomment %}
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 col-10 my-0">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 my-0">
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'main' %}">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createCidade' %}">Cidades</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createNecessitado' %}">Necessitados</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createProfissao' %}">Profissão</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createONG' %}">ONGs</a></li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'createSituacao' %}">Situação</a></li>
+                        
+                        {% if user %}
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'logout' %}">Deslogar</a></li>    
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'login' %}">Logar</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'cadastro' %}">Cadastrar</a></li>        
+                        {% endif %}
+                        
                     </ul>
               </div>
             </div>

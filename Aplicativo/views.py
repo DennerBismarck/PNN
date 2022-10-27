@@ -4,12 +4,17 @@ from Usuario.models                 import Usuario
 from Localidade.views               import requestDBEstado, requestDBCidade
 from Localidade                     import models as modelsL
 from django.contrib.auth.decorators import login_required
-    
+
+def user_is_authenticated(request):
+    username = None
+    if request.user.is_authenticated:
+        username = request.user.usu_nome
+    return username
+
 # ==================================================================
 # INDEX
 # ==================================================================
 
-@login_required(login_url="/login")
 def index(request):
     # Verificando se os ESTADOS e CIDADES já foram ADICIONADOS ao DB
     if (set(modelsL.Estado.objects.filter(est_id=1)) == set(modelsL.Estado.objects.none())):
@@ -31,6 +36,7 @@ def index(request):
     necessitados = models.Necessitado.objects.all()
     listagem = {
         'necessitados_chave': necessitados, 
+        'user': user_is_authenticated(request),
     }
     return render(request, "index.html", listagem)
 
@@ -156,12 +162,6 @@ def deleteProfissao(request, id_profissao):
 # ===================================================================
 # TIMELINE
 # ===================================================================
-
-def user_is_authenticated(request):
-    username = None
-    if request.user.is_authenticated:
-        username = request.user.usu_nome
-    return username
 
 @login_required(login_url="/login")
 def createTimeline(request, id_necessitado):

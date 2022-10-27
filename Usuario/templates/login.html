@@ -94,8 +94,19 @@ input{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <body style="background-color:#b3cff2;">
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">        
-                <h1 class=" table-responsive" href="" style="left: 0px;">NeSys</>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 fixed-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'main' %}">
+                    NeSys
+                    {% comment %} <img class="col-2" src="{% static 'img/logo_navbar.png'%}"> {% endcomment %}
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 my-0">
+                    </ul>
+              </div>
             </div>
         </nav>
         <!-- Header - set the background image for the header in the line below-->
@@ -108,6 +119,7 @@ input{
                     <input type="text" name="username" placeholder="Nome do Usuário">
                     <input type="password" name="password" placeholder="Sua Senha">
                     <button type="submit">Enviar</button>
+                    <a href="{% url 'cadastro' %}">Não tem uma conta? Cadastre-se!</a>
                     {{ erro }}
                 </form> 
         </section><br>
