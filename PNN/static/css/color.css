@@ -1,0 +1,34 @@
+:root {
+--A: #b3cff2;
+--B: #3045BF;
+--C: #262EBF;
+--D: #07054036;
+--E: #080705;
+}
+
+.color-A { 
+    background-color: var(--A);
+}
+
+.color-B { 
+    background-color: var(--B);
+}
+
+.color-C { 
+    background-color: var(--C);
+}
+
+.color-D { 
+    background-color: var(--D);
+    color: white;
+}
+
+.color-E { 
+    background-color: var(--E);
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 2px black;
+}
+
+
