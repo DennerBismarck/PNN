@@ -198,12 +198,12 @@
                         </div>
                     -->
                         <div class="card mb-4" >
-                            <div class="card-header text-white" style="background-color:#262EBF;">
+                            <div class="card-header text-white" style="background-color:#070540;">
                                 <i class="fas fa-table me-1" ></i>
                                 Lista de Necessitados
                             </div>
                             <div class="card-body" style="background-color:#b3cff2">
-                                <table id="datatablesSimple" class="text-white" style="background-color:#070540;">
+                                <table id="datatablesSimple" class="text-black" style="background-color: white;">
                                     <thead>
                                         <tr>
                                             <th>Editar</th>
@@ -233,7 +233,7 @@
                                         <tbody>     
                                             {% for Necessitado in necessitados_chave %}
                                             <td>
-                                                <button class="btn" style="color: white; background-color:#080705;"><a href="{% url 'updateNecessitado' Necessitado.nec_id %}"></a>Editar</button>
+                                                <button class="btn" style="color: white; background-color:#3045BF;"><a href="{% url 'updateNecessitado' Necessitado.nec_id %}"></a>Editar</button>
                                             </td> 
                                             <td>
                                                 {{ Necessitado.nec_nome }}
