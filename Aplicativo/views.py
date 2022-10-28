@@ -38,7 +38,7 @@ def index(request):
         'necessitados_chave': necessitados, 
         'user': user_is_authenticated(request),
     }
-    return render(request, "template/index.html", listagem)
+    return render(request, "index.html", listagem)
 
 # ===================================================================
 # CRUD de NECESSITADOS

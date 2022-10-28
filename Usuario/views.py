@@ -30,7 +30,7 @@ def logout(request):
 
 def cadastro(request):
     if request.method == "GET":
-        return render(request, "cadastro.html")
+        return render(request, "register.html")
     else:
         username    = request.POST.get('username')
         password    = request.POST.get('password')
@@ -42,11 +42,11 @@ def cadastro(request):
 
         if user:
             erro = {'erro': 'Usuário ou Senha INVÁLIDA'}
-            return render(request, "cadastro.html", erro)
+            return render(request, "register.html", erro)
 
         if user_email:
             erro = {'erro': 'E-mail já está sendo utilizado.'}
-            return render(request, "cadastro.html", erro)
+            return render(request, "register.html", erro)
         
         user        = models.Usuario.objects.create_user(usu_nome=username, password=password)
         user_email  = models.EMAIL_DOS_USU(ema_email=email,ema_usu_id=user)

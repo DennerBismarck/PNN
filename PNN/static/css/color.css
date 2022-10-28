@@ -31,4 +31,7 @@
     text-shadow: 2px 2px 2px black;
 }
 
+.linear-edit {
+    background: linear-gradient(to bottom right, #89ceff, #192bc2);
+}
 
