@@ -122,6 +122,7 @@ def createTimeline(request, id_necessitado):
             att_nec_gen_id      = models.Genero.objects.get(gen_id=form['nec_gen_id'].value()),
             att_nec_cid_id      = modelsL.Cidade.objects.get(cid_id=form['nec_cid_id'].value()),
         )
+        form.save()
         atualizacao.save()
         return redirect("createNecessitado")
     listagem = {'form_necessitado': form, 'necessitado_chave': necessitado, 'atualizacao_chave': atualizacoes}
