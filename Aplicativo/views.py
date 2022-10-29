@@ -32,10 +32,8 @@ def index(request):
     if not (models.Genero.objects.filter(gen_generos="Outro").first()):
         model = models.Genero(gen_generos="Outro")
         model.save()
-
-    necessitados = models.Necessitado.objects.all()
+    
     listagem = {
-        'necessitados_chave': necessitados, 
         'user': user_is_authenticated(request),
     }
     return render(request, "index.html", listagem)
@@ -50,8 +48,10 @@ def createNecessitado(request):
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_necessitado': form, 'request': list}
-    return render(request, "necessitado.html", listagem)
+
+    necessitados = models.Necessitado.objects.all()
+    listagem = {'form_necessitado': form, 'necessitados_chave': necessitados}
+    return render(request, "ShowNecessitado.html", listagem)
 
 @login_required(login_url="/login")
 def updateNecessitado(request, id_necessitado):
@@ -61,8 +61,8 @@ def updateNecessitado(request, id_necessitado):
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_necessitado': form, 'necessitado': necessitado, 'atualizacoes': atualizacoes}
-    return render(request, "necessitado.html", listagem)
+    listagem = {'form_necessitado': form, 'necessitados_chave': necessitado}
+    return render(request, "ShowNecessitado.html", listagem)
 
 @login_required(login_url="/login")
 def deleteNecessitado(request, id_necessitado):
@@ -87,7 +87,6 @@ def createAtualizacao(request):
 def updateAtualizacao(request, id_atualizacao):
     Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
     form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
-
 
     if form.is_valid():
         form.save()
@@ -185,7 +184,7 @@ def createTimeline(request, id_necessitado):
         atualizacao.save()
         return redirect("main")
     listagem = {'form_necessitado': form, 'necessitado': necessitado, 'atualizacoes': atualizacoes}
-    return render(request, "necessitado.html", listagem)
+    return render(request, "ShowNecessitado.html", listagem)
 
 @login_required(login_url="/login")
 def updateTimeline(request, id_necessitado, id_atualizacao):

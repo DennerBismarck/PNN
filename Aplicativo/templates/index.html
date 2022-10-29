@@ -22,7 +22,7 @@
         {% endblock style %}
     </head>
     <body class="sb-nav-fixed">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-5 fixed-top">
+        <nav class="sb-topnav navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <!-- Navbar Brand-->
                 <a class="navbar-brand ps-3" href="{% url 'main' %}">NeSys</a>
@@ -80,10 +80,10 @@
             </div>
         </nav>
 
-        <div id="layoutSidenav_content">
-            <main>
+        <div id="layoutSidenav_content" class="py-2">
+            <main class="mt-5">
                 {% block content %}
-                <header class="py-1 bg-image-full" style="background-image: url({% static 'img/home_vector_img.jpg' %})">
+                <header class="py-1 bg-image-full my-5" style="background-image: url({% static 'img/home_vector_img.jpg' %})">
                     <div class="container text-center my-5">
                         <img class="img-fluid img-thumbnail rounded-circle mx-5 my-5" src="{% static 'img/logo_nesys_round.png' %}" height="200px" width="200px"/>
                         <div class="card color-D m-auto text-shadow" >
@@ -123,6 +123,18 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <!-- Jquery CORE JS -->
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+        <!-- Select2 CORE JS -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+            // In your Javascript (external .js resource or <script> tag)
+            $(document).ready(function() {
+                $('.selectForm').select2({
+                    dropdownParent: $('#form-control')
+                });
+            });
+        </script>
         {% endblock script %}
     </body>
 </html>
