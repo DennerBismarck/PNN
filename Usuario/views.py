@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from Usuario import models
+from Aplicativo import views
 from django.contrib.auth import authenticate, login as loginSite, logout as desconectar
 
 def user_is_authenticated(request):
@@ -26,7 +27,7 @@ def login(request):
 
 def logout(request):
     desconectar(request)
-    return render(request, "login.html")
+    return views.index(request)
 
 def cadastro(request):
     if request.method == "GET":

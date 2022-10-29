@@ -36,7 +36,7 @@ def index(request):
     listagem = {
         'user': user_is_authenticated(request),
     }
-    return render(request, "index.html", listagem)
+    return render(request, "Index.html", listagem)
 
 # ===================================================================
 # CRUD de NECESSITADOS
