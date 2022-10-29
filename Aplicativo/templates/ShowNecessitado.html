@@ -102,14 +102,18 @@
             {% endif %}
             
         </div>
+        
         <div class="card-body">
-            <form>
+            {{ nome }}
+            <form method="POST">
+                {% csrf_token %}
                 {% for fields in form_necessitado %}
                 <div class="mb-3">
                     {{ fields.label }}
                     {{ fields }}
                 </div>
                 {% endfor %}
+                <button class="btn btn-primary" type="submit">Enviar</button>
             </form>    
         </div>
     </div>    

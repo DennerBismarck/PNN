@@ -45,10 +45,11 @@ def index(request):
 @login_required(login_url="/login")
 def createNecessitado(request):
     form = forms.NecessitadoForm(request.POST or None)
+    
     if form.is_valid():
         form.save()
-        return redirect("main")
-
+        nec_nome = models.Necessitado.objects.filter(nec_nome=str(form["nec_nome"].value())).first()
+        return createTimeline(request, nec_nome.nec_id)
     necessitados = models.Necessitado.objects.all()
     listagem = {'form_necessitado': form, 'necessitados_chave': necessitados}
     return render(request, "ShowNecessitado.html", listagem)
@@ -57,7 +58,6 @@ def createNecessitado(request):
 def updateNecessitado(request, id_necessitado):
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
-    atualizacoes = models.Atualizacao.objects.filter(att_nec_id=necessitado)
     if form.is_valid():
         form.save()
         return redirect("main")
@@ -99,6 +99,58 @@ def deleteAtualizacao(request, id_atualizacao):
     Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
     Atualizacao.delete()
     return redirect("main")
+
+# ===================================================================
+# TIMELINE
+# ===================================================================
+
+def createNecTimeLine(request, id_necessitado):
+    return createTimeline(request, id_necessitado)
+
+@login_required(login_url="/login")
+def createTimeline(request, id_necessitado):
+    necessitado = models.Necessitado.objects.get(pk=id_necessitado)
+    form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
+    atualizacoes = models.Atualizacao.objects.filter(att_nec_id=necessitado)
+    if form.is_valid():
+        user = Usuario.objects.filter(usu_nome=user_is_authenticated(request)).first()
+        atualizacao = models.Atualizacao(
+            att_nec_id          = necessitado,
+            att_usu_id          = user, 
+            att_nec_nome        = form['nec_nome'].value(),
+            att_nec_idade       = form['nec_idade'].value(),
+            att_nec_logradouro  = form['nec_logradouro'].value(),
+            att_nec_cpf         = form['nec_cpf'].value(),
+            att_nec_sit_id      = models.Situacao.objects.get(sit_id=form['nec_sit_id'].value()),
+            att_nec_pro_id      = models.Profissao.objects.get(pro_id=form['nec_pro_id'].value()),
+            att_nec_gen_id      = models.Genero.objects.get(gen_id=form['nec_gen_id'].value()),
+            att_nec_cid_id      = modelsL.Cidade.objects.get(cid_id=form['nec_cid_id'].value()),
+        )
+        atualizacao.save()
+        return redirect("main")
+    listagem = {'form_necessitado': form, 'necessitado': necessitado, 'atualizacoes': atualizacoes}
+    return render(request, "ShowNecessitado.html", listagem)
+
+@login_required(login_url="/login")
+def updateTimeline(request, id_necessitado, id_atualizacao):
+    listNumber = int(id_atualizacao)-1
+    Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
+    Atualizacao = models.Atualizacao.objects.filter(att_nec_id=Necessitado)[listNumber]
+    form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
+    if form.is_valid():
+        form.save()
+        return redirect("main")
+    listagem = {'form_atualizacao': form, 'Atualizacao': Atualizacao, 'teste': listNumber}
+    return render(request, "atualizacao.html", listagem)
+
+@login_required(login_url="/login")
+def deleteTimeline(request, id_necessitado, id_atualizacao):
+    listNumber = int(id_atualizacao)-1
+    Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
+    Atualizacao = models.Atualizacao.objects.filter(att_nec_id=Necessitado)[listNumber]
+    Atualizacao.delete()
+    return redirect("main")
+
 
 # ===================================================================
 # CRUD de Situação
@@ -156,52 +208,4 @@ def updateProfissao(request, id_profissao):
 def deleteProfissao(request, id_profissao):
     Profissao = models.Profissao.objects.get(pk=id_profissao)
     Profissao.delete()
-    return redirect("main")
-
-# ===================================================================
-# TIMELINE
-# ===================================================================
-
-@login_required(login_url="/login")
-def createTimeline(request, id_necessitado):
-    necessitado = models.Necessitado.objects.get(pk=id_necessitado)
-    form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
-    atualizacoes = models.Atualizacao.objects.filter(att_nec_id=necessitado)
-    if form.is_valid():
-        user = Usuario.objects.filter(usu_nome=user_is_authenticated(request)).first()
-        atualizacao = models.Atualizacao(
-            att_nec_id          = necessitado,
-            att_usu_id          = user, 
-            att_nec_nome        = form['nec_nome'].value(),
-            att_nec_idade       = form['nec_idade'].value(),
-            att_nec_logradouro  = form['nec_logradouro'].value(),
-            att_nec_cpf         = form['nec_cpf'].value(),
-            att_nec_sit_id      = models.Situacao.objects.get(sit_id=form['nec_sit_id'].value()),
-            att_nec_pro_id      = models.Profissao.objects.get(pro_id=form['nec_pro_id'].value()),
-            att_nec_gen_id      = models.Genero.objects.get(gen_id=form['nec_gen_id'].value()),
-            att_nec_cid_id      = modelsL.Cidade.objects.get(cid_id=form['nec_cid_id'].value()),
-        )
-        atualizacao.save()
-        return redirect("main")
-    listagem = {'form_necessitado': form, 'necessitado': necessitado, 'atualizacoes': atualizacoes}
-    return render(request, "ShowNecessitado.html", listagem)
-
-@login_required(login_url="/login")
-def updateTimeline(request, id_necessitado, id_atualizacao):
-    listNumber = int(id_atualizacao)-1
-    Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
-    Atualizacao = models.Atualizacao.objects.filter(att_nec_id=Necessitado)[listNumber]
-    form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
-    if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_atualizacao': form, 'Atualizacao': Atualizacao, 'teste': listNumber}
-    return render(request, "atualizacao.html", listagem)
-
-@login_required(login_url="/login")
-def deleteTimeline(request, id_necessitado, id_atualizacao):
-    listNumber = int(id_atualizacao)-1
-    Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
-    Atualizacao = models.Atualizacao.objects.filter(att_nec_id=Necessitado)[listNumber]
-    Atualizacao.delete()
     return redirect("main")
