@@ -15,10 +15,6 @@ class NecessitadoForm(ModelForm):
             'nec_cid_id',
         ]
 
-        labels = {
-            'nec_nome': 'Nome do Necessitado',
-        }
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['nec_nome'].widget.attrs.update(        {'class': 'form-control'})
@@ -48,12 +44,16 @@ class AtualizacaoForm(ModelForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['att_nec_id'].widget.attrs.update({'class': 'select_id_control'})
-        self.fields['att_usu_id'].widget.attrs.update({'class': 'select_id_control'})
-        self.fields['att_nec_sit_id'].widget.attrs.update({'class': 'select_id_control'})
-        self.fields['att_nec_pro_id'].widget.attrs.update({'class': 'select_id_control'})
-        self.fields['att_nec_gen_id'].widget.attrs.update({'class': 'select_id_control'})
-        self.fields['att_nec_cid_id'].widget.attrs.update({'class': 'select_id_control'})
+        self.fields['att_nec_id'].widget.attrs.update(          {'class': 'form-control'})
+        self.fields['att_usu_id'].widget.attrs.update(          {'class': 'form-control'})
+        self.fields['att_nec_nome'].widget.attrs.update(        {'class': 'form-control'})
+        self.fields['att_nec_idade'].widget.attrs.update(       {'class': 'form-control'})
+        self.fields['att_nec_logradouro'].widget.attrs.update(  {'class': 'form-control'})
+        self.fields['att_nec_cpf'].widget.attrs.update(         {'class': 'form-control'})
+        self.fields['att_nec_sit_id'].widget.attrs.update(      {'class': 'form-control'})
+        self.fields['att_nec_pro_id'].widget.attrs.update(      {'class': 'form-control'})
+        self.fields['att_nec_gen_id'].widget.attrs.update(      {'class': 'form-control'})
+        self.fields['att_nec_cid_id'].widget.attrs.update(      {'class': 'form-control'})
 
 class SituacaoForm(ModelForm):
     class Meta:
@@ -62,10 +62,18 @@ class SituacaoForm(ModelForm):
             'sit_situacao',
         ]
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['sit_situacao'].widget.attrs.update({'class': 'form-control'})
+
 class ProfissaoForm(ModelForm):
     class Meta:
         model = models.Profissao
         fields= [
             'pro_profissao',
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['pro_profissao'].widget.attrs.update({'class': 'form-control'})
 

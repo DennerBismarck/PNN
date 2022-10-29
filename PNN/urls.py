@@ -15,10 +15,9 @@ urlpatterns = [
     path('', viewsAplicativo.index, name='main'),
     # CRUD de NECESSITADOS
     path('necessitado', viewsAplicativo.createNecessitado, name="createNecessitado"),
-    path('necessitado/<int:id_necessitado>', viewsAplicativo.createTimeline, name="updateNecessitado"),
     path('necessitado/<int:id_necessitado>/delete', viewsAplicativo.deleteNecessitado, name="deleteNecessitado"),
     # CRUD de ATUALIZAÇÕES
-    path('necessitado', viewsAplicativo.createTimeline, name="createAtualizacao"),
+    path('necessitado/<int:id_necessitado>', viewsAplicativo.createTimeline, name="createAtualizacao"),
     path('necessitado/<int:id_necessitado>/<int:id_atualizacao>', viewsAplicativo.updateTimeline, name="updateAtualizacao"),
     path('necessitado/<int:id_necessitado>/<int:id_atualizacao>/delete', viewsAplicativo.deleteTimeline, name="deleteAtualizacao"),
     # CRUD de PROFISSÕES

@@ -45,7 +45,6 @@ def index(request):
 @login_required(login_url="/login")
 def createNecessitado(request):
     form = forms.NecessitadoForm(request.POST or None)
-    
     if form.is_valid():
         form.save()
         nec_nome = models.Necessitado.objects.filter(nec_nome=str(form["nec_nome"].value())).first()
@@ -60,7 +59,7 @@ def updateNecessitado(request, id_necessitado):
     form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
     if form.is_valid():
         form.save()
-        return redirect("main")
+        return redirect("createNecessitado")
     listagem = {'form_necessitado': form, 'necessitados_chave': necessitado}
     return render(request, "ShowNecessitado.html", listagem)
 
@@ -68,7 +67,7 @@ def updateNecessitado(request, id_necessitado):
 def deleteNecessitado(request, id_necessitado):
     necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     necessitado.delete()
-    return redirect("main")
+    return redirect("createNecessitado")
 
 # ===================================================================
 # CRUD de Atualização
@@ -79,7 +78,7 @@ def createAtualizacao(request):
     form = forms.AtualizacaoForm(request.POST or None)
     if form.is_valid():
         form.save()
-        return redirect("main")
+        return redirect("createNecessitado")
     listagem = {'form_atualizacao': form, 'request': list}
     return render(request, "atualizacao.html", listagem)
 
@@ -90,7 +89,7 @@ def updateAtualizacao(request, id_atualizacao):
 
     if form.is_valid():
         form.save()
-        return redirect("main")
+        return redirect("createNecessitado")
     listagem = {'form_atualizacao': form, 'Atualizacao': Atualizacao}
     return render(request, "atualizacao.html", listagem)
 
@@ -98,14 +97,11 @@ def updateAtualizacao(request, id_atualizacao):
 def deleteAtualizacao(request, id_atualizacao):
     Atualizacao = models.Atualizacao.objects.get(pk=id_atualizacao)
     Atualizacao.delete()
-    return redirect("main")
+    return redirect("createNecessitado")
 
 # ===================================================================
 # TIMELINE
 # ===================================================================
-
-def createNecTimeLine(request, id_necessitado):
-    return createTimeline(request, id_necessitado)
 
 @login_required(login_url="/login")
 def createTimeline(request, id_necessitado):
@@ -127,9 +123,9 @@ def createTimeline(request, id_necessitado):
             att_nec_cid_id      = modelsL.Cidade.objects.get(cid_id=form['nec_cid_id'].value()),
         )
         atualizacao.save()
-        return redirect("main")
-    listagem = {'form_necessitado': form, 'necessitado': necessitado, 'atualizacoes': atualizacoes}
-    return render(request, "ShowNecessitado.html", listagem)
+        return redirect("createNecessitado")
+    listagem = {'form_necessitado': form, 'necessitado_chave': necessitado, 'atualizacao_chave': atualizacoes}
+    return render(request, "ShowAtualizacao.html", listagem)
 
 @login_required(login_url="/login")
 def updateTimeline(request, id_necessitado, id_atualizacao):
@@ -139,9 +135,9 @@ def updateTimeline(request, id_necessitado, id_atualizacao):
     form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
     if form.is_valid():
         form.save()
-        return redirect("main")
-    listagem = {'form_atualizacao': form, 'Atualizacao': Atualizacao, 'teste': listNumber}
-    return render(request, "atualizacao.html", listagem)
+        return redirect("createNecessitado")
+    listagem = {'form_atualizacao': form, 'atualizacao_chave': Atualizacao}
+    return render(request, "ShowAtualizacao.html", listagem)
 
 @login_required(login_url="/login")
 def deleteTimeline(request, id_necessitado, id_atualizacao):
@@ -149,7 +145,7 @@ def deleteTimeline(request, id_necessitado, id_atualizacao):
     Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     Atualizacao = models.Atualizacao.objects.filter(att_nec_id=Necessitado)[listNumber]
     Atualizacao.delete()
-    return redirect("main")
+    return redirect("createNecessitado")
 
 
 # ===================================================================
@@ -162,8 +158,9 @@ def createSituacao(request):
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_Situacao': form}
-    return render(request, "Situacao.html", listagem)
+    Situacao = models.Situacao.objects.all()
+    listagem = {'form_situacao': form, 'situacao_chave': Situacao}
+    return render(request, "ShowSituacao.html", listagem)
 
 @login_required(login_url="/login")
 def updateSituacao(request, id_Situacao):
@@ -172,8 +169,8 @@ def updateSituacao(request, id_Situacao):
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_Situacao': form}
-    return render(request, "Situacao.html", listagem)
+    listagem = {'form_situacao': form}
+    return render(request, "ShowSituacao.html", listagem)
 
 @login_required(login_url="/login")
 def deleteSituacao(request, id_Situacao):
@@ -191,8 +188,9 @@ def createProfissao(request):
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_profissao': form}
-    return render(request, "profissao.html", listagem)
+    Profissao = models.Profissao.objects.all()
+    listagem = {'form_profissao': form, 'profissao_chave': Profissao}
+    return render(request, "ShowProfissao.html", listagem)
 
 @login_required(login_url="/login")
 def updateProfissao(request, id_profissao):
@@ -202,7 +200,7 @@ def updateProfissao(request, id_profissao):
         form.save()
         return redirect("main")
     listagem = {'form_profissao': form}
-    return render(request, "profissao.html", listagem)
+    return render(request, "ShowProfissao.html", listagem)
 
 @login_required(login_url="/login")
 def deleteProfissao(request, id_profissao):

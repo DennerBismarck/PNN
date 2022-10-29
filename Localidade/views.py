@@ -42,8 +42,9 @@ def createCidade(request):
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_cidade': form}
-    return render(request, "cidade.html", listagem)
+    Cidades = models.Cidade.objects.all()
+    listagem = {'form_cidade': form, 'cidades_chave': Cidades}
+    return render(request, "ShowCidade.html", listagem)
 
 @login_required(login_url="/login")
 def updateCidade(request, id_cidade):
@@ -53,7 +54,7 @@ def updateCidade(request, id_cidade):
         form.save()
         return redirect("main")
     listagem = {'form_cidade': form}
-    return render(request, "cidade.html", listagem)
+    return render(request, "ShowCidade.html", listagem)
 
 @login_required(login_url="/login")
 def deleteCidade(request, id_cidade):

@@ -1,0 +1,90 @@
+{% extends "index.html" %}
+{% block title %}<title>Cidades</title>{% endblock %}
+
+{% block content %}
+
+{% if cidades_chave %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Tabela de cidades</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
+        <li class="breadcrumb-item active">Cidades</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Cidades Registradas
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th scope="row">Cidade</th> 
+                        <th scope="row">Estado</th> 
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th scope="row">Cidade</th> 
+                        <th scope="row">Estado</th> 
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for cidade in cidades_chave %}
+                    <tr> 
+                        <td>
+                            <a href="{% url 'updateCidade' cidade.cid_id %}">{{cidade.cid_cidade}}</a>
+                        </td> 
+                        <td>
+                            {{cidade.cid_est_id}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">
+        {% if cidades_chave|length > 1 %}
+        Registrar nova Cidade
+        {% else %}
+        Editar {{ form_cidade.cid_cidade.value }}
+        {% endif %}
+    </h1>
+    {% if not cidades_chave|length > 1 %}
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'createCidade' %}">Cidades</a></li>
+        <li class="breadcrumb-item active">Editar</li>
+    </ol>
+    {% endif %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            {% if cidades_chave|length > 1 %}
+            Registrar Cidade
+            {% else %}
+            Cartão de Edição
+            {% endif %}
+            
+        </div>
+        
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                {% for fields in form_cidade %}
+                <div class="mb-3">
+                    {{ fields.label }}
+                    {{ fields }}
+                </div>
+                {% endfor %}
+                <button class="btn btn-primary" type="submit">Enviar</button>
+            </form>    
+        </div>
+    </div>    
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "index.html" %}
+{% block title %}<title>Situação</title>{% endblock %}
+
+{% block content %}
+
+{% if situacao_chave %}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Tabela de Situação</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
+        <li class="breadcrumb-item active">Situações</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Necessitaods Registrados
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th scope="row">Situação</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th scope="row">Situação</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for Situacao in situacao_chave %}
+                    <tr> 
+                        <td>
+                            <a href="{% url 'updateSituacao' Situacao.sit_id %}">
+                                {{ Situacao.sit_situacao }}
+                            </a>
+                        </td> 
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">
+        {% if situacao_chave|length > 1 %}
+        Registrar uma Nova Situação
+        {% else %}
+        Editar {{ form_Situacao.sit_situacao.value }}
+        {% endif %}
+    </h1>
+    {% if not situacao_chave|length > 1 %}
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'createSituacao' %}">situacao</a></li>
+        <li class="breadcrumb-item active">Editar</li>
+    </ol>
+    {% endif %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            {% if situacao_chave|length > 1 %}
+            Registrar Situacao
+            {% else %}
+            Cartão de Edição
+            {% endif %}
+            
+        </div>
+        
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+                {% for fields in form_situacao %}
+                <div class="mb-3">
+                    {{ fields.label }}
+                    {{ fields }}
+                </div>
+                {% endfor %}
+                <button class="btn btn-primary" type="submit">Enviar</button>
+            </form>    
+        </div>
+    </div>    
+</div>
+{% endblock %}
