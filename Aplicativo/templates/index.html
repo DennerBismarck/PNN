@@ -74,9 +74,9 @@
                         {% else %}
                         <ul class= "navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
                             <li><hr class="mx-2"></li>
-                            <li class="nav-item"><a class="btn btn-outline-success " href="{% url 'login' %}">Conectar-se</a></li>
+                            <li class="nav-item"><a class="btn color-outline-B" href="{% url 'login' %}">Conectar-se</a></li>
                             <li><hr class="mx-1"></li>
-                            <li class="nav-item"><a class="btn btn-outline-danger" href="{% url 'cadastro' %}">Cadastrar-se</a></li>
+                            <li class="nav-item"><a class="btn color-outline-B" href="{% url 'cadastro' %}">Cadastrar-se</a></li>
                         </ul> 
                         {% endif %}
                     </div>
@@ -101,23 +101,23 @@
                     </div>
                 </header>
 
-                <div class="container-fluid">
-                    <div class="mt-4 row text-center">
+                <div class="container-fluid pt-5">
+                    <div class="row text-center">
                         <h1>Sobre o Projeto</h1>
                         <hr class="border border-dark border-3 rounded-3 col-3 m-auto">
                     </div>
                     <div class="container-fluid p-5">
-                        <div class="cardborder border-white p-5">
-                            <div class="row">
-                                <div class="col-md-4">
+                        <div class="border-white p-5 row">
+                            <div class="col-10 row m-auto">
+                                <div class="col-md-6">
                                     <img src="{% static 'img/home_vector_img.jpg' %}" class="img-fluid" alt="...">
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Lorem ipsum dolor sit amet</h5>
-                                        <p class="card-text">
+                                <div class="col-md-6">
+                                    <div class="container">
+                                        <h5 class="">Lorem ipsum dolor sit amet</h5>
+                                        <p style="font-size: 12px;">
                                             Consectetur adipiscing elit. Donec iaculis interdum imperdiet. Mauris et enim at risus tincidunt tempus ut ac ante. Pellentesque vel sem lectus. Ut et odio mi. Nullam erat urna, congue at scelerisque id, eleifend non sem. Phasellus non efficitur ante. Praesent mollis eget massa eu sodales.
-                                            Etiam lacinia lacinia ex, vel mattis nibh dapibus feugiat. Praesent odio quam, volutpat sit amet nibh a, auctor vehicula diam. Morbi eu consectetur ipsum. Proin cursus semper sollicitudin. Sed et odio ut magna aliquam volutpat. Integer cursus neque accumsan, varius libero sit amet, fringilla lorem. Proin eget lacus ac lacus rutrum eleifend malesuada in neque. Praesent facilisis nunc dignissim justo cursus ultrices. Maecenas venenatis efficitur tellus, nec iaculis ex auctor a. Integer mollis commodo ultrices. Phasellus at consequat ipsum. Maecenas maximus, neque semper varius accumsan, ante quam venenatis lectus, sit amet accumsan erat risus porta augue. 
+                                            
                                         </p>
                                     </div>
                                 </div>
@@ -126,8 +126,8 @@
                     </div>
                 </div>
 
-                <div class="container-fluid linear-edit text-white p-5">
-                    <div class="row">
+                <div class="container-fluid linear-edit-2 text-white p-5">
+                    <div class="row col-10 m-auto">
                         <div class="col-md-6 p-5">
                             <h1 class="text-center">PESSOAS CADASTRADAS</h1>
                             <p class="fs-6 py-1">
@@ -151,8 +151,8 @@
 
                 <div class="container-fluid p-5 text-white color-E">
                     <div class="container-fluid p-5">
-                        <div class="mt-4 row text-center mb-4">
-                            <h3>Nossa Equipe!</h3>
+                        <div class="mt-4 row text-center mb-5">
+                            <h1>Nossa Equipe!</h1>
                             <hr class="border border-white border-3 rounded-3 col-2 m-auto">
                         </div>
 

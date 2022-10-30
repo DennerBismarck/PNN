@@ -14,6 +14,18 @@
     background-color: var(--B);
 }
 
+.color-outline-B { 
+    color: var(--B);
+    background-color: transparent;
+    border-color: var(--B);
+}
+
+.color-outline-B:hover {
+    color: #fff;
+    background-color: var(--B);
+    border-color: var(--B);
+}
+
 .color-C { 
     background-color: var(--C);
 }
@@ -37,5 +49,9 @@
 
 .linear-edit {
     background: linear-gradient(to bottom right, #89ceff, #192bc2);
+}
+
+.linear-edit-2 {
+    background: linear-gradient(to right, rgb(178,208,242), #192bc2);
 }
 
