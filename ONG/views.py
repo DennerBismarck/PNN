@@ -10,8 +10,9 @@ def createONG(request):
     if form.is_valid():
         form.save()
         return redirect("main")
-    listagem = {'form_ONG': form}
-    return render(request, "ONG.html", listagem)
+    ONGs = models.ONG.objects.all()
+    listagem = {'form_ONG': form, 'ONG_chave': ONGs}
+    return render(request, "ShowONG.html", listagem)
 
 def updateONG(request, id_ONG):
     ONG = models.ONG.objects.get(pk=id_ONG)
@@ -20,7 +21,7 @@ def updateONG(request, id_ONG):
         form.save()
         return redirect("main")
     listagem = {'form_ONG': form}
-    return render(request, "ONG.html", listagem)
+    return render(request, "ShowONG.html", listagem)
 
 def deleteONG(request, id_ONG):
     ONG = models.ONG.objects.get(pk=id_ONG)

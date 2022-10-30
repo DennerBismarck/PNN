@@ -1,42 +1,56 @@
 {% extends "index.html" %}
-{% block title %}<title>Cidades</title>{% endblock %}
+{% block title %}<title>ONGs</title>{% endblock %}
 
 {% block content %}
 
-{% if cidades_chave %}
+{% if ONG_chave %}
 <div class="container-fluid px-4">
-    <h1 class="mt-4">Tabela de cidades</h1>
+    <h1 class="mt-4">Tabela de ONGs</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
-        <li class="breadcrumb-item active">Cidades</li>
+        <li class="breadcrumb-item active">ONGs</li>
     </ol>
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            Cidades Registradas
+            ONGs Registradas
         </div>
         <div class="card-body">
             <table id="datatablesSimple">
                 <thead>
                     <tr>
-                        <th scope="row">Cidade</th> 
-                        <th scope="row">Estado</th> 
+                        <th scope="row">ONGs</th>
+                        <th scope="row">Site</th>
+                        <th scope="row">Logradouro</th>
+                        <th scope="row">Cidade</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
-                        <th scope="row">Cidade</th> 
-                        <th scope="row">Estado</th> 
+                        <th scope="row">ONGs</th>
+                        <th scope="row">Site</th>
+                        <th scope="row">Logradouro</th>
+                        <th scope="row">Cidade</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                    {% for cidade in cidades_chave %}
+                    {% for ONG in ONG_chave %}
                     <tr> 
                         <td>
-                            <a href="{% url 'updateCidade' cidade.cid_id %}">{{cidade.cid_cidade}}</a>
+                            <a href="{% url 'updateONG' ONG.ong_id %}">
+                                {{ ONG.ong_nome }}
+                            </a>
                         </td> 
                         <td>
-                            {{cidade.cid_est_id}}
+                            <a href="{{ONG.ong_site}}">
+                                {{ONG.ong_site}}
+                            </a>
+                        </td>
+                        <td>
+                            {{ONG.ong_logradouro}}
+                        </td>
+                        <td>
+                            {{ONG.ong_cid_id}}
                         </td>
                     </tr>
                     {% endfor %}
@@ -49,24 +63,24 @@
 
 <div class="container-fluid px-4">
     <h1 class="mt-4">
-        {% if cidades_chave|length > 1 %}
-        Registrar nova Cidade
+        {% if ONG_chave|length > 1 %}
+        Registrar uma Nova ONGs
         {% else %}
-        Editar {{ form_cidade.cid_cidade.value }}
+        Editar {{ form_ONG.sit_ONG.value }}
         {% endif %}
     </h1>
-    {% if not cidades_chave|length > 1 %}
+    {% if not ONG_chave|length > 1 %}
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'createCidade' %}">Cidades</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'createONG' %}">ONG</a></li>
         <li class="breadcrumb-item active">Editar</li>
     </ol>
     {% endif %}
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            {% if cidades_chave|length > 1 %}
-            Registrar Cidade
+            {% if ONG_chave|length > 1 %}
+            Registrar ONG
             {% else %}
             Cartão de Edição
             {% endif %}
@@ -75,7 +89,7 @@
         <div class="card-body">
             <form method="POST">
                 {% csrf_token %}
-                {% for fields in form_cidade %}
+                {% for fields in form_ONG %}
                 <div class="mb-3">
                     {{ fields.label }}
                     {{ fields }}

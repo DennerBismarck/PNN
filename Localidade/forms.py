@@ -8,7 +8,7 @@ class CidadeForm(ModelForm):
             'cid_cidade',
             'cid_est_id',
         ]
-    
+        
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['cid_cidade'].widget.attrs.update({'class': 'form-label'})
