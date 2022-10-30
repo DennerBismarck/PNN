@@ -32,9 +32,14 @@ def index(request):
     if not (models.Genero.objects.filter(gen_generos="Outro").first()):
         model = models.Genero(gen_generos="Outro")
         model.save()
+
+    necessitados = models.Necessitado.objects.all()
+    usuarios     = models.Usuario.objects.all()
     
     listagem = {
         'user': user_is_authenticated(request),
+        'n_necessitados': len(necessitados),
+        'n_usuarios': len(usuarios),
     }
     return render(request, "Index.html", listagem)
 

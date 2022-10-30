@@ -4,84 +4,86 @@
 {% block content %}
 
 {% if profissao_chave %}
-<div class="container-fluid px-4">
-    <h1 class="mt-4">Tabela de profissao</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
-        <li class="breadcrumb-item active">Profissões</li>
-    </ol>
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            profissao Registradas
-        </div>
-        <div class="card-body">
-            <table id="datatablesSimple">
-                <thead>
-                    <tr>
-                        <th scope="row">Profissao</th> 
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th scope="row">Profissao</th> 
-                    </tr>
-                </tfoot>
-                <tbody>
-                    {% for Profissao in profissao_chave %}
-                    <tr> 
-                        <td>
-                            <a href="{% url 'updateProfissao' Profissao.pro_id %}">
-                                {{Profissao.pro_profissao}}
-                            </a>
-                        </td> 
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+<div class="container-fluid row">
+    <div class="container-fluid px-4">
+        <h2 class="mt-4">Tabela de profissao</h2>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
+            <li class="breadcrumb-item active">Profissões</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                profissao Registradas
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th scope="row">Profissao</th> 
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="row">Profissao</th> 
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for Profissao in profissao_chave %}
+                        <tr> 
+                            <td>
+                                <a href="{% url 'updateProfissao' Profissao.pro_id %}">
+                                    {{Profissao.pro_profissao}}
+                                </a>
+                            </td> 
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-{% endif %}
-
-<div class="container-fluid px-4">
-    <h1 class="mt-4">
-        {% if profissao_chave|length > 1 %}
-        Registrar nova Profissao
-        {% else %}
-        Editar {{ form_profissao.pro_profissao.value }}
-        {% endif %}
-    </h1>
-    {% if not profissao_chave|length > 1 %}
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'createProfissao' %}">Profissões</a></li>
-        <li class="breadcrumb-item active">Editar</li>
-    </ol>
     {% endif %}
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
+
+    <div class="container-fluid px-4">
+        <h2 class="mt-4">
             {% if profissao_chave|length > 1 %}
-            Registrar Profissao
+            Registrar nova Profissao
             {% else %}
-            Cartão de Edição
+            Editar {{ form_profissao.pro_profissao.value }}
             {% endif %}
+        </h2>
+        {% if not profissao_chave|length > 1 %}
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'createProfissao' %}">Profissões</a></li>
+            <li class="breadcrumb-item active">Editar</li>
+        </ol>
+        {% endif %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                {% if profissao_chave|length > 1 %}
+                Registrar Profissao
+                {% else %}
+                Cartão de Edição
+                {% endif %}
+                
+            </div>
             
-        </div>
-        
-        <div class="card-body">
-            <form method="POST">
-                {% csrf_token %}
-                {% for fields in form_profissao %}
-                <div class="mb-3">
-                    {{ fields.label }}
-                    {{ fields }}
-                </div>
-                {% endfor %}
-                <button class="btn btn-primary" type="submit">Enviar</button>
-            </form>    
-        </div>
-    </div>    
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {% for fields in form_profissao %}
+                    <div class="mb-3">
+                        {{ fields.label }}
+                        {{ fields }}
+                    </div>
+                    {% endfor %}
+                    <button class="btn btn-primary" type="submit">Enviar</button>
+                </form>    
+            </div>
+        </div>    
+    </div>
 </div>
 {% endblock %}

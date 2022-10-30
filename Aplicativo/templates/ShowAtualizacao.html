@@ -4,133 +4,135 @@
 {% block content %}
 
 {% if atualizacao_chave %}
-<div class="container-fluid px-4">
-    <h1 class="mt-4">Tabela de Atualizações</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'createNecessitado' %}">Necessitados</a></li>
-        <li class="breadcrumb-item active">{{ necessitado_chave }}</li>
-    </ol>
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Atualizações realizadas
-        </div>
-        <div class="card-body">
-            <table id="datatablesSimple">
-                <thead>
-                    <tr>
-                        <th scope="row">Data</th>
-                        <th scope="row">Necessitado</th>
-                        <th scope="row">Usuário</th>
-                        <th scope="row">Nome</th>
-                        <th scope="row">Idade</th>
-                        <th scope="row">Logradouro</th>
-                        <th scope="row">Cpf</th>
-                        <th scope="row">Situação</th>
-                        <th scope="row">Profissão</th>
-                        <th scope="row">Gênero</th>
-                        <th scope="row">Cidade</th> 
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th scope="row">Data</th>
-                        <th scope="row">Necessitado</th>
-                        <th scope="row">Usuário</th>
-                        <th scope="row">Nome</th>
-                        <th scope="row">Idade</th>
-                        <th scope="row">Logradouro</th>
-                        <th scope="row">Cpf</th>
-                        <th scope="row">Situação</th>
-                        <th scope="row">Profissão</th>
-                        <th scope="row">Gênero</th>
-                        <th scope="row">Cidade</th> 
-                    </tr>
-                </tfoot>
-                <tbody>
-                    {% for atualizacao in atualizacao_chave %}
-                    <tr> 
-                        <td>
-                            {{atualizacao.att_date}}
-                        </td>
-                        <td>
-                            {{atualizacao.att_nec_id}}
-                        </td>
-                        <td>
-                            {{atualizacao.att_usu_id}}
-                        </td>
-                        <td>
-                            {{atualizacao.att_nec_nome}}
-                        </td>
-                        <td>
-                            {{atualizacao.att_nec_idade}}
-                        </td>
-                        <td>
-                            {{atualizacao.att_nec_logradouro}}
-                        </td>
-                        <td>
-                            {{atualizacao.att_nec_cpf}}
-                        </td>
-                        <td>
-                            {{atualizacao.att_nec_sit_id}} 
-                        </td>
-                        <td>
-                            {{atualizacao.att_nec_pro_id}} 
-                        </td>
-                        <td>
-                            {{atualizacao.att_nec_gen_id}}
-                        </td>
-                        <td>
-                            {{atualizacao.att_nec_cid_id}}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+<div class="container-fluid row">
+    <div class="container-fluid px-4">
+        <h2 class="mt-4">Tabela de Atualizações</h2>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'createNecessitado' %}">Necessitados</a></li>
+            <li class="breadcrumb-item active">{{ necessitado_chave }}</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Atualizações realizadas
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th scope="row">Data</th>
+                            <th scope="row">Necessitado</th>
+                            <th scope="row">Usuário</th>
+                            <th scope="row">Nome</th>
+                            <th scope="row">Idade</th>
+                            <th scope="row">Logradouro</th>
+                            <th scope="row">Cpf</th>
+                            <th scope="row">Situação</th>
+                            <th scope="row">Profissão</th>
+                            <th scope="row">Gênero</th>
+                            <th scope="row">Cidade</th> 
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="row">Data</th>
+                            <th scope="row">Necessitado</th>
+                            <th scope="row">Usuário</th>
+                            <th scope="row">Nome</th>
+                            <th scope="row">Idade</th>
+                            <th scope="row">Logradouro</th>
+                            <th scope="row">Cpf</th>
+                            <th scope="row">Situação</th>
+                            <th scope="row">Profissão</th>
+                            <th scope="row">Gênero</th>
+                            <th scope="row">Cidade</th> 
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for atualizacao in atualizacao_chave %}
+                        <tr> 
+                            <td>
+                                {{atualizacao.att_date}}
+                            </td>
+                            <td>
+                                {{atualizacao.att_nec_id}}
+                            </td>
+                            <td>
+                                {{atualizacao.att_usu_id}}
+                            </td>
+                            <td>
+                                {{atualizacao.att_nec_nome}}
+                            </td>
+                            <td>
+                                {{atualizacao.att_nec_idade}}
+                            </td>
+                            <td>
+                                {{atualizacao.att_nec_logradouro}}
+                            </td>
+                            <td>
+                                {{atualizacao.att_nec_cpf}}
+                            </td>
+                            <td>
+                                {{atualizacao.att_nec_sit_id}} 
+                            </td>
+                            <td>
+                                {{atualizacao.att_nec_pro_id}} 
+                            </td>
+                            <td>
+                                {{atualizacao.att_nec_gen_id}}
+                            </td>
+                            <td>
+                                {{atualizacao.att_nec_cid_id}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-{% endif %}
-
-<div class="container-fluid px-4">
-    <h1 class="mt-4">
-        {% if atualizacao_chave|length > 1 %}
-        Atualizar Necessitado
-        {% else %}
-        Atualizar {{ necessitado_chave }}
-        {% endif %}
-    </h1>
-    {% if not atualizacao_chave|length > 1 %}
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'createNecessitado' %}">Necessitado</a></li>
-        <li class="breadcrumb-item">{{ necessitado_chave }}</li>
-    </ol>
     {% endif %}
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
+
+    <div class="container-fluid px-4">
+        <h2 class="mt-4">
             {% if atualizacao_chave|length > 1 %}
-            Registrar Atualização
+            Atualizar Necessitado
             {% else %}
-            Cartão de Edição
+            Atualizar {{ necessitado_chave }}
             {% endif %}
+        </h2>
+        {% if not atualizacao_chave|length > 1 %}
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'createNecessitado' %}">Necessitado</a></li>
+            <li class="breadcrumb-item">{{ necessitado_chave }}</li>
+        </ol>
+        {% endif %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                {% if atualizacao_chave|length > 1 %}
+                Registrar Atualização
+                {% else %}
+                Cartão de Edição
+                {% endif %}
+                
+            </div>
             
-        </div>
-        
-        <div class="card-body">
-            <form method="POST">
-                {% csrf_token %}
-                {% for fields in form_necessitado %}
-                <div class="mb-3">
-                    {{ fields.label }}
-                    {{ fields }}
-                </div>
-                {% endfor %}
-                <button class="btn btn-primary" type="submit">Enviar</button>
-            </form>    
-        </div>
-    </div>    
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {% for fields in form_necessitado %}
+                    <div class="mb-3">
+                        {{ fields.label }}
+                        {{ fields }}
+                    </div>
+                    {% endfor %}
+                    <button class="btn btn-primary" type="submit">Enviar</button>
+                </form>    
+            </div>
+        </div>    
+    </div>
 </div>
 {% endblock %}

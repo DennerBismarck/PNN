@@ -63,15 +63,11 @@
                                 </a>
                                 
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    
                                     <li><a class="dropdown-item" href="{% url 'createCidade' %}">   Cadastrar Cidade</a></li>
                                     <li><a class="dropdown-item" href="{% url 'createSituacao' %}"> Cadastrar Situação</a></li>
                                     <li><a class="dropdown-item" href="{% url 'createProfissao' %}">Cadastrar Profissão</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
-                                    
-                                    
-                                    
                                 </ul>
                             </li>
                         </ul>
@@ -105,17 +101,107 @@
                           </div>
                     </div>
                 </header>
+
+                <div class="container-fluid">
+                    <div class="mt-4 row text-center">
+                        <h1>Sobre o Projeto</h1>
+                        <hr class="border col-5">
+                        <hr class="border border-dark border-3 rounded-3 col-2 border-opacity-10">
+                        <hr class="border col-5">
+                    </div>
+                    <div class="container-fluid p-5">
+                        <div class="cardborder border-white p-5">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="{% static 'img/home_vector_img.jpg' %}" class="img-fluid" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Lorem ipsum dolor sit amet</h5>
+                                        <p class="card-text">
+                                            Consectetur adipiscing elit. Donec iaculis interdum imperdiet. Mauris et enim at risus tincidunt tempus ut ac ante. Pellentesque vel sem lectus. Ut et odio mi. Nullam erat urna, congue at scelerisque id, eleifend non sem. Phasellus non efficitur ante. Praesent mollis eget massa eu sodales.
+                                            Etiam lacinia lacinia ex, vel mattis nibh dapibus feugiat. Praesent odio quam, volutpat sit amet nibh a, auctor vehicula diam. Morbi eu consectetur ipsum. Proin cursus semper sollicitudin. Sed et odio ut magna aliquam volutpat. Integer cursus neque accumsan, varius libero sit amet, fringilla lorem. Proin eget lacus ac lacus rutrum eleifend malesuada in neque. Praesent facilisis nunc dignissim justo cursus ultrices. Maecenas venenatis efficitur tellus, nec iaculis ex auctor a. Integer mollis commodo ultrices. Phasellus at consequat ipsum. Maecenas maximus, neque semper varius accumsan, ante quam venenatis lectus, sit amet accumsan erat risus porta augue. 
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid linear-edit text-white p-5">
+                    <div class="row">
+                        <div class="col-md-6 p-5">
+                            <h1 class="text-center">PESSOAS CADASTRADAS</h1>
+                            <p class="fs-6 py-1">
+                                Consectetur adipiscing elit. Donec iaculis interdum imperdiet. Mauris et enim at risus tincidunt tempus ut ac ante. Pellentesque vel sem lectus. Ut et odio mi. Nullam erat urna, congue at scelerisque id, eleifend non sem. Phasellus non efficitur ante. Praesent mollis eget massa eu sodales.
+                                Etiam lacinia lacinia ex, vel mattis nibh dapibus feugiat.
+                            </p>
+                        </div>
+    
+                        <div class="col-md-6 text-center py-5 row">
+                            <div class="container-fluid my-auto">
+                                <h1>{{ n_necessitados }}</h1>
+                                <h4>Necessitados</h4>
+                            </div>
+                            <div class="container-fluid mx-auto">
+                                <h1>{{ n_usuarios }}</h1>
+                                <h4>Usuários</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid p-5 text-white color-E">
+                    <div class="container-fluid p-5">
+                        <div class="mt-4 row text-center mb-4">
+                            <h3>Nossa Equipe!</h3>
+                            <hr class="border border-white border-3 rounded-3 col-2 m-auto">
+                        </div>
+
+                        <div class="card-group px-5 text-center">
+                            <div class="card color-E">
+                                <img src="{% static 'img/ImagemPrincipal.jpg' %}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Paulo de Tarso</h5>
+                                    <p class="card-text">Gerente</p>
+                                </div>
+                            </div>
+                            <div class="card color-E">
+                                <img src="{% static 'img/ImagemPrincipal.jpg' %}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Alec Can Yalcin</h5>
+                                    <p class="card-text">Desenvolvedor</p>
+                                </div>
+                            </div>
+                            <div class="card color-E">
+                                <img src="{% static 'img/ImagemPrincipal.jpg' %}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Denner Bismarck</h5>
+                                    <p class="card-text">Analista</p>
+                                </div>
+                            </div>
+                            <div class="card color-E">
+                                <img src="{% static 'img/ImagemPrincipal.jpg' %}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Lucas Dantas</h5>
+                                    <p class="card-text">Designer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {% endblock content %}
             </main>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
                     <div class="d-flex align-items-center justify-content-between small">
                         <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                        <div>
+                        {% comment %} <div>
                             <a href="#">Privacy Policy</a>
                             &middot;
                             <a href="#">Terms &amp; Conditions</a>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
                 </div>
             </footer>

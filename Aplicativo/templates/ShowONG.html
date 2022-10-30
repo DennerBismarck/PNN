@@ -4,100 +4,102 @@
 {% block content %}
 
 {% if ONG_chave %}
-<div class="container-fluid px-4">
-    <h1 class="mt-4">Tabela de ONGs</h1>
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
-        <li class="breadcrumb-item active">ONGs</li>
-    </ol>
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            ONGs Registradas
-        </div>
-        <div class="card-body">
-            <table id="datatablesSimple">
-                <thead>
-                    <tr>
-                        <th scope="row">ONGs</th>
-                        <th scope="row">Site</th>
-                        <th scope="row">Logradouro</th>
-                        <th scope="row">Cidade</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th scope="row">ONGs</th>
-                        <th scope="row">Site</th>
-                        <th scope="row">Logradouro</th>
-                        <th scope="row">Cidade</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    {% for ONG in ONG_chave %}
-                    <tr> 
-                        <td>
-                            <a href="{% url 'updateONG' ONG.ong_id %}">
-                                {{ ONG.ong_nome }}
-                            </a>
-                        </td> 
-                        <td>
-                            <a href="{{ONG.ong_site}}">
-                                {{ONG.ong_site}}
-                            </a>
-                        </td>
-                        <td>
-                            {{ONG.ong_logradouro}}
-                        </td>
-                        <td>
-                            {{ONG.ong_cid_id}}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+<div class="container-fluid row">
+    <div class="container-fluid px-4">
+        <h2 class="mt-4">Tabela de ONGs</h2>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
+            <li class="breadcrumb-item active">ONGs</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                ONGs Registradas
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th scope="row">ONGs</th>
+                            <th scope="row">Site</th>
+                            <th scope="row">Logradouro</th>
+                            <th scope="row">Cidade</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th scope="row">ONGs</th>
+                            <th scope="row">Site</th>
+                            <th scope="row">Logradouro</th>
+                            <th scope="row">Cidade</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for ONG in ONG_chave %}
+                        <tr> 
+                            <td>
+                                <a href="{% url 'updateONG' ONG.ong_id %}">
+                                    {{ ONG.ong_nome }}
+                                </a>
+                            </td> 
+                            <td>
+                                <a href="{{ONG.ong_site}}">
+                                    {{ONG.ong_site}}
+                                </a>
+                            </td>
+                            <td>
+                                {{ONG.ong_logradouro}}
+                            </td>
+                            <td>
+                                {{ONG.ong_cid_id}}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-{% endif %}
-
-<div class="container-fluid px-4">
-    <h1 class="mt-4">
-        {% if ONG_chave|length > 1 %}
-        Registrar uma Nova ONGs
-        {% else %}
-        Editar {{ form_ONG.sit_ONG.value }}
-        {% endif %}
-    </h1>
-    {% if not ONG_chave|length > 1 %}
-    <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'createONG' %}">ONG</a></li>
-        <li class="breadcrumb-item active">Editar</li>
-    </ol>
     {% endif %}
-    <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
+
+    <div class="container-fluid px-4">
+        <h2 class="mt-4">
             {% if ONG_chave|length > 1 %}
-            Registrar ONG
+            Registrar uma Nova ONGs
             {% else %}
-            Cartão de Edição
+            Editar {{ form_ONG.sit_ONG.value }}
             {% endif %}
-        </div>
-        
-        <div class="card-body">
-            <form method="POST">
-                {% csrf_token %}
-                {% for fields in form_ONG %}
-                <div class="mb-3">
-                    {{ fields.label }}
-                    {{ fields }}
-                </div>
-                {% endfor %}
-                <button class="btn btn-primary" type="submit">Enviar</button>
-            </form>    
-        </div>
-    </div>    
+        </h2>
+        {% if not ONG_chave|length > 1 %}
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'createONG' %}">ONG</a></li>
+            <li class="breadcrumb-item active">Editar</li>
+        </ol>
+        {% endif %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                {% if ONG_chave|length > 1 %}
+                Registrar ONG
+                {% else %}
+                Cartão de Edição
+                {% endif %}
+            </div>
+            
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    {% for fields in form_ONG %}
+                    <div class="mb-3">
+                        {{ fields.label }}
+                        {{ fields }}
+                    </div>
+                    {% endfor %}
+                    <button class="btn btn-primary" type="submit">Enviar</button>
+                </form>    
+            </div>
+        </div>    
+    </div>
 </div>
 {% endblock %}
