@@ -44,6 +44,7 @@
     color: #fff;
     background-color: var(--B);
     border-color: #fff;
+    transition: .25s;
 }
 
 .button-login:hover {
