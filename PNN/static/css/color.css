@@ -28,6 +28,30 @@
     border-color: var(--B);
 }
 
+.color-outline-reverse-B { 
+    color: #fff;
+    background-color: var(--B);
+    border-color: #fff;
+}
+
+.color-outline-reverse-B:hover {
+    color: var(--A);
+    background-color: transparent;
+    border-color: var(--A);
+}
+
+.button-login {
+    color: #fff;
+    background-color: var(--B);
+    border-color: #fff;
+}
+
+.button-login:hover {
+    background-color: white;
+    color: var(--C);
+    border-radius: 25px;
+}
+
 .color-C { 
     background-color: var(--C);
     color: white;
