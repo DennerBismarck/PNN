@@ -86,7 +86,7 @@
             </div>
         </nav>
 
-        <div id="layoutSidenav_content" class="py-2">
+        <div id="layoutSidenav_content" class="">
             <main class="mt-5">
                 {% block content %}
                 <header class="py-1 bg-image-full my-5" style="background-image: url({% static 'img/home_vector_img.jpg' %})">
@@ -96,7 +96,7 @@
                             <div class="card-body">
                                 <div class="card-body">
                                     <h1 class="fs-3 fw-bolder">Ajuda a Quem Precisa</h1>
-                                    <h5 class="mb-50">Encontre e ajude pessoas necessitadas com funcionalidades que irão facilitar seu acesso!</h5>
+                                    <h5>Encontre e ajude pessoas necessitadas com funcionalidades que irão facilitar seu acesso!</h5>
                                 </div>                          
                             </div>
                           </div>
@@ -108,18 +108,17 @@
                         <h1>Sobre o Projeto</h1>
                         <hr class="border border-dark border-3 rounded-3 col-3 m-auto">
                     </div>
-                    <div class="container-fluid p-5">
-                        <div class="border-white p-5 row">
-                            <div class="col-10 row m-auto">
-                                <div class="col-md-6">
+                    <div class="container-fluid p-md-5 p-4">
+                        <div class="border-white p-md-5 row">
+                            <div class="col-md-10 col-12 row m-auto">
+                                <div class="col-md-6 col-12">
                                     <img src="{% static 'img/home_vector_img.jpg' %}" class="img-fluid" alt="...">
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="container">
+                                <div class="col-md-6 col-12 mt-xl-0 mt-2">
+                                    <div class="container-fluid p-0">
                                         <h5 class="">Lorem ipsum dolor sit amet</h5>
-                                        <p style="font-size: 12px;">
+                                        <p class="" style="font-size: 12px;">
                                             Consectetur adipiscing elit. Donec iaculis interdum imperdiet. Mauris et enim at risus tincidunt tempus ut ac ante. Pellentesque vel sem lectus. Ut et odio mi. Nullam erat urna, congue at scelerisque id, eleifend non sem. Phasellus non efficitur ante. Praesent mollis eget massa eu sodales.
-                                            
                                         </p>
                                     </div>
                                 </div>
@@ -128,9 +127,9 @@
                     </div>
                 </div>
 
-                <div class="container-fluid linear-edit-2 text-white p-5">
-                    <div class="row col-10 m-auto">
-                        <div class="col-md-6 p-5">
+                <div class="container-fluid linear-edit-2 text-white p-md-5 p-0 m-auto">
+                    <div class="row col-md-10 col-12 m-auto">
+                        <div class="col-md-6 col-12 p-5 m-md-auto">
                             <h1 class="text-center">PESSOAS CADASTRADAS</h1>
                             <p class="fs-6 py-1">
                                 Consectetur adipiscing elit. Donec iaculis interdum imperdiet. Mauris et enim at risus tincidunt tempus ut ac ante. Pellentesque vel sem lectus. Ut et odio mi. Nullam erat urna, congue at scelerisque id, eleifend non sem. Phasellus non efficitur ante. Praesent mollis eget massa eu sodales.
@@ -138,7 +137,7 @@
                             </p>
                         </div>
     
-                        <div class="col-md-6 text-center py-5 row">
+                        <div class="col-md-6 text-center py-5 row m-md-auto mx-0">
                             <div class="container-fluid my-auto">
                                 <h1>{{ n_necessitados }}</h1>
                                 <h4>Necessitados</h4>
@@ -151,8 +150,8 @@
                     </div>
                 </div>
 
-                <div class="container-fluid p-5 text-white color-E">
-                    <div class="container-fluid p-5">
+                <div class="container-fluid p-md-5 text-white color-E">
+                    <div class="container-fluid p-md-5 p-3">
                         <div class="mt-4 row text-center mb-5">
                             <h1>Nossa Equipe!</h1>
                             <hr class="border border-white border-3 rounded-3 col-2 m-auto">
