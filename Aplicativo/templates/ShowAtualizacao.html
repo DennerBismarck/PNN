@@ -5,7 +5,7 @@
 
 {% if atualizacao_chave %}
 <div class="container-fluid row">
-    <div class="container-fluid px-4">
+    <div class="container-fluid px-4 col-11 m-auto">
         <h2 class="mt-4">Tabela de Atualizações</h2>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
@@ -53,7 +53,7 @@
                         {% for atualizacao in atualizacao_chave %}
                         <tr> 
                             <td>
-                                {{atualizacao.att_date}}
+                                {{ atualizacao.att_date}}
                             </td>
                             <td>
                                 {{atualizacao.att_nec_id}}
