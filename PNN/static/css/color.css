@@ -8,10 +8,12 @@
 
 .color-A { 
     background-color: var(--A);
+    color: white;
 }
 
 .color-B { 
     background-color: var(--B);
+    color: white;
 }
 
 .color-outline-B { 
@@ -28,6 +30,7 @@
 
 .color-C { 
     background-color: var(--C);
+    color: white;
 }
 
 .color-D { 
@@ -37,10 +40,31 @@
 
 .color-E { 
     background-color: var(--E);
+    color: white;
 }
 
 .color-W { 
     background-color: white;
+}
+
+.text-W { 
+    color: white;
+}
+
+.text-A {
+    color: var(--A);
+}
+
+.text-B {
+    color: var(--B);
+}
+
+.text-C {
+    color: var(--C);
+}
+
+.text-D {
+    color: var(--D);
 }
 
 .text-shadow {
