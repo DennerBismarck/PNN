@@ -209,6 +209,7 @@
 
         <!-- SCRIPTS -->
         <script src="{% static 'js/scripts2.js' %}"></script>
+        <script src="{% static 'js/format.js' %}"></script>
         <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
         <script src="{% static 'js/vendor/jquery/jquery.min.js' %}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
@@ -221,9 +222,8 @@
             $(document).ready(function() {
                 $('#id_nec_cid_id').select2();
             });
-
-            
         </script>
+
         {% block script %}
         {% endblock script %}
     </body>

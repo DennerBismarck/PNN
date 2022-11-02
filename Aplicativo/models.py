@@ -1,6 +1,7 @@
 from django.db import models
 from Usuario.models import Usuario
 from Localidade.models import Cidade
+from django.core.validators import MaxLengthValidator
 
 # ===================================================================
 # Todos os Modelos Abaixo vão para a série de tabelas de NECESSITADOS!
@@ -60,7 +61,7 @@ class Atualizacao(models.Model):
     att_id      = models.AutoField(primary_key=True)
     att_usu_id  = models.ForeignKey(Usuario, verbose_name="Usuário", related_name='usuario', on_delete=models.CASCADE, default=1)
     att_nec_id  = models.ForeignKey(Necessitado, verbose_name="Necessitado", related_name='necessitado', on_delete=models.CASCADE, default=1)
-    att_date        = models.DateTimeField(verbose_name="Data da Atualização", auto_now_add=True)
+    att_date    = models.DateTimeField(verbose_name="Data da Atualização", auto_now_add=True)
 
     att_nec_nome        = models.CharField(verbose_name="Nome",max_length=100)
     att_nec_idade       = models.IntegerField(verbose_name="Idade",default=0)

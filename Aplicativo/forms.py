@@ -15,12 +15,16 @@ class NecessitadoForm(ModelForm):
             'nec_cid_id',
         ]
 
+        widget = (
+
+        )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['nec_nome'].widget.attrs.update(        {'class': 'form-control'})
         self.fields['nec_idade'].widget.attrs.update(       {'class': 'form-control'})
         self.fields['nec_logradouro'].widget.attrs.update(  {'class': 'form-control'})
-        self.fields['nec_cpf'].widget.attrs.update(         {'class': 'form-control'})
+        self.fields['nec_cpf'].widget.attrs.update(         {'class': 'form-control format_field'})
         self.fields['nec_sit_id'].widget.attrs.update(      {'class': 'form-control'})
         self.fields['nec_pro_id'].widget.attrs.update(      {'class': 'form-control'})
         self.fields['nec_gen_id'].widget.attrs.update(      {'class': 'form-control'})

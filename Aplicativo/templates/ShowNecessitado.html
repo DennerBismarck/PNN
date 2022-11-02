@@ -80,11 +80,7 @@
 
     <div class="container-fluid px-4">
         <h2 class="mt-4">
-            {% if necessitados_chave|length > 1 %}
             Registrar um Novo Caso
-            {% else %}
-            Editar {{ form_necessitado.nec_nome.value }}
-            {% endif %}
         </h2>
         {% if not necessitados_chave|length > 1 %}
         <ol class="breadcrumb mb-4">
@@ -119,4 +115,12 @@
         </div>    
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+</script>
+
 {% endblock %}
