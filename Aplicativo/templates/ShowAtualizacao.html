@@ -53,7 +53,7 @@
                         {% for atualizacao in atualizacao_chave %}
                         <tr> 
                             <td>
-                                {{ atualizacao.att_date}}
+                                {{ atualizacao.att_date|date:"Y-m-d"}}<br>{{ atualizacao.att_date|time:"H:i:s"}}
                             </td>
                             <td>
                                 {{atualizacao.att_nec_id}}

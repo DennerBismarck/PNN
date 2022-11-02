@@ -35,7 +35,7 @@ def index(request):
 
     necessitados = models.Necessitado.objects.all()
     usuarios     = models.Usuario.objects.all()
-    
+
     listagem = {
         'user': user_is_authenticated(request),
         'n_necessitados': len(necessitados),

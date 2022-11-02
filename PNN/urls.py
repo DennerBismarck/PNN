@@ -3,14 +3,16 @@ from django.urls import path
 from Aplicativo import views as viewsAplicativo
 from Localidade import views as viewsLocalidade
 from ONG        import views as viewsONG
-from Usuario import views as userView
+from Usuario    import views as userView
 
 urlpatterns = [
     # Tela Login e Cadastro
     path('login/', userView.login, name="login"),
     path('cadastro/', userView.cadastro, name="cadastro"),
     path('logout/', userView.logout, name="logout"),
-    #-----------  -----------#
+    # Mapeamento
+    path('map/', viewsLocalidade.map, name="map"),
+    # Admin e Index #
     path('admin/', admin.site.urls),
     path('', viewsAplicativo.index, name='main'),
     # CRUD de NECESSITADOS
