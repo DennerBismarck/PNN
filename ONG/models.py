@@ -19,7 +19,7 @@ class ONG(models.Model):
         verbose_name        = "ONG"
     
 class EMAIL_DAS_ONGS(models.Model):
-    emo_email = models.CharField(max_length=40, primary_key=True)
+    emo_email = models.CharField(verbose_name="Email", max_length=40, primary_key=True)
     emo_ong_id = models.ForeignKey(ONG, verbose_name="ONG",on_delete=models.CASCADE, default=1)
 
     def __str__(self):
@@ -31,7 +31,7 @@ class EMAIL_DAS_ONGS(models.Model):
         unique_together = (("emo_email", "emo_ong_id"),)
 
 class TEL_DAS_ONGS(models.Model):
-    ton_telefone = models.CharField(max_length=15, primary_key=True)
+    ton_telefone = models.CharField(verbose_name="Telefone", max_length=15, primary_key=True)
     ton_ong_id = models.ForeignKey(ONG, verbose_name="ONG",on_delete=models.CASCADE, default=1)
 
     def __str__(self):

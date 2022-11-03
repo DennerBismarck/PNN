@@ -14,7 +14,7 @@ def login(request):
         return render(request, "login.html")
     else:
         username = request.POST.get('username')
-        senha = request.POST.get('password')
+        senha    = request.POST.get('password')
 
         user = authenticate(request, username=username, password=senha)  
 

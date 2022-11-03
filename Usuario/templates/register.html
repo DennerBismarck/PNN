@@ -39,15 +39,19 @@
                                                 <label for="email">Email</label>   
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control"     id="password"      name="password" type="password" placeholder="12345678" />
-                                                <label for="password">Senha</label>
-                                            </div>
-                                            <div class="form-floating mb-3">
                                                 <input class="form-control format_field_tel"     id="telefone"   name="telefone" type="tel" placeholder="(00) 90000-0000"/>
                                                 <label for="telefone">Telefone</label>
                                             </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control"     id="password"      name="password" type="password" placeholder="12345678" />
+                                                <label for="password">Senha</label>
+                                            </div>
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" id="showPassword" type="checkbox" onclick="appearPassword();"/>
+                                                <label class="form-check-label" for="showPassword">Mostrar Senha</label>
+                                            </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><button class="btn btn-primary"     type="submit">Enviar</button></div>
+                                                <div class="d-grid"><button class="btn btn-primary" type="submit">Enviar</button></div>
                                             </div>
                                             {{ erro }}
                                         </form>

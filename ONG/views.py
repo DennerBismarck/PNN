@@ -9,8 +9,10 @@ def createONG(request):
     form = forms.ONGForm(request.POST or None)
     if form.is_valid():
         form.save()
-        return redirect("main")
+        return createTelONG(request, )
+
     ONGs = models.ONG.objects.all()
+    
     listagem = {'form_ONG': form, 'ONG_chave': ONGs}
     return render(request, "ShowONG.html", listagem)
 

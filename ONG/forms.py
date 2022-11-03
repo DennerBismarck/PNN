@@ -17,3 +17,22 @@ class ONGForm(ModelForm):
         self.fields['ong_site'].widget.attrs.update(        {'class': 'form-control'})
         self.fields['ong_logradouro'].widget.attrs.update(  {'class': 'form-control'})
         self.fields['ong_cid_id'].widget.attrs.update(      {'class': 'form-control'})
+
+class EMAIL_DAS_ONGSForm(ModelForm):
+    class Meta:
+        model = models.EMAIL_DAS_ONGS
+        fields = '__all__'
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['emo_email'].widget.attrs.update(        {'class': 'form-control'})
+
+class TEL_DAS_ONGSForm(ModelForm):
+    class Meta:
+        model = models.TEL_DAS_ONGS
+        fields = '__all__'
+        
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['ton_telefone'].widget.attrs.update(        {'class': 'form-control'})

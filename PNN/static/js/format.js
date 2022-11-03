@@ -19,7 +19,7 @@ try {
         }
     })
 } catch(e) { 
-    console.log("Não consegui achar esse campo [CPF]")
+    
 }
 
 try {
@@ -43,5 +43,16 @@ try {
 
     })
 } catch(e) { 
-    console.log("Não consegui achar esse campo [TEL]")
+    
 }
+
+function appearPassword() {
+    input_check = document.querySelector('#showPassword')
+    input_password = document.querySelector('#password')
+    
+    if (input_check.checked == true) {
+        input_password.type = "text";
+    } else {
+        input_password.type = "password";
+    }
+} 
