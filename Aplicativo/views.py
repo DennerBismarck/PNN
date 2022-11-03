@@ -41,7 +41,7 @@ def index(request):
         'n_necessitados': len(necessitados),
         'n_usuarios': len(usuarios),
     }
-    return render(request, "Index.html", listagem)
+    return render(request, "index.html", listagem)
 
 # ===================================================================
 # CRUD de NECESSITADOS
