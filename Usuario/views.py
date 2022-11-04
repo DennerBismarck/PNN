@@ -58,3 +58,11 @@ def cadastro(request):
         user_tel.save()
 
         return redirect('login')
+
+def user(request):
+    user = user_is_authenticated(request)
+    if user:
+        usersettings = {'user': user}
+        return render(request, 'ShowUser.html', usersettings)
+    else:
+        return render(request, 'index.html')

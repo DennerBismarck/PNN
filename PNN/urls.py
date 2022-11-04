@@ -10,6 +10,7 @@ urlpatterns = [
     path('login/', userView.login, name="login"),
     path('cadastro/', userView.cadastro, name="cadastro"),
     path('logout/', userView.logout, name="logout"),
+    path('user/', userView.user , name="user"),
     # Mapeamento
     path('map/', viewsLocalidade.map, name="map"),
     # Admin e Index #

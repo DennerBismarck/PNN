@@ -65,12 +65,14 @@
                                     <span>{% if user %}{{user}}{% endif %}</span>
                                 </a>
                                 
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item color-outline-B" href="{% url 'createCidade' %}">   Cadastrar Cidade</a></li>
-                                    <li><a class="dropdown-item color-outline-B" href="{% url 'createSituacao' %}"> Cadastrar Situação</a></li>
-                                    <li><a class="dropdown-item color-outline-B" href="{% url 'createProfissao' %}">Cadastrar Profissão</a></li>
+                                <ul class="dropdown-menu dropdown-menu-end p-1 " aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item color-outline-B rounded-3" href="{% url 'user' %}">Minha de Conta</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item color-outline-B" href="{% url 'logout' %}">Sair</a></li>
+                                    <li><a class="dropdown-item color-outline-B rounded-3" href="{% url 'createCidade' %}">Cadastrar Cidade</a></li>
+                                    <li><a class="dropdown-item color-outline-B rounded-3" href="{% url 'createSituacao' %}">Cadastrar Situação</a></li>
+                                    <li><a class="dropdown-item color-outline-B rounded-3" href="{% url 'createProfissao' %}">Cadastrar Profissão</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item color-outline-B rounded-3" href="{% url 'logout' %}">Sair</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -217,12 +219,12 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"  crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"            crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"                         crossorigin="anonymous"></script>
-        
+{% comment %}         
         <script>
             $(document).ready(function() {
                 $('#id_nec_cid_id').select2();
             });
-        </script>
+        </script> {% endcomment %}
 
         {% block script %}
         {% endblock script %}
