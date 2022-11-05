@@ -63,6 +63,6 @@ def user(request):
     user = user_is_authenticated(request)
     if user:
         usersettings = {'user': user}
-        return render(request, 'ShowUser.html', usersettings)
+        return render(request, 'user.html', usersettings)
     else:
         return render(request, 'index.html')

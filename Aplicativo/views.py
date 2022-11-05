@@ -85,7 +85,7 @@ def createAtualizacao(request):
         form.save()
         return redirect("createNecessitado")
     listagem = {'form_atualizacao': form, 'request': list}
-    return render(request, "atualizacao.html", listagem)
+    return render(request, "ShowAtualizacao.html", listagem)
 
 @login_required(login_url="/login")
 def updateAtualizacao(request, id_atualizacao):
@@ -96,7 +96,7 @@ def updateAtualizacao(request, id_atualizacao):
         form.save()
         return redirect("createNecessitado")
     listagem = {'form_atualizacao': form, 'Atualizacao': Atualizacao}
-    return render(request, "atualizacao.html", listagem)
+    return render(request, "ShowAtualizacao.html", listagem)
 
 @login_required(login_url="/login")
 def deleteAtualizacao(request, id_atualizacao):
@@ -135,21 +135,20 @@ def createTimeline(request, id_necessitado):
 
 @login_required(login_url="/login")
 def updateTimeline(request, id_necessitado, id_atualizacao):
-    listNumber = int(id_atualizacao)-1
     Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
-    Atualizacao = models.Atualizacao.objects.filter(att_nec_id=Necessitado)[listNumber]
+    Atualizacao = models.Atualizacao.objects.get(att_id=id_atualizacao, att_nec_id=Necessitado)
     form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
     if form.is_valid():
         form.save()
         return redirect("createNecessitado")
-    listagem = {'form_atualizacao': form, 'atualizacao_chave': Atualizacao}
+    Atualizacoes = models.Atualizacao.objects.filter(att_nec_id=id_necessitado)
+    listagem = {'form_atualizacao': form, 'atualizacao_chave': Atualizacoes, 'atualizacao': Atualizacao, 'necessitado_chave': Necessitado}
     return render(request, "ShowAtualizacao.html", listagem)
 
 @login_required(login_url="/login")
 def deleteTimeline(request, id_necessitado, id_atualizacao):
-    listNumber = int(id_atualizacao)-1
     Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
-    Atualizacao = models.Atualizacao.objects.filter(att_nec_id=Necessitado)[listNumber]
+    Atualizacao = models.Atualizacao.objects.get(att_id=id_atualizacao, att_nec_id=Necessitado)
     Atualizacao.delete()
     return redirect("createNecessitado")
 

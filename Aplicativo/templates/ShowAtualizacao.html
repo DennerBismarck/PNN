@@ -4,143 +4,100 @@
 {% block content %}
 
 {% if atualizacao_chave %}
-<div class="container-fluid row px-5 py-4">
-    <div class="container-fluid px-4">
-        <h2 class="mt-4">Tabela de Atualizações</h2>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'createNecessitado' %}">Necessitados</a></li>
-            <li class="breadcrumb-item active">{{ necessitado_chave }}</li>
-        </ol>
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                Atualizações realizadas
-            </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th scope="row">&nbsp;&nbsp;&nbsp;Data&nbsp;&nbsp;&nbsp;</th>
-                            <th scope="row">Necessitado</th>
-                            <th scope="row">Usuário</th>
-                            <th scope="row">Nome</th>
-                            <th scope="row">Idade</th>
-                            <th scope="row">Logradouro</th>
-                            <th scope="row">Cpf</th>
-                            <th scope="row">Situação</th>
-                            <th scope="row">Profissão</th>
-                            <th scope="row">Gênero</th>
-                            <th scope="row">Cidade</th> 
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th scope="row">&nbsp;&nbsp;&nbsp;Data&nbsp;&nbsp;&nbsp;</th>
-                            <th scope="row">Necessitado</th>
-                            <th scope="row">Usuário</th>
-                            <th scope="row">Nome</th>
-                            <th scope="row">Idade</th>
-                            <th scope="row">Logradouro</th>
-                            <th scope="row">Cpf</th>
-                            <th scope="row">Situação</th>
-                            <th scope="row">Profissão</th>
-                            <th scope="row">Gênero</th>
-                            <th scope="row">Cidade</th> 
-                        </tr>
-                    </tfoot>
-                    <tbody>
+<div class="container-fluid px-md-5 py-md-4">
+    <div class="row ">
+        <h2 class="mt-4 text-center mb-4">Atualizações de {{ necessitado_chave.nec_nome }}</h2>
+        <div class="container">                      
+            <div class="row">
+                <div class="col">
+                    <div class="timeline-steps aos-init aos-animate" data-aos="fade-up">
                         {% for atualizacao in atualizacao_chave %}
-                        <tr> 
-                            <td>
-                                {{ atualizacao.att_date|date:"d-m-Y"}}<br>{{ atualizacao.att_date|time:"H:i:s"}}
-                            </td>
-                            <td>
-                                {{atualizacao.att_nec_id}}
-                            </td>
-                            <td>
-                                {{atualizacao.att_usu_id}}
-                            </td>
-                            <td>
-                                {{atualizacao.att_nec_nome}}
-                            </td>
-                            <td>
-                                {{atualizacao.att_nec_idade}}
-                            </td>
-                            <td>
-                                {{atualizacao.att_nec_logradouro}}
-                            </td>
-                            <td>
-                                {{atualizacao.att_nec_cpf}}
-                            </td>
-                            <td>
-                                {{atualizacao.att_nec_sit_id}} 
-                            </td>
-                            <td>
-                                {{atualizacao.att_nec_pro_id}} 
-                            </td>
-                            <td>
-                                {{atualizacao.att_nec_gen_id}}
-                            </td>
-                            <td>
-                                {{atualizacao.att_nec_cid_id}}
-                            </td>
-                        </tr>
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2003">
+                                <a class="inner-circle" href="/necessitado/{{necessitado_chave.nec_id}}/{{atualizacao.att_id}}"></a>
+                                <p class="h6 mt-3 mb-1">{{ atualizacao.att_date|date:"d-m-Y"}} às {{ atualizacao.att_date|time:"H:i"}}</p>
+                                <p class="h6 text-muted mb-0 mb-lg-0">{{ atualizacao.att_nec_nome}}</p>
+                            </div>
+                        </div>
                         {% endfor %}
-                    </tbody>
-                </table>
+                        <div class="timeline-step">
+                            <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2003">
+                                <a class="inner-circle" href="{% url 'createAtualizacao' necessitado_chave.nec_id %}"></a>
+                                <p class="h6 mt-3 mb-1">Criar Nova Atualiazação?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            {% if atualizacao %}
+            <div class="row">
+                <div class="col">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Atualizações realizadas até então
+                        </div>
+                        
+                    <div class="card-body">
+                        <div class="mb-3">
+                            Nome
+                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_nome  }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            Idade
+                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_idade  }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            Logradouro
+                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_logradouro  }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            CPF
+                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_cpf  }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            Situação
+                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_sit_id  }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            Profissão
+                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_pro_id  }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            Gênero
+                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_gen_id  }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            Cidade
+                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_cid_id  }}" disabled>
+                        </div>
+                    </div>
+                    </div>    
+                </div>
+            </div>
+            {% else %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table me-1"></i>
+                    Registrar Atualização
+                </div>
+                
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% for fields in form_necessitado %}
+                        <div class="mb-3">
+                            {{ fields.label }}
+                            {{ fields }}
+                        </div>
+                        {% endfor %}
+                        <button class="btn btn-primary" type="submit">Enviar</button>
+                    </form>    
+                </div>
+            </div>   
+            {% endif %}
         </div>
     </div>
-
-    {% endif %}
-
-    <div class="container-fluid px-4">
-        <h2 class="mt-4">
-            {% if atualizacao_chave|length > 1 %}
-            Atualizar Necessitado
-            {% else %}
-            Atualizar {{ necessitado_chave }}
-            {% endif %}
-        </h2>
-        {% if not atualizacao_chave|length > 1 %}
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="{% url 'main' %}">Inicio</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'createNecessitado' %}">Necessitado</a></li>
-            <li class="breadcrumb-item">{{ necessitado_chave }}</li>
-        </ol>
-        {% endif %}
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                {% if atualizacao_chave|length > 1 %}
-                Registrar Atualização
-                {% else %}
-                Cartão de Edição
-                {% endif %}
-                
-            </div>
-            
-            <div class="card-body">
-                <form method="POST">
-                    {% csrf_token %}
-                    {% for fields in form_necessitado %}
-                    <div class="mb-3">
-                        {{ fields.label }}
-                        {{ fields }}
-                    </div>
-                    {% endfor %}
-                    <button class="btn btn-primary" type="submit">Enviar</button>
-                </form>    
-            </div>
-        </div>    
-    </div>
 </div>
-
-{% endblock %}
-
-{% block scripts %}
-<script type="text/javascript">
-    $("#telefone, #celular").mask("(00) 0000-0000");
-</script>
+{% endif %}
 {% endblock %}
