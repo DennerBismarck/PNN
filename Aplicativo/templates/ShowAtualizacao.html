@@ -38,40 +38,65 @@
                             Atualizações realizadas até então
                         </div>
                         
-                    <div class="card-body">
-                        <div class="mb-3">
-                            Nome
-                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_nome  }}" disabled>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                Nome
+                                <input type="text" class="form-control" value="{{ atualizacao.att_nec_nome  }}" disabled>
+                            </div>
+                            <div class="mb-3">
+                                Idade
+                                <input type="text" class="form-control" value="{{ atualizacao.att_nec_idade  }}" disabled>
+                            </div>
+                            <div class="mb-3">
+                                Logradouro
+                                <input type="text" class="form-control" value="{{ atualizacao.att_nec_logradouro  }}" disabled>
+                            </div>
+                            <div class="mb-3">
+                                CPF
+                                <input type="text" class="form-control" value="{{ atualizacao.att_nec_cpf  }}" disabled>
+                            </div>
+                            <div class="mb-3">
+                                Situação
+                                <input type="text" class="form-control" value="{{ atualizacao.att_nec_sit_id  }}" disabled>
+                            </div>
+                            <div class="mb-3">
+                                Profissão
+                                <input type="text" class="form-control" value="{{ atualizacao.att_nec_pro_id  }}" disabled>
+                            </div>
+                            <div class="mb-3">
+                                Gênero
+                                <input type="text" class="form-control" value="{{ atualizacao.att_nec_gen_id  }}" disabled>
+                            </div>
+                            <div class="mb-3">
+                                Cidade
+                                <input type="text" class="form-control" value="{{ atualizacao.att_nec_cid_id  }}" disabled>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            Idade
-                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_idade  }}" disabled>
+                    </div>    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Recomendação de ONGs
                         </div>
-                        <div class="mb-3">
-                            Logradouro
-                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_logradouro  }}" disabled>
+                        
+                        <div class="card-body">
+                            {% for ong in ongs_chave %}
+                            {% if ong.ong_cid_id == atualizacao.att_nec_cid_id %}
+                            <div class="mb-3">
+                                ONG: <a href="{% url 'updateONG' ong.ong_id %}"> {{ ong.ong_nome }} </a>
+                            </div>
+                            <div class="mb-3">
+                            {% endif %}
+                            {% endfor %}
+                            <div class="mb-3">
+                                Não encontramos mais opções... Mas você pode registrar caso conheça alguma!
+                                <a href="{% url 'createONG' %}">Registrar nova ONG</a>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            CPF
-                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_cpf  }}" disabled>
-                        </div>
-                        <div class="mb-3">
-                            Situação
-                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_sit_id  }}" disabled>
-                        </div>
-                        <div class="mb-3">
-                            Profissão
-                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_pro_id  }}" disabled>
-                        </div>
-                        <div class="mb-3">
-                            Gênero
-                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_gen_id  }}" disabled>
-                        </div>
-                        <div class="mb-3">
-                            Cidade
-                            <input type="text" class="form-control" value="{{ atualizacao.att_nec_cid_id  }}" disabled>
-                        </div>
-                    </div>
                     </div>    
                 </div>
             </div>
@@ -95,6 +120,32 @@
                     </form>    
                 </div>
             </div>   
+
+            <div class="row">
+                <div class="col">
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Recomendação de ONGs
+                        </div>
+                        
+                        <div class="card-body">
+                            {% for ong in ongs_chave %}
+                            {% if ong.ong_cid_id.cid_id == form_necessitado.nec_cid_id.value %}
+                            <div class="mb-3">
+                                ONG: <a href="{% url 'updateONG' ong.ong_id %}"> {{ ong.ong_nome }} </a>
+                            </div>
+                            <div class="mb-3">
+                            {% endif %}
+                            {% endfor %}
+                            <div class="mb-3">
+                                Não encontramos mais opções... Mas você pode registrar caso conheça alguma!
+                                <a href="{% url 'createONG' %}">Registrar nova ONG</a>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
             {% endif %}
         </div>
     </div>

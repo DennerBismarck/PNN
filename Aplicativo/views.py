@@ -1,6 +1,7 @@
 from django.shortcuts               import render, redirect
 from Aplicativo                     import forms, models
 from Usuario.models                 import Usuario
+from ONG.models                     import ONG
 from Localidade.views               import requestDBEstado, requestDBCidade
 from Localidade                     import models as modelsL
 from django.contrib.auth.decorators import login_required
@@ -110,9 +111,11 @@ def deleteAtualizacao(request, id_atualizacao):
 
 @login_required(login_url="/login")
 def createTimeline(request, id_necessitado):
-    necessitado = models.Necessitado.objects.get(pk=id_necessitado)
-    form = forms.NecessitadoForm(request.POST or None, instance=necessitado)
-    atualizacoes = models.Atualizacao.objects.filter(att_nec_id=necessitado)
+    necessitado     = models.Necessitado.objects.get(pk=id_necessitado)
+    form            = forms.NecessitadoForm(request.POST or None, instance=necessitado)
+    atualizacoes    = models.Atualizacao.objects.filter(att_nec_id=necessitado)
+    ongs            = ONG.objects.all()
+
     if form.is_valid():
         user = Usuario.objects.filter(usu_nome=user_is_authenticated(request)).first()
         atualizacao = models.Atualizacao(
@@ -130,19 +133,32 @@ def createTimeline(request, id_necessitado):
         form.save()
         atualizacao.save()
         return redirect("createNecessitado")
-    listagem = {'form_necessitado': form, 'necessitado_chave': necessitado, 'atualizacao_chave': atualizacoes}
+    listagem = {
+        'form_necessitado': form,
+        'necessitado_chave': necessitado,
+        'atualizacao_chave': atualizacoes,
+        'ongs_chave': ongs,
+    }
     return render(request, "ShowAtualizacao.html", listagem)
 
 @login_required(login_url="/login")
 def updateTimeline(request, id_necessitado, id_atualizacao):
     Necessitado = models.Necessitado.objects.get(pk=id_necessitado)
     Atualizacao = models.Atualizacao.objects.get(att_id=id_atualizacao, att_nec_id=Necessitado)
-    form = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
+    form        = forms.AtualizacaoForm(request.POST or None, instance=Atualizacao)
+    ongs        = ONG.objects.all()
+
     if form.is_valid():
         form.save()
         return redirect("createNecessitado")
     Atualizacoes = models.Atualizacao.objects.filter(att_nec_id=id_necessitado)
-    listagem = {'form_atualizacao': form, 'atualizacao_chave': Atualizacoes, 'atualizacao': Atualizacao, 'necessitado_chave': Necessitado}
+    listagem = {
+        'form_atualizacao': form,
+        'atualizacao_chave': Atualizacoes,
+        'atualizacao': Atualizacao,
+        'necessitado_chave': Necessitado,
+        'ongs_chave': ongs
+    }
     return render(request, "ShowAtualizacao.html", listagem)
 
 @login_required(login_url="/login")

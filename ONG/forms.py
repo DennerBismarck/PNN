@@ -34,4 +34,4 @@ class TelONGForm(ModelForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['ton_telefone'].widget.attrs.update(        {'class': 'form-control'})
+        self.fields['ton_telefone'].widget.attrs.update(        {'class': 'form-control format_field_tel'})
