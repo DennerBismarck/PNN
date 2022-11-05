@@ -39,6 +39,14 @@ urlpatterns = [
     path('cidade', viewsLocalidade.createCidade, name="createCidade"),
     path('cidade/<int:id_cidade>', viewsLocalidade.updateCidade, name="updateCidade"),
     path('cidade/<int:id_cidade>/delete', viewsLocalidade.deleteCidade, name="deleteCidade"),
+    # CRUD de TELEFONE DAS ONGS
+    path('ONG/<int:id_ONG>/tel', viewsONG.createTelefone, name="createTelefone"),
+    path('ONG/<int:id_ONG>/tel/<int:id_telefone>', viewsONG.updateTelefone, name="updateTelefone"),
+    path('ONG/<int:id_ONG>/tel/<int:id_telefone>/delete', viewsONG.deleteTelefone, name="deleteTelefone"),
+    # CRUD de email das ongs
+    path('ONG/<int:id_ONG>/email', viewsONG.createEmail, name="createEmail"),
+    path('ONG/<int:id_ONG>/email/<int:id_email>', viewsONG.updateEmail, name="updateEmail"),
+    path('ONG/<int:id_ONG>/email/<int:id_email>/delete', viewsONG.deleteEmail, name="deleteEmail"),
 ]
 
 # if settings.DEBUG:

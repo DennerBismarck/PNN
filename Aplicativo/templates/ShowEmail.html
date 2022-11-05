@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block title %}<title>Email</title>{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid row px-5 py-4">
+    <div class="container-fluid px-4">
+        <div class="mb-3">
+            <form method="POST">
+                {% csrf_token %}
+                {% for fields in form_Email %}
+                <div class="mb-3">
+                    {{ fields.label }}
+                    {{ fields }}
+                </div>
+                {% endfor %}
+                <button class="btn btn-primary" type="submit">Enviar</button>
+            </form>    
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

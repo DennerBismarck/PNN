@@ -23,6 +23,8 @@
                             <th scope="row">ONGs</th>
                             <th scope="row">Site</th>
                             <th scope="row">Logradouro</th>
+                            <th scope="row">Telefones</th>
+                            <th scope="row">E-mail</th>
                             <th scope="row">Cidade</th>
                         </tr>
                     </thead>
@@ -31,6 +33,8 @@
                             <th scope="row">ONGs</th>
                             <th scope="row">Site</th>
                             <th scope="row">Logradouro</th>
+                            <th scope="row">Telefones</th>
+                            <th scope="row">E-mail</th>
                             <th scope="row">Cidade</th>
                         </tr>
                     </tfoot>
@@ -51,11 +55,22 @@
                                 {{ONG.ong_logradouro}}
                             </td>
                             <td>
-                                {{ONG.ong_cid_id}}
+                                {% for tel in ONG_tel_chave %}
+                                    {% if tel.ton_ong_id == ONG %}
+                                        {{ tel }}<br>
+                                    {% endif %}
+                                {% endfor %}
                             </td>
                             <td>
-                                {{ONG_Tel}}
+                                {% for email in ONG_email_chave %}
+                                    {% if email.emo_ong_id == ONG %}
+                                        {{ email.emo_email }}<br>
+                                    {% endif %}
+                                {% endfor %}
                             </td>
+                            <td>
+                                {{ONG.ong_cid_id}}
+                            </td>    
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -65,10 +80,10 @@
     </div>
     {% endif %}
 
-    <div class="container-fluid px-4">
+    <div class="container-fluid px-5 py-3">
         <h2 class="mt-4">
-            {% if ONG_chave|length > 1 %}
-            Registrar uma Nova ONGs
+            {% if ONG_chave|length >= 1 %}
+            Registrar uma Nova ONG
             {% else %}
             Editar {{ form_ONG.sit_ONG.value }}
             {% endif %}
@@ -99,6 +114,79 @@
                         {{ fields }}
                     </div>
                     {% endfor %}
+
+                    {% if not ONG %}
+                    <div class="mb-3">
+                        {{ form_tel_ONG }}
+                    </div>
+                    {% else %}
+                    <div class="mb-3">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="row">Telefones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for tel in ONG_tel_chave %}
+                                {% if tel.ton_ong_id == ONG %}
+                                <tr> 
+                                    <td>
+                                        <a href="{% url 'updateTelefone' ONG.ong_id tel.ton_id %}">
+                                            {{tel}}
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'createTelefone' ONG.ong_id%}">
+                                            Criar Telefone
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+
+                    {% if not ONG %}
+                    <div class="mb-3">
+                        {{ form_email_ONG }}
+                    </div>
+                    {% else %}
+                    <div class="mb-3">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Emails</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for email in ONG_email_chave %}
+                                {% if email.emo_ong_id == ONG %}
+                                <tr> 
+                                    <td>
+                                        <a href="{% url 'updateEmail' ONG.ong_id email.emo_id %}">
+                                            {{email}}
+                                        </a>
+                                    </td>
+                                    
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                                <tr>
+                                    <td>
+                                        <a href="{% url 'createEmail' ONG.ong_id%}">
+                                            Criar Email
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
                     <button class="btn btn-primary" type="submit">Enviar</button>
                 </form>    
             </div>
