@@ -1,7 +1,7 @@
 from django.shortcuts               import render, redirect
 from Localidade                     import models, forms
 from django.contrib.auth.decorators import login_required
-import requests, folium
+import requests, folium, json
 
 # ==================================================================
 # API e REQUESTS para DATABASE de CIDADE e ESTADO
@@ -73,6 +73,7 @@ def map(request):
     m = folium.Map(location=[-15.77972, -47.92972], zoom_start=4.1)
     folium.Choropleth(
         geo_data=state_geo,
+        key_on='feature.properties.1.AC',
         name="choropleth",
         fill_color="green",
         fill_opacity=0.7,

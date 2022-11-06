@@ -10,7 +10,16 @@ urlpatterns = [
     path('login/', userView.login, name="login"),
     path('cadastro/', userView.cadastro, name="cadastro"),
     path('logout/', userView.logout, name="logout"),
+    # Usuário
     path('user/', userView.user , name="user"),
+    # Crud de Usuário TELEFONE
+    path('user/tel', userView.createTelefone , name="createUserTel"),
+    path('user/tel/<int:id_telefone>', userView.updateTelefone , name="updateUserTel"),
+    path('user/tel/<int:id_telefone>/delete', userView.deleteTelefone , name="deleteUserTel"),
+    # Crud de Usuário EMAIL
+    path('user/email', userView.createEmail , name="createUserEmail"),
+    path('user/email/<int:id_email>', userView.updateEmail , name="updateUserEmail"),
+    path('user/email/<int:id_email>/delete', userView.deleteEmail , name="deleteUserEmail"),
     # Mapeamento
     path('map/', viewsLocalidade.map, name="map"),
     # Admin e Index #
@@ -31,14 +40,14 @@ urlpatterns = [
     path('Situacao', viewsAplicativo.createSituacao, name="createSituacao"),
     path('Situacao/<int:id_Situacao>', viewsAplicativo.updateSituacao, name="updateSituacao"),
     path('Situacao/<int:id_Situacao>/delete', viewsAplicativo.deleteSituacao, name="deleteSituacao"),
-    # CRUD de ONGs
-    path('ONG', viewsONG.createONG, name="createONG"),
-    path('ONG/<int:id_ONG>', viewsONG.updateONG, name="updateONG"),
-    path('ONG/<int:id_ONG>/delete', viewsONG.deleteONG, name="deleteONG"),
     # CRUD de CIDADES
     path('cidade', viewsLocalidade.createCidade, name="createCidade"),
     path('cidade/<int:id_cidade>', viewsLocalidade.updateCidade, name="updateCidade"),
     path('cidade/<int:id_cidade>/delete', viewsLocalidade.deleteCidade, name="deleteCidade"),
+    # CRUD de ONGs
+    path('ONG', viewsONG.createONG, name="createONG"),
+    path('ONG/<int:id_ONG>', viewsONG.updateONG, name="updateONG"),
+    path('ONG/<int:id_ONG>/delete', viewsONG.deleteONG, name="deleteONG"),
     # CRUD de TELEFONE DAS ONGS
     path('ONG/<int:id_ONG>/tel', viewsONG.createTelefone, name="createTelefone"),
     path('ONG/<int:id_ONG>/tel/<int:id_telefone>', viewsONG.updateTelefone, name="updateTelefone"),

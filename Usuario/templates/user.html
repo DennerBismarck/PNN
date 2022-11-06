@@ -5,7 +5,87 @@
 
 <div class="container-fluid row px-5 py-4">
     <div class="container-fluid px-4">
-        {% comment %} <h1>{{ user }}</h1> {% endcomment %}
+        <div class="row">
+            <div class="col">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Informações do Usuário
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="mb-3">
+                            Nome
+                            <input type="text" class="form-control" value="{{ user }}" disabled>
+                        </div>
+                        <div class="mb-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="row">Telefones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for telefone in user_tel %}
+                                    {% if telefone.tel_usu_id == user %}
+                                    <tr> 
+                                        <td>
+                                            <a href="{% url 'updateUserTel' telefone.tel_id %}">
+                                                {{ telefone }}
+                                            </a>
+                                        </td>
+                                    <tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                        <td>
+                                            <a href="{% url 'createUserTel' %}">
+                                                Criar Telefone
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mb-3">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="row">Emails</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for email in user_email %}
+                                    {% if email.ema_usu_id == user %}
+                                    <tr> 
+                                        <td>
+                                            <a href="{% url 'updateUserEmail' email.ema_id %}">
+                                                {{ email }}
+                                            </a>
+                                        </td>
+                                    <tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                        <td>
+                                            <a href="{% url 'createUserEmail' %}">
+                                                Criar Email
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mb-3">
+                            Tag de Staff
+                            {% if user.is_staff %}
+                            <input type="text" class="form-control" value="STAFF" disabled>
+                            {% else %}
+                            <input type="text" class="form-control" value="USUÁRIO" disabled>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
     </div>
 </div>
 

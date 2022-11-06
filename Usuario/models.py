@@ -51,7 +51,8 @@ class Usuario(AbstractBaseUser):
         verbose_name_plural = "Usuários"
 
 class TEL_DOS_USU(models.Model):
-    tel_telefone    = models.CharField(max_length=15, primary_key=True)
+    tel_id          = models.AutoField(primary_key=True)
+    tel_telefone    = models.CharField(verbose_name="Telefone",max_length=15)
     tel_usu_id      = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
@@ -63,8 +64,9 @@ class TEL_DOS_USU(models.Model):
         unique_together = (("tel_telefone", "tel_usu_id"),)
 
 class EMAIL_DOS_USU(models.Model):
-    ema_email    = models.CharField(max_length=40, primary_key=True)
-    ema_usu_id   = models.ForeignKey(Usuario, on_delete=models.CASCADE, default=1)
+    ema_id       = models.AutoField(primary_key=True)
+    ema_email    = models.CharField(verbose_name="Email",max_length=40)
+    ema_usu_id   = models.ForeignKey(Usuario, verbose_name="Usuário",on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.ema_email
