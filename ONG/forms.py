@@ -16,7 +16,7 @@ class ONGForm(ModelForm):
         self.fields['ong_nome'].widget.attrs.update(        {'class': 'form-control'})
         self.fields['ong_site'].widget.attrs.update(        {'class': 'form-control'})
         self.fields['ong_logradouro'].widget.attrs.update(  {'class': 'form-control'})
-        self.fields['ong_cid_id'].widget.attrs.update(      {'class': 'form-control'})
+        self.fields['ong_cid_id'].widget.attrs.update(      {'class': 'form-control select_id'})
 
 class EmailONGForm(ModelForm):
     class Meta:

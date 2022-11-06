@@ -21,10 +21,10 @@ class NecessitadoForm(ModelForm):
         self.fields['nec_idade'].widget.attrs.update(       {'class': 'form-control'})
         self.fields['nec_logradouro'].widget.attrs.update(  {'class': 'form-control'})
         self.fields['nec_cpf'].widget.attrs.update(         {'class': 'form-control format_field_cpf'})
-        self.fields['nec_sit_id'].widget.attrs.update(      {'class': 'form-control'})
-        self.fields['nec_pro_id'].widget.attrs.update(      {'class': 'form-control'})
-        self.fields['nec_gen_id'].widget.attrs.update(      {'class': 'form-control'})
-        self.fields['nec_cid_id'].widget.attrs.update(      {'class': 'form-control'})
+        self.fields['nec_sit_id'].widget.attrs.update(      {'class': 'form-control select_id'})
+        self.fields['nec_pro_id'].widget.attrs.update(      {'class': 'form-control select_id'})
+        self.fields['nec_gen_id'].widget.attrs.update(      {'class': 'form-control select_id'})
+        self.fields['nec_cid_id'].widget.attrs.update(      {'class': 'form-control select_id'})
 
 class AtualizacaoForm(ModelForm):
     class Meta:
@@ -50,10 +50,10 @@ class AtualizacaoForm(ModelForm):
         self.fields['att_nec_idade'].widget.attrs.update(       {'class': 'form-control'})
         self.fields['att_nec_logradouro'].widget.attrs.update(  {'class': 'form-control'})
         self.fields['att_nec_cpf'].widget.attrs.update(         {'class': 'form-control'})
-        self.fields['att_nec_sit_id'].widget.attrs.update(      {'class': 'form-control'})
-        self.fields['att_nec_pro_id'].widget.attrs.update(      {'class': 'form-control'})
-        self.fields['att_nec_gen_id'].widget.attrs.update(      {'class': 'form-control'})
-        self.fields['att_nec_cid_id'].widget.attrs.update(      {'class': 'form-control'})
+        self.fields['att_nec_sit_id'].widget.attrs.update(      {'class': 'form-control select_id'})
+        self.fields['att_nec_pro_id'].widget.attrs.update(      {'class': 'form-control select_id'})
+        self.fields['att_nec_gen_id'].widget.attrs.update(      {'class': 'form-control select_id'})
+        self.fields['att_nec_cid_id'].widget.attrs.update(      {'class': 'form-control select_id'})
 
 class SituacaoForm(ModelForm):
     class Meta:

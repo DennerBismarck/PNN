@@ -12,4 +12,4 @@ class CidadeForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['cid_cidade'].widget.attrs.update({'class': 'form-label'})
-        self.fields['cid_est_id'].widget.attrs.update({'class': 'form-label'})
+        self.fields['cid_est_id'].widget.attrs.update({'class': 'form-label select_id'})
