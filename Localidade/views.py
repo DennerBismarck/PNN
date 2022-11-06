@@ -17,20 +17,18 @@ def requestDBEstado():
     rlist = requestAPI()
     for municipio in rlist:
         estado = municipio['municipio']['regiao-imediata']['regiao-intermediaria']['UF']['nome']
-        EstadoList = models.Estado(est_estado=estado)
-        estadoVerify = models.Estado.objects.filter(est_estado=estado)
-        if (set(estadoVerify) == set(models.Estado.objects.none())):
-            EstadoList.save()
+        db_estado = models.Estado.objects.filter(est_estado=estado)
+        if not db_estado:
+            models.Estado.objects.create(est_estado=estado)
 
 def requestDBCidade():
     rlist = requestAPI()
     for municipio in rlist:
         estado = municipio['municipio']['regiao-imediata']['regiao-intermediaria']['UF']['nome']
         cidade = municipio['municipio']['nome']
-        CidadeList = models.Cidade(cid_cidade=cidade, cid_est_id=models.Estado.objects.get(est_estado=estado))
-        cidadeVerify = models.Cidade.objects.filter(cid_cidade=cidade)
-        if (set(cidadeVerify) == set(models.Cidade.objects.none())):
-            CidadeList.save()
+        db_cidade = models.Cidade.objects.filter(cid_cidade=cidade)
+        if not db_cidade:
+            models.Cidade.objects.create(cid_cidade=cidade, cid_est_id=models.Estado.objects.get(est_estado=estado))
 
 # ===================================================================
 # CRUD de CIDADE

@@ -5,6 +5,7 @@ from Localidade import views as viewsLocalidade
 from ONG        import views as viewsONG
 from Usuario    import views as userView
 
+
 urlpatterns = [
     # Tela Login e Cadastro
     path('login/', userView.login, name="login"),
@@ -24,7 +25,8 @@ urlpatterns = [
     path('map/', viewsLocalidade.map, name="map"),
     # Admin e Index #
     path('admin/', admin.site.urls),
-    path('', viewsAplicativo.index, name='main'),
+    path('index/', viewsAplicativo.index, name='main'),
+    path('', viewsAplicativo.requestDB, name='db'),
     # CRUD de NECESSITADOS
     path('necessitado', viewsAplicativo.createNecessitado, name="createNecessitado"),
     path('necessitado/<int:id_necessitado>/delete', viewsAplicativo.deleteNecessitado, name="deleteNecessitado"),

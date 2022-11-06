@@ -1,10 +1,12 @@
 from django.shortcuts   import render, redirect
 from ONG                import forms, models
+from django.contrib.auth.decorators import login_required
 
 # ===================================================================
 # CRUD de ONG
 # ===================================================================
 
+@login_required(login_url="/login")
 def createONG(request):
     form_ONG        = forms.ONGForm(request.POST or None)
     form_tel_ONG    = forms.TelONGForm(request.POST or None)
@@ -37,6 +39,7 @@ def createONG(request):
     }
     return render(request, "ShowONG.html", listagem)
 
+@login_required(login_url="/login")
 def updateONG(request, id_ONG):
     ONG         = models.ONG.objects.get(pk=id_ONG)
     ONGs_tel    = models.TEL_DAS_ONGS.objects.all()
@@ -56,6 +59,7 @@ def updateONG(request, id_ONG):
     }
     return render(request, "ShowONG.html", listagem)
 
+@login_required(login_url="/login")
 def deleteONG(request, id_ONG):
     ONG         = models.ONG.objects.get(pk=id_ONG)
     ONG_tel     = models.TEL_DAS_ONGS.objects.get(ton_ong_id=id_ONG)
@@ -70,6 +74,7 @@ def deleteONG(request, id_ONG):
 # CRUD de telefone
 # ===================================================================
 
+@login_required(login_url="/login")
 def createTelefone(request, id_ONG):
     ONG = models.ONG.objects.get(pk=id_ONG)
     form = forms.TelONGForm(request.POST or None)
@@ -82,6 +87,7 @@ def createTelefone(request, id_ONG):
     listagem = {'form_Telefone': form, 'Telefone_chave': Telefone}
     return render(request, "ShowTelefone.html", listagem)
 
+@login_required(login_url="/login")
 def updateTelefone(request, id_telefone, id_ONG):
     Telefone = models.TEL_DAS_ONGS.objects.get(pk=id_telefone)
     form = forms.TelONGForm(request.POST or None, instance=Telefone)
@@ -91,6 +97,7 @@ def updateTelefone(request, id_telefone, id_ONG):
     listagem = {'form_Telefone': form}
     return render(request, "ShowTelefone.html", listagem)
 
+@login_required(login_url="/login")
 def deleteTelefone(request, id_telefone, id_ONG):
     Telefone = models.TEL_DAS_ONGS.objects.get(pk=id_telefone)
     Telefone.delete()
@@ -100,6 +107,7 @@ def deleteTelefone(request, id_telefone, id_ONG):
 # CRUD de email
 # ===================================================================
 
+@login_required(login_url="/login")
 def createEmail(request, id_ONG):
     ONG = models.ONG.objects.get(pk=id_ONG)
     form = forms.EmailONGForm(request.POST or None)
@@ -112,7 +120,7 @@ def createEmail(request, id_ONG):
     listagem = {'form_Email': form, 'email_chave': Email}
     return render(request, "ShowEmail.html", listagem)
 
-
+@login_required(login_url="/login")
 def updateEmail(request, id_email, id_ONG):
     Email = models.EMAIL_DAS_ONGS.objects.get(pk=id_email)
     form = forms.EmailONGForm(request.POST or None, instance=Email)
@@ -122,6 +130,7 @@ def updateEmail(request, id_email, id_ONG):
     listagem = {'form_Email': form}
     return render(request, "ShowEmail.html", listagem)
 
+@login_required(login_url="/login")
 def deleteEmail(request, id_email, id_ONG):
     Email = models.EMAIL_DAS_ONGS.objects.get(pk=id_email)
     Email.delete()

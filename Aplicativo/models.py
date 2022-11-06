@@ -15,6 +15,7 @@ class Profissao(models.Model):
         return self.pro_profissao
 
     class Meta:
+        ordering            = ['pro_profissao']
         verbose_name        = "Profissão"
         verbose_name_plural = "Profissões"
 

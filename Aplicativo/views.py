@@ -1,28 +1,34 @@
 from django.shortcuts               import render, redirect
 from Aplicativo                     import forms, models
 from Usuario.models                 import Usuario
+from Usuario.views                  import user_is_authenticated
 from ONG.models                     import ONG
 from Localidade.views               import requestDBEstado, requestDBCidade
 from Localidade                     import models as modelsL
 from django.contrib.auth.decorators import login_required
-
-def user_is_authenticated(request):
-    username = None
-    if request.user.is_authenticated:
-        username = request.user.usu_nome
-    return username
+import requests, folium, json
 
 # ==================================================================
 # INDEX
 # ==================================================================
 
-def index(request):
-    # Verificando se os ESTADOS e CIDADES já foram ADICIONADOS ao DB
-    if (set(modelsL.Estado.objects.filter(est_id=1)) == set(modelsL.Estado.objects.none())):
-        requestDBEstado()
-    if (set(modelsL.Cidade.objects.filter(cid_id=1)) == set(modelsL.Cidade.objects.none())):
-        requestDBCidade()
+def requestAPI():
+    url = 'https://raw.githubusercontent.com/Isaiasdd/utils/master/profissoes.json'
+    r = requests.get(url)
+    rlist = r.json()
+    return rlist
 
+def requestDBProfissao():
+    rlist = requestAPI()
+    for profissao in rlist['profissoes']:
+        db_profissoes = models.Profissao.objects.filter(pro_profissao=profissao)
+        if not db_profissoes:
+            models.Profissao.objects.create(pro_profissao=profissao)
+
+def requestDB(request):
+    requestDBEstado()
+    requestDBCidade()
+    requestDBProfissao()
     # Criar primeiros GÊNEROS
     if not (models.Genero.objects.filter(gen_generos="Masculino").first()):
         model = models.Genero(gen_generos="Masculino")
@@ -34,6 +40,11 @@ def index(request):
         model = models.Genero(gen_generos="Outro")
         model.save()
 
+    return redirect('main')
+
+def index(request):
+    # Verificando se os ESTADOS e CIDADES já foram ADICIONADOS ao DB
+    
     necessitados = models.Necessitado.objects.all()
     usuarios     = models.Usuario.objects.all()
 
@@ -56,7 +67,8 @@ def createNecessitado(request):
         nec_nome = models.Necessitado.objects.filter(nec_nome=str(form["nec_nome"].value())).first()
         return createTimeline(request, nec_nome.nec_id)
     necessitados = models.Necessitado.objects.all()
-    listagem = {'form_necessitado': form, 'necessitados_chave': necessitados}
+    atualizacoes = models.Atualizacao.objects.all()
+    listagem = {'form_necessitado': form, 'necessitados_chave': necessitados, 'atualizacoes_chave': atualizacoes}
     return render(request, "ShowNecessitado.html", listagem)
 
 @login_required(login_url="/login")
