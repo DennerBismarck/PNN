@@ -115,25 +115,40 @@ def deleteTelefone(request, id_telefone):
 # CRUD de EMAIL dos Usuários
 # ===================================================================
 
+def email_verify(email_id):
+    email = models.EMAIL_DOS_USU.objects.filter(ema_email=email_id).first()
+    if email:
+        return False
+    else:
+        return True
+
 def createEmail(request):
     user = models.Usuario.objects.get(pk=user_is_authenticated(request).usu_id)
     form = forms.EmailUserForm(request.POST or None)
+    erro = ""
     if form.is_valid():
         user_email = form['ema_email'].value()
-        email = models.EMAIL_DOS_USU(ema_email=user_email, ema_usu_id=user)
-        email.save()
-        return redirect("main")
+        if email_verify(user_email):
+            email = models.EMAIL_DOS_USU(ema_email=user_email, ema_usu_id=user)
+            email.save()
+            return redirect("main")
+        else:
+            erro = "E-mail já cadastrado"
     Email = models.EMAIL_DOS_USU.objects.all()
-    listagem = {'form_Email': form, 'Email_chave': Email}
+    listagem = {'form_Email': form, 'Email_chave': Email, 'erro': erro}
     return render(request, "ShowEmail.html", listagem)
 
 def updateEmail(request, id_email):
     Email = models.EMAIL_DOS_USU.objects.get(pk=id_email)
     form = forms.EmailUserForm(request.POST or None, instance=Email)
+    erro = ""
     if form.is_valid():
-        form.save()
-        return redirect("main")
-    listagem = {'form_Email': form}
+        if email_verify(Email.ema_email):
+            form.save()
+            return redirect("main")
+        else:
+            erro = "E-mail já cadastrado"
+    listagem = {'form_Email': form, 'erro': erro}
     return render(request, "ShowEmail.html", listagem)
 
 def deleteEmail(request, id_email):
