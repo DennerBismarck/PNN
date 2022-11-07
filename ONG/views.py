@@ -1,5 +1,6 @@
 from django.shortcuts   import render, redirect
 from ONG                import forms, models
+from Usuario.views      import user_is_authenticated
 from django.contrib.auth.decorators import login_required
 
 # ===================================================================
@@ -30,6 +31,7 @@ def createONG(request):
     ONGs_email = models.EMAIL_DAS_ONGS.objects.all()
 
     listagem = {
+        'user': user_is_authenticated(request),
         'form_ONG': form_ONG,
         'form_tel_ONG': form_tel_ONG,
         'form_email_ONG': form_email_ONG, 

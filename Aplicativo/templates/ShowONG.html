@@ -42,7 +42,11 @@
                         {% for ONG in ONG_chave %}
                         <tr> 
                             <td>
-                                <a href="{% url 'updateONG' ONG.ong_id %}">
+                                <a href="
+                                {% if user.is_staff %}
+                                    {% url 'updateONG' ONG.ong_id %}
+                                {% endif %}
+                                ">
                                     {{ ONG.ong_nome }}
                                 </a>
                             </td> 
@@ -80,6 +84,8 @@
     </div>
     {% endif %}
 
+
+    {% if user.is_staff %}
     <div class="container-fluid px-5 py-3">
         <h2 class="mt-4">
             {% if ONG_chave|length >= 1 %}
@@ -192,5 +198,6 @@
             </div>
         </div>    
     </div>
+    {% endif %}
 </div>
 {% endblock %}

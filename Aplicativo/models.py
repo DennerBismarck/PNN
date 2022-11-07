@@ -1,7 +1,6 @@
 from django.db import models
 from Usuario.models import Usuario
 from Localidade.models import Cidade
-from django.core.validators import MaxLengthValidator
 
 # ===================================================================
 # Todos os Modelos Abaixo vão para a série de tabelas de NECESSITADOS!
