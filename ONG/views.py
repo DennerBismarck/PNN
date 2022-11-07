@@ -62,11 +62,17 @@ def updateONG(request, id_ONG):
 @login_required(login_url="/login")
 def deleteONG(request, id_ONG):
     ONG         = models.ONG.objects.get(pk=id_ONG)
-    ONG_tel     = models.TEL_DAS_ONGS.objects.get(ton_ong_id=id_ONG)
-    ONG_email   = models.EMAIL_DAS_ONGS.objects.get(emo_ong_id=id_ONG)
+    try:
+        ONG_tel     = models.TEL_DAS_ONGS.objects.get(ton_ong_id=id_ONG)
+        ONG_tel.delete()
+    except:
+        print('Não existente')
+    try:
+        ONG_email   = models.EMAIL_DAS_ONGS.objects.get(emo_ong_id=id_ONG)
+        ONG_email.delete()
+    except:
+        print('Não existente')
 
-    ONG_email.delete()
-    ONG_tel.delete()
     ONG.delete()
     return redirect("main")
 
