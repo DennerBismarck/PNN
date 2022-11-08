@@ -74,7 +74,7 @@ class Atualizacao(models.Model):
     att_nec_cid_id      = models.ForeignKey(Cidade, verbose_name="Cidade",on_delete=models.CASCADE, default=1)
 
     def __str__(self):
-        return "%s: Usuário %s atualizou %s às %s" % (self.att_id, self.att_usu_id, self.att_nec_id, self.att_date)
+        return "Usuário %s atualizou %s às %s" % (self.att_usu_id, self.att_nec_id, self.att_date)
 
     class Meta:
         verbose_name        = "Atualização"

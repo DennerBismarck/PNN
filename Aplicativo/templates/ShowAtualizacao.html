@@ -16,7 +16,7 @@
                             <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2003">
                                 <a class="inner-circle" href="/necessitado/{{necessitado_chave.nec_id}}/{{atualizacao.att_id}}"></a>
                                 <p class="h6 mt-3 mb-1">{{ atualizacao.att_date|date:"d-m-Y"}} às {{ atualizacao.att_date|time:"H:i"}}</p>
-                                <p class="h6 text-muted mb-0 mb-lg-0">{{ atualizacao.att_nec_nome}}</p>
+                                <p class="h6 text-muted mb-0 mb-lg-0">Atualizado por {{ atualizacao.att_usu_id}}</p>
                             </div>
                         </div>
                         {% endfor %}
