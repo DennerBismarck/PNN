@@ -25,8 +25,8 @@ urlpatterns = [
     path('map/', viewsLocalidade.map, name="map"),
     # Admin e Index #
     path('admin/', admin.site.urls),
-    path('index/', viewsAplicativo.index, name='main'),
-    path('', viewsAplicativo.requestDB, name='db'),
+    path('', viewsAplicativo.index, name='main'),
+    path('loaddb/', viewsAplicativo.requestDB, name='db'),
     # CRUD de NECESSITADOS
     path('necessitado', viewsAplicativo.createNecessitado, name="createNecessitado"),
     path('necessitado/<int:id_necessitado>/delete', viewsAplicativo.deleteNecessitado, name="deleteNecessitado"),
