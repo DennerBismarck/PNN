@@ -87,7 +87,7 @@
                             {% for ong in ongs_chave %}
                             {% if ong.ong_cid_id == atualizacao.att_nec_cid_id %}
                             <div class="mb-3">
-                                ONG: <a href="{% url 'updateONG' ong.ong_id %}"> {{ ong.ong_nome }} </a>
+                                ONG: <a href="{% url 'createONG' %}"> {{ ong.ong_nome }} </a>
                             </div>
                             <div class="mb-3">
                             {% endif %}
